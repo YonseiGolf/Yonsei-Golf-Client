@@ -1,15 +1,20 @@
 <template>
-  <div>
-
+  <div id="app">
+    <Header></Header>
   </div>
 </template>
 
 <script>
+import Header from './components/common/Header.vue'
 export default {
+  name: 'App',
 
+  components: {
+    Header,
+  }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>
