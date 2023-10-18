@@ -1,8 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
-  }
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="eaf40cfc-b046-4e88-a28c-62891aeb39d5" name="Changes" comment="chore: 프로젝트 초기 세팅 (#1)">
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/ApplicationPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/ApplicationPopUp.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/ApplicationPostPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/NotApplyTerm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/admin/FormManagement.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/applyinfo/ApplyInfo.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/applyinfo/ApplyPeriod.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/applyinfo/ApplyQualification.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/common/Footer.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/common/Header.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/ClubActivityIntroduction.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/ClubIntroduction.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/Contact.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/Home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/MainInfo.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/interview/InterviewSchedule.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/interview/SelectInterview.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/qna/QnA.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/user/AdminLogin.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/user/InterviewSelectLogin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue3-yonsei-golf/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/HelloWorld.vue" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
 }</component>
+  <component name="ProjectId" id="2WunW1pbHjWqsjCsjMNbwGgNSyF" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "chore/#1-project-setting",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vue3-yonsei-golf/src/components/common" />
+      <recent name="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eaf40cfc-b046-4e88-a28c-62891aeb39d5" name="Changes" comment="" />
+      <created>1697591361866</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1697591361866</updated>
+      <workItem from="1697591364561" duration="292000" />
+      <workItem from="1697605245175" duration="3106000" />
+    </task>
+    <task id="LOCAL-00001" summary="chore: 프로젝트 초기 세팅 (#1)">
+      <option name="closed" value="true" />
+      <created>1697591521656</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1697591521656</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: 프로젝트 초기 세팅 (#1)" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: 프로젝트 초기 세팅 (#1)" />
+  </component>
 </project>
