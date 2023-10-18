@@ -4,12 +4,11 @@
       <CommonHeader></CommonHeader>
     </header>
 
-    <div>내용</div>
+    <HomePage></HomePage>
 
     <footer>
       <CommonFooter></CommonFooter>
     </footer>
-
 
   </div>
 </template>
@@ -17,12 +16,15 @@
 <script>
 import CommonHeader from './components/common/CommonHeader.vue'
 import CommonFooter from './components/common/CommonFooter.vue'
+import HomePage from "./components/home/HomePage.vue";
+
 export default {
   name: 'App',
 
   components: {
     CommonHeader,
     CommonFooter,
+    HomePage,
   }
 }
 </script>
