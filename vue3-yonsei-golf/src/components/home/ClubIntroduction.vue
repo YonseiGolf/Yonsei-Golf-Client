@@ -38,7 +38,7 @@ export default {
 }
 
 h2 {
-  color: blue;
+  color: #143673;
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
