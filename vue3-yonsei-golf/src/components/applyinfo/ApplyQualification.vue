@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    지원 자격
   </div>
 </template>
 

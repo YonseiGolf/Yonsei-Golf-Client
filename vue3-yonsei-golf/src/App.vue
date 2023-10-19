@@ -1,9 +1,15 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div id="app">
+    <header>
+      <CommonHeader></CommonHeader>
+    </header>
+
+    <router-view></router-view>
+
+    <footer>
+      <CommonFooter></CommonFooter>
+    </footer>
+  </div>
 </template>
 
 <style lang="scss">
@@ -13,10 +19,23 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  > header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  > footer {
+    margin-top: auto;
+  }
 }
 
 nav {
-  padding: 30px;
 
   a {
     font-weight: bold;
@@ -27,4 +46,12 @@ nav {
     }
   }
 }
+
+body {
+  margin: 0;
+}
 </style>
+<script setup>
+import CommonFooter from "@/components/common/CommonFooter.vue";
+import CommonHeader from "@/components/common/CommonHeader.vue";
+</script>
