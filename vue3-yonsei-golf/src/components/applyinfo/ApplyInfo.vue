@@ -1,11 +1,21 @@
 <template>
   <div>
-    모집 안내 최상위 컴포넌트
+    <ApplyQualification></ApplyQualification>
+    <br>
+    <ApplyPeriod></ApplyPeriod>
   </div>
 </template>
 
 <script>
+import ApplyQualification from "@/components/applyinfo/ApplyQualification.vue";
+import ApplyPeriod from "@/components/applyinfo/ApplyPeriod.vue";
+
 export default {
+
+  components: {
+    ApplyPeriod,
+    ApplyQualification
+  }
 
 }
 </script>

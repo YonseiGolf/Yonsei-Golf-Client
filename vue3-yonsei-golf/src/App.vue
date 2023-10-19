@@ -39,9 +39,11 @@ nav {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    // navigation bar의 텍스트 색상
+    color: white;
 
     &.router-link-exact-active {
+      //라우터 링크 선택될때 나오는 색
       color: #42b983;
     }
   }
