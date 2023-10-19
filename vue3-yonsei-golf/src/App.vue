@@ -1,51 +1,30 @@
 <template>
-  <div id="app">
-    <header>
-      <CommonHeader></CommonHeader>
-    </header>
-
-    <HomePage></HomePage>
-
-    <footer>
-      <CommonFooter></CommonFooter>
-    </footer>
-
-  </div>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view/>
 </template>
-
-<script>
-import CommonHeader from './components/common/CommonHeader.vue'
-import CommonFooter from './components/common/CommonFooter.vue'
-import HomePage from "./components/home/HomePage.vue";
-
-export default {
-  name: 'App',
-
-  components: {
-    CommonHeader,
-    CommonFooter,
-    HomePage,
-  }
-}
-</script>
 
 <style lang="scss">
 #app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  > common-footer {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
-  > footer {
-    margin-top: auto;
-  }
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-body {
-  margin: 0;
+
+nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
