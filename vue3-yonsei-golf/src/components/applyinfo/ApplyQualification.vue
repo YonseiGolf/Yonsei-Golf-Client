@@ -5,10 +5,14 @@
   </h1>
   <div class="container">
     <div class="text-box">
-      ⛳️ 혼자 즐기던 골프를 다른 사람들과 함께하고 싶은 분 <br><br>
-      ⛳️ 비슷한 또래와 라운딩하며 실력 향상을 원하는 분 <br><br>
-      ⛳️ 골프를 치면서 타과 학생들과 함께 친목을 다지고 싶은 분 <br><br>
+      ⛳️ 혼자 즐기던 골프를 다른 사람들과 함께하고 싶은 분 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br><br>
+      ⛳️ 비슷한 또래와 라운딩하며 실력 향상을 원하는 분 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br><br>
+      ⛳️ 골프를 치면서 타과 학생들과 함께 친목을 다지고 싶은 분
+      <br><br>
       ⛳️ 골프에 대해 남다른 열정을 가지고 있는 분
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </div>
 
@@ -25,7 +29,7 @@ h1{
 .container{
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
-  height: 100vh;           /* 뷰포트 높이로 설정 */
+  //height: 100vh;           /* 뷰포트 높이로 설정 */
 }
 
 .text-box {
