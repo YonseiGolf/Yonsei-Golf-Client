@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    지원서 작성 페이지
   </div>
 </template>
 

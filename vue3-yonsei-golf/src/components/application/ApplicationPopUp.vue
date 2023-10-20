@@ -1,6 +1,6 @@
 <template>
   <div>
-
+      지원 전 팝업
   </div>
 </template>
 

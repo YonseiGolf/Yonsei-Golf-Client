@@ -4,11 +4,11 @@
       <img src="../../img/logo.png" alt="Logo" width=727 />
     </div>
     <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/link1">모집안내</a></li>
-        <li><a href="/link2">지원하기</a></li>
-<!--        <li><a href="/link3">지원서관리</a></li>-->
+      <ul class="header-nav">
+        <li><router-link to="/">Home</router-link ></li>
+        <li><router-link to="/recruit">모집안내</router-link></li>
+        <li><router-link to="/apply">지원하기</router-link></li>
+<!--        <li><router-link to="/apply/administration">지원서관리</router-link></li>-->
       </ul>
     </nav>
   </header>
@@ -31,7 +31,7 @@ export default {
 
 .logo img {
   width: 60px;
-  height: 60px; /* 이 값을 조정하여 원하는 로고 크기를 설정하세요. */
+  height: 60px;
 }
 
 nav ul {
@@ -50,6 +50,7 @@ nav a {
 }
 
 nav a:hover {
-  color: blue;
+  color: black;
 }
+
 </style>
