@@ -1,12 +1,15 @@
 <template>
   <div>
-    지원하기 최상위 컴포넌트
+    <NotApplyTerm></NotApplyTerm>
   </div>
 </template>
 
 <script>
+import NotApplyTerm from "@/components/application/NotApplyTerm.vue";
 export default {
-
+  components: {
+    NotApplyTerm
+  },
 }
 </script>
 
