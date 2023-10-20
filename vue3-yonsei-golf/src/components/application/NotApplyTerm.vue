@@ -65,6 +65,8 @@ h1 {
     border: none;
     border-radius: 100px;
     cursor: pointer;
+    transition: background-color 0.3s;
+
     &:hover {
       background-color: #1a5cc8;
     }

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from "@/components/home/HomePage.vue";
 import ApplyInfo from "@/components/applyinfo/ApplyInfo.vue";
 import ApplicationPage from "@/components/application/ApplicationPage.vue";
+import ApplicationForm from "@/components/application/ApplicationForm.vue";
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/apply',
     name: 'applyInfo',
     component: ApplicationPage
+  },
+  {
+    path: '/apply/form',
+    name: 'applicationForm',
+    component: ApplicationForm
   }
 ]
 
