@@ -16,8 +16,37 @@
 </template>
 
 <script>
-export default {
 
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      email: ''
+    }
+  },
+
+  methods: {
+    async registerNotification() {
+      try {
+        const response =
+            await axios.post(`${process.env.VUE_APP_LOCAL_API_URL}/application/emailAlarm`, {
+          email: this.email
+        });
+
+        // 응답 처리
+        if (response.status === 200) {
+          alert('알림이 성공적으로 등록되었습니다.');
+          this.$router.push('/');
+        } else {
+          console.log(process.env.LOCAL_API_URL)
+          console.error('알림 등록에 실패하였습니다.');
+        }
+      } catch (error) {
+        console.error('API 호출 중 오류 발생:', error);
+      }
+    }
+  }
 }
 </script>
 
