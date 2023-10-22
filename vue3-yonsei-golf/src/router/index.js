@@ -3,6 +3,7 @@ import HomePage from "@/components/home/HomePage.vue";
 import ApplyInfo from "@/components/applyinfo/ApplyInfo.vue";
 import ApplicationPage from "@/components/application/ApplicationPage.vue";
 import ApplicationForm from "@/components/application/ApplicationForm.vue";
+import LoginPage from "@/components/user/LoginPage.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/apply/form',
     name: 'applicationForm',
     component: ApplicationForm
+  },
+  {
+    path:'/login',
+    name: 'loginPage',
+    component: LoginPage
   }
 ]
 
