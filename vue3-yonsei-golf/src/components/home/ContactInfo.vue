@@ -11,13 +11,13 @@
       <!--      </a>-->
     </p>
     <div class="buttons">
-      <router-link to="/apply">
+      <router-link to="/recruit">
         <button>
           &nbsp;&nbsp;&nbsp;모집안내&nbsp;&nbsp;&nbsp;
         </button>
       </router-link>
 
-      <router-link to="/recruit">
+      <router-link to="/apply">
         <button>
           &nbsp;&nbsp;&nbsp;지원하기&nbsp;&nbsp;&nbsp;
         </button>
