@@ -8,7 +8,7 @@
         <li><router-link to="/">Home</router-link ></li>
         <li><router-link to="/recruit">모집안내</router-link></li>
         <li><router-link to="/apply">지원하기</router-link></li>
-<!--        <li><router-link to="/apply/administration">지원서관리</router-link></li>-->
+        <li><router-link to="/login">로그인</router-link></li>
       </ul>
     </nav>
   </header>
