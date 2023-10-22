@@ -6,13 +6,22 @@
     <div class="contact-info">부회장 임동현 : 010 0000 0000</div>
     <div class="contact-detail">자세히 둘러보기</div>
     <p>
-<!--      <a href="https://www.instagram.com/yonsei__golf/" target="__blank">-->
-        INSTAGRAM : @yonsei__golf
-<!--      </a>-->
+      <!--      <a href="https://www.instagram.com/yonsei__golf/" target="__blank">-->
+      INSTAGRAM : @yonsei__golf
+      <!--      </a>-->
     </p>
     <div class="buttons">
-      <button>&nbsp;&nbsp;&nbsp;모집안내&nbsp;&nbsp;&nbsp;</button>
-      <button>&nbsp;&nbsp;&nbsp;지원하기&nbsp;&nbsp;&nbsp;</button>
+      <router-link to="/apply">
+        <button>
+          &nbsp;&nbsp;&nbsp;모집안내&nbsp;&nbsp;&nbsp;
+        </button>
+      </router-link>
+
+      <router-link to="/recruit">
+        <button>
+          &nbsp;&nbsp;&nbsp;지원하기&nbsp;&nbsp;&nbsp;
+        </button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -38,7 +47,7 @@ h1 {
   font-weight: 500;
 }
 
-.contact-detail{
+.contact-detail {
   font-size: 20px;
   margin-top: 15px;
   margin-bottom: 10px;
@@ -52,7 +61,7 @@ p {
   font-weight: 500;
 }
 
-.contact-info{
+.contact-info {
   font-size: 16px;
   font-weight: normal;
   color: #4d4d4d;
