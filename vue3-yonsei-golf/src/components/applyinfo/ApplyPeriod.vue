@@ -54,7 +54,6 @@ export default {
     try {
       const response = await axios.get(`${process.env.VUE_APP_LOCAL_API_URL}/application/recruit`);
 
-
       if (response.status === 200) {
         this.applicationDates = response.data.data;  // API 응답에 따라 적절하게 맞춰주어야 합니다.
       }
