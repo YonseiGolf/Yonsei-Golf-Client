@@ -4,6 +4,9 @@ import ApplyInfo from "@/components/applyinfo/ApplyInfo.vue";
 import ApplicationPage from "@/components/application/ApplicationPage.vue";
 import ApplicationForm from "@/components/application/ApplicationForm.vue";
 import LoginPage from "@/components/user/LoginPage.vue";
+import SignUpPage from "@/components/user/SignUpPage.vue";
+import globalState from "@/globalState";
+import CallBack from "@/components/user/CallBack.vue";
 
 const routes = [
   {
@@ -30,6 +33,24 @@ const routes = [
     path:'/login',
     name: 'loginPage',
     component: LoginPage
+  },
+  {
+    path: '/signup',
+    name: 'signupPage',
+    component: SignUpPage,
+    beforeEnter: (to, from, next) => {
+      if (globalState.loginFailed) {
+        globalState.loginFailed = false;  // 상태를 다시 초기화
+        next();
+      } else {
+        next('/');
+      }
+    }
+  },
+  {
+    path: '/oauth/kakao',
+    name: 'kakaoLogin',
+    component: CallBack
   }
 ]
 

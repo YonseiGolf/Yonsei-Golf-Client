@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -47,14 +49,29 @@ export default {
     };
   },
   methods: {
-    register() {
-      // TODO: 회원가입 로직 구현 (예: API 호출)
-      console.log('회원가입 정보:', {
-        username: this.username,
-        email: this.email,
-        password: this.password
-      });
-      alert('회원가입 성공!');
+    async register() {
+      try {
+        const response = await axios.post('http://localhost:8080/users/signUp', {
+          username: this.username,
+          phoneNumber: this.phoneNumber,
+          password: this.password,
+          studentId: this.studentId,
+          major: this.major,
+          semester: this.semester
+        });
+
+        if (response.status === 200) {
+          alert('회원가입에 성공했습니다.');
+          this.$router.push('/');
+        } else {
+          alert('회원가입에 실패했습니다.');
+          this.$router.push('/');
+        }
+
+      }catch (error){
+        alert('회원가입에 실패했습니다.');
+        this.$router.push('/');
+      }
     }
   }
 }
