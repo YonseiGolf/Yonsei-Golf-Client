@@ -1,33 +1,39 @@
 <template>
   <!--    활동-->
-  <input type="radio" name="accordion" id="activity-answer01">
-  <label for="activity-answer01">
-    질문글 1 <em></em>
-  </label>
-  <div>
-    <p>
-      답변글 1
-    </p>
+  <div class="answer-container">
+    <input type="checkbox" id="activity-answer01">
+    <label for="activity-answer01">
+      질문글 1 <em></em>
+    </label>
+    <div>
+      <p>
+        답변글 1
+      </p>
+    </div>
   </div>
 
-  <input type="radio" name="accordion" id="activity-answer02">
-  <label for="activity-answer02">
-    질문글 2 <em></em>
-  </label>
-  <div>
-    <p>
-      답변글 2
-    </p>
+  <div class="answer-container">
+    <input type="checkbox" id="activity-answer02">
+    <label for="activity-answer02">
+      질문글 2 <em></em>
+    </label>
+    <div>
+      <p>
+        답변글 2
+      </p>
+    </div>
   </div>
 
-  <input type="radio" name="accordion" id="activity-answer03">
-  <label for="activity-answer03">
-    질문글 3 <em></em>
-  </label>
-  <div>
-    <p>
-      답변글 3
-    </p>
+  <div class="answer-container">
+    <input type="checkbox" id="activity-answer03">
+    <label for="activity-answer03">
+      질문글 3 <em></em>
+    </label>
+    <div>
+      <p>
+        답변글 3
+      </p>
+    </div>
   </div>
 
 </template>
@@ -38,14 +44,23 @@ export default {}
 
 <style lang="scss" scoped>
 
-input[id*="activity-answer"] {
+.answer-container {
+  margin: 0 auto;
+  border: 1px solid #f2f2f2;
+  background: #f2f2f2;
+  border-radius: 20px;
+  width: 800px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+input[id*="answer"] {
   display: none;
 }
 
-input[id*="activity-answer"] + label {
+input[id*="answer"] + label {
   display: block;
   padding: 20px;
-  border: 1px solid #143790;
   border-bottom: 0;
   color: black;
   font-weight: 900;
@@ -53,7 +68,7 @@ input[id*="activity-answer"] + label {
   position: relative;
 }
 
-input[id*="activity-answer"] + label em {
+input[id*="answer"] + label em {
   position: absolute; // 오른쪽에 자율 배치
   top: 50%;
   right: 10px;
@@ -61,27 +76,30 @@ input[id*="activity-answer"] + label em {
   height: 30px;
   margin-top: -15px;
   display: inline-block;
-  background: url('../../../img/instalogo.png') 0 0 no-repeat
+  background: url('../../../img/right-arrow.png') 0 0 no-repeat;
 }
 
-input[id*="activity-answer"] + label + div {
+input[id*="answer"] + label + div {
   max-height: 0;
   transition: all .35s;
   overflow: hidden; // 안의 내용이 삐져나오지 않음
-  background: #ebf8ff;
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 20px;
 }
 
-input[id*="activity-answer"] + label + p {
+input[id*="answer"] + label + p {
   display: inline-block;
   padding: 20px;
 }
 
-input[id*="activity-answer"]:checked + label + div {
+input[id*="answer"]:checked + label + div {
   max-height: 100px;
 }
 
-input[id*="activity-answer"]:checked + label em {
-  background-position: 0 -30px;
+input[id*="answer"]:checked + label em {
+  background: url('../../../img/down-arrow.png') 0 0 no-repeat;
+  //background-position: 0 -30px;
 }
+
 </style>

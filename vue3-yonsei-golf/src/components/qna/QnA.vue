@@ -23,17 +23,18 @@
     </button>
   </div>
 
-  <div class="qualifications" v-show="activeTab === 'qualifications'">
-    <QualificationsTab></QualificationsTab>
-  </div>
+    <div class="qualifications" v-show="activeTab === 'qualifications'">
+      <QualificationsTab></QualificationsTab>
+    </div>
 
-  <div class="interview" v-show="activeTab === 'interview'">
-    <InterviewTab></InterviewTab>
-  </div>
+    <div class="interview" v-show="activeTab === 'interview'">
+      <InterviewTab></InterviewTab>
+    </div>
 
-  <div class="activity" v-show="activeTab === 'activity'">
-    <ActivityTab></ActivityTab>
-  </div>
+    <div class="activity" v-show="activeTab === 'activity'">
+      <ActivityTab></ActivityTab>
+    </div>
+<!--  </div>-->
 
 
 </template>
