@@ -2,13 +2,17 @@
   <div class="contact-card">
     <h1>지금 바로 함께 해요</h1>
     <div class="contact-detail">상세 문의사항</div>
-    <div class="contact-info">회장 임동현 : 010 0000 0000</div>
-    <div class="contact-info">부회장 임동현 : 010 0000 0000</div>
+    <div v-if="leader" class="contact-info">
+      &nbsp;&nbsp;회장&nbsp;&nbsp;:&nbsp;{{ leader.name }}  {{ leader.phoneNumber }}
+    </div>
+
+    <div v-for="assistant in assistantLeaders" :key="assistant.name" class="contact-info">
+      부회장 :{{ assistant.name }} {{ assistant.phoneNumber }}
+    </div>
+
     <div class="contact-detail">자세히 둘러보기</div>
     <p>
-      <!--      <a href="https://www.instagram.com/yonsei__golf/" target="__blank">-->
       INSTAGRAM : @yonsei__golf
-      <!--      </a>-->
     </p>
     <div class="buttons">
       <router-link to="/recruit">
@@ -27,7 +31,28 @@
 </template>
 
 <script>
-export default {}
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      leader: null,
+      assistantLeaders: []
+    };
+  },
+  created() {
+    axios.get("http://localhost:8080/users/leaders")
+        .then(response => {
+          if (response.data.status === "success") {
+            this.leader = response.data.data.leader;
+            this.assistantLeaders = response.data.data.assistantLeaders;
+          }
+        })
+        .catch(error => {
+          console.error("There was an error fetching the data:", error);
+        });
+  }
+}
 </script>
 
 <style lang="scss" scoped>
