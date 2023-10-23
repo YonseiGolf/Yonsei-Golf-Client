@@ -8,7 +8,7 @@
         <img src="../../img/rounding.jpg" alt="정규 활동" class="introduction-image">
       </div>
       <div class="card">
-        <span>정기 활동</span>
+        <span>정기 활동 </span>
       </div>
 
       <div class="card grey-card">
@@ -43,6 +43,11 @@ export default {
 </script>
 
 <style scoped>
+#title {
+  margin-bottom: 20px; /* 제목과 카드 컨테이너 사이의 간격 설정 */
+  color: white; /* 제목 색상 설정 */
+}
+
 
 #title {
   text-align: center;
@@ -50,38 +55,45 @@ export default {
 
 .blue-container {
   background-color: #0a3d91;
-  color: white;
   padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
+
 
 h2 {
   font-size: 24px;
 }
 
 .card-container {
-
+  width: 60%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 50px;
-  width: 60%;
 }
 
 .card {
-  width: 410px;
-  height: 250px;
+  width: 100%; /* 카드의 너비 설정 */
+  height: 100%; /* 카드의 높이 설정 */
+  margin-bottom: 20px; /* 카드 간의 위아래 간격 설정 */
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0a3d91;
+  color: white;
+  font-size: 20px; /* 글자 크기 설정 */
+
   border: 1px solid #a5b1c2;
-  font-size: 18px;
   border-radius: 10px;
 }
 
+
 .introduction-image {
-  width: 410px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   border-radius: 9px;
 }
 
