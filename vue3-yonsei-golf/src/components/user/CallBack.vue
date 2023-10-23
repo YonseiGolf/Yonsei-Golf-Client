@@ -1,5 +1,5 @@
 <template>
-  <div>Loading...</div>
+  <img class="loading-img" src="../../img/loading.gif" alt="loading img">
 </template>
 
 <script>
@@ -57,3 +57,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+.loading-img{
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+</style>
