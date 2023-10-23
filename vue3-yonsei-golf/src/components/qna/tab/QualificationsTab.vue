@@ -3,7 +3,7 @@
   <div class="answer-container">
     <input type="checkbox" id="qualifications-answer01">
     <label for="qualifications-answer01">
-      Q: 연세 골프의 지원 자격 <em></em>
+      Q: 연세 골프의 지원 자격
     </label>
     <div>
       <p>
@@ -15,7 +15,7 @@
   <div class="answer-container">
     <input type="checkbox" id="qualifications-answer02">
     <label for="qualifications-answer02">
-      질문글 2 <em></em>
+      질문글 2
     </label>
     <div>
       <p>
@@ -28,7 +28,7 @@
   <div class="answer-container">
     <input type="checkbox" id="qualifications-answer03">
     <label for="qualifications-answer03">
-      질문글 3 <em></em>
+      질문글 3
     </label>
     <div>
       <p>
@@ -69,17 +69,6 @@ input[id*="answer"] + label {
   position: relative;
 }
 
-input[id*="answer"] + label em {
-  position: absolute; // 오른쪽에 자율 배치
-  top: 50%;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  margin-top: -15px;
-  display: inline-block;
-  background: url('../../../img/instalogo.png') 0 0 no-repeat
-}
-
 input[id*="answer"] + label + div {
   max-height: 0;
   transition: all .35s;
@@ -97,9 +86,5 @@ input[id*="answer"] + label + p {
 
 input[id*="answer"]:checked + label + div {
   max-height: 100px;
-}
-
-input[id*="answer"]:checked + label em {
-  background-position: 0 -30px;
 }
 </style>

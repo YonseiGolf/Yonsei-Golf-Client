@@ -3,7 +3,7 @@
   <div class="answer-container">
     <input type="checkbox" id="activity-answer01">
     <label for="activity-answer01">
-      질문글 1 <em></em>
+      질문글 1
     </label>
     <div>
       <p>
@@ -15,7 +15,7 @@
   <div class="answer-container">
     <input type="checkbox" id="activity-answer02">
     <label for="activity-answer02">
-      질문글 2 <em></em>
+      질문글 2
     </label>
     <div>
       <p>
@@ -27,7 +27,7 @@
   <div class="answer-container">
     <input type="checkbox" id="activity-answer03">
     <label for="activity-answer03">
-      질문글 3 <em></em>
+      질문글 3
     </label>
     <div>
       <p>
@@ -68,17 +68,6 @@ input[id*="answer"] + label {
   position: relative;
 }
 
-input[id*="answer"] + label em {
-  position: absolute; // 오른쪽에 자율 배치
-  top: 50%;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  margin-top: -15px;
-  display: inline-block;
-  background: url('../../../img/right-arrow.png') 0 0 no-repeat;
-}
-
 input[id*="answer"] + label + div {
   max-height: 0;
   transition: all .35s;
@@ -95,11 +84,6 @@ input[id*="answer"] + label + p {
 
 input[id*="answer"]:checked + label + div {
   max-height: 100px;
-}
-
-input[id*="answer"]:checked + label em {
-  background: url('../../../img/down-arrow.png') 0 0 no-repeat;
-  //background-position: 0 -30px;
 }
 
 </style>
