@@ -5,6 +5,18 @@
     </div>
     <nav>
       <ul class="header-nav">
+        <li v-if="adminStatus">
+          <router-link to="/admin/form">
+            지원서 관리
+          </router-link>
+        </li>
+
+        <li v-if="adminStatus">
+          <router-link to="/admin/users">
+            회원 관리
+          </router-link>
+        </li>
+
         <li>
           <router-link to="/">Home</router-link>
         </li>
@@ -39,9 +51,10 @@ export default {
     });
 
     const username = computed(() => store.state.username);
+    const adminStatus = computed(() => store.state.adminStatus);
 
     return {
-      username
+      username, adminStatus
     };
   }
 }
@@ -63,7 +76,7 @@ export default {
   height: 60px;
 }
 
-.header-nav{
+.header-nav {
   font-size: 15px;
   color: white;
   font-weight: bold;

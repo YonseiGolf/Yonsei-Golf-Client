@@ -1,6 +1,6 @@
 <template>
   <div>
-    지원서 관리 페이지
+    회원 관리 페이지
   </div>
 </template>
 
