@@ -5,6 +5,7 @@
 <script>
 import axios from "axios";
 import globalState from "@/globalState";
+import store from "@/store";
 
 export default {
   name: 'KakaoCallback',
@@ -27,6 +28,13 @@ export default {
             const loginResponse = await axios.post('http://localhost:8080/users/signIn');
 
             if (loginResponse.status === 200) {
+              // 로그인이 성공하면 store 에 로그인 정보를 저장해둔다.
+              const userDetails = {
+                username: loginResponse.data.data.name,
+                adminStatus: loginResponse.data.data.adminStatus // <-- 수정된 부분
+              };
+              store.commit('SET_USER_DETAILS', userDetails);
+
               this.$router.push('/');
             }
           } catch (error) {

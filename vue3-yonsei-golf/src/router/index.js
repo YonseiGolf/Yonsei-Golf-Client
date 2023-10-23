@@ -7,6 +7,7 @@ import LoginPage from "@/components/user/LoginPage.vue";
 import SignUpPage from "@/components/user/SignUpPage.vue";
 import globalState from "@/globalState";
 import CallBack from "@/components/user/CallBack.vue";
+import store from "@/store";
 
 const routes = [
   {
@@ -58,5 +59,13 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'loginPage' && store.state.isLoggedIn) {
+    next('/');  // 이미 로그인된 상태에서 로그인 페이지 방문 시 홈으로 리디렉션
+  } else {
+    next();
+  }
+});
 
 export default router
