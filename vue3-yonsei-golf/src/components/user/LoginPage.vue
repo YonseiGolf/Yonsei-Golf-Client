@@ -2,34 +2,28 @@
   <div class="yonsei-golf">
     <img src="../../img/yonsei-golf.jpg" alt="yonsei-golf Logo"/>
     <h1>Yonsei-Golf</h1>
-    <button @click="showMessage" id="login-text">
+    <button @click="kakaoLogin" id="login-text">
       <img src="../../img/kakao.jpg" alt="kako logo" id="kako">
       카카오로 3초 만에 시작하기
     </button>
-<!--    추후에 분리하기 -->
-    <SignUpPage></SignUpPage>
   </div>
 
 </template>
 
 <script>
 
-import SignUpPage from "./SignUpPage.vue";
-
 export default {
-  components:{
-    SignUpPage
-  },
   name: 'Yonsei-golf',
   data() {
     return {
-      message: '카카오로 3초 만에 시작하기'
+      message: '카카오로 3초 만에 시작하기',
+      kakaoUrl: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.VUE_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.VUE_APP_KAKAO_REDIRECT_URI}&response_type=code`,
     };
   },
   methods: {
-    showMessage() {
-      alert(this.message);
-    }
+    kakaoLogin() {
+      window.location.href = this.kakaoUrl;
+    },
   }
 }
 </script>
@@ -37,6 +31,12 @@ export default {
 <style scoped>
 .yonsei-golf {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-top: 50px;
 }
 
 .yonsei-golf img {
@@ -46,7 +46,7 @@ export default {
 
 .yonsei-golf h1 {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 
 .yonsei-golf button {
