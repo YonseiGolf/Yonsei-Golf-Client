@@ -102,10 +102,10 @@ export default {
       // 숫자나 '-' 이외의 문자를 제거
       this.phoneNumber = this.phoneNumber.replace(invalidCharacters, '');
       // 길이가 10자를 넘어갈 경우 마지막 부분을 잘라냄
-      if (this.phoneNumber.length > 10) {
-        this.phoneNumber = this.phoneNumber.substring(0, 11);
+      if (this.phoneNumber.length > 14) {
+        this.phoneNumber = this.phoneNumber.substring(0, 14);
       }
-      this.phoneNumberInvalid = invalidCharacters.test(this.phoneNumber) || this.phoneNumber.length > 10;
+      this.phoneNumberInvalid = invalidCharacters.test(this.phoneNumber) || this.phoneNumber.length > 13;
     },
 
     validateStudentId() {
