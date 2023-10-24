@@ -45,7 +45,7 @@ export default {
         }
 
         const response =
-            await axios.post(`${process.env.VUE_APP_LOCAL_API_URL}/application/emailAlarm`, {
+            await axios.post(`${process.env.VUE_APP_API_URL}/application/emailAlarm`, {
           email: this.email
         });
 

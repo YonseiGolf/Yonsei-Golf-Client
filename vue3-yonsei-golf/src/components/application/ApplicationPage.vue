@@ -28,7 +28,7 @@ export default {
 
   async mounted() {
     try {
-      const response = await axios.get(`${process.env.VUE_APP_LOCAL_API_URL}/application/availability`);
+      const response = await axios.get(`${process.env.VUE_APP_API_URL}/application/availability`);
 
       if (response.status === 200) {
         this.applicationAvailable = response.data.data;

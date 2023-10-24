@@ -42,7 +42,7 @@ export default {
     };
   },
   created() {
-    axios.get("http://localhost:8080/users/leaders")
+    axios.get(`${process.env.VUE_APP_API_URL}/users/leaders`)
         .then(response => {
           if (response.data.status === "success") {
             this.leader = response.data.data.leader;
