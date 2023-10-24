@@ -2,6 +2,7 @@
   <div>
     <ApplyTerm v-if="applicationAvailable"></ApplyTerm>
     <NotApplyTerm v-else></NotApplyTerm>
+    <div class="white-container"></div>
     <QnA></QnA>
   </div>
 </template>
@@ -40,5 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.white-container{
+  height: 100px;
+}
 </style>

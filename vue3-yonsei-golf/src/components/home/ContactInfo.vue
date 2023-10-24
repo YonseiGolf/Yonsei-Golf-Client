@@ -1,11 +1,11 @@
 <template>
+  <div class="white-container"></div>
   <div class="contact-card">
     <h1>지금 바로 함께 해요</h1>
     <div class="contact-detail">상세 문의사항</div>
     <div v-if="leader" class="contact-info">
       &nbsp;&nbsp;회장&nbsp;&nbsp;:&nbsp;{{ leader.name }}  {{ leader.phoneNumber }}
     </div>
-
     <div v-for="assistant in assistantLeaders" :key="assistant.name" class="contact-info">
       부회장 :{{ assistant.name }} {{ assistant.phoneNumber }}
     </div>
@@ -20,7 +20,7 @@
           &nbsp;&nbsp;&nbsp;모집안내&nbsp;&nbsp;&nbsp;
         </button>
       </router-link>
-
+      &nbsp;&nbsp;
       <router-link to="/apply">
         <button>
           &nbsp;&nbsp;&nbsp;지원하기&nbsp;&nbsp;&nbsp;
@@ -28,6 +28,7 @@
       </router-link>
     </div>
   </div>
+  <div class="white-container"></div>
 </template>
 
 <script>
@@ -56,6 +57,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.white-container{
+  height: 150px;
+  color: white;
+}
+
 .contact-card {
   //width: 80%;
   max-width: 600px;
@@ -74,8 +81,8 @@ h1 {
 
 .contact-detail {
   font-size: 20px;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-weight: 400;
   color: #4d4d4d;
 }
@@ -90,6 +97,7 @@ p {
   font-size: 16px;
   font-weight: normal;
   color: #4d4d4d;
+  margin-bottom: 10px;
 }
 
 .buttons {

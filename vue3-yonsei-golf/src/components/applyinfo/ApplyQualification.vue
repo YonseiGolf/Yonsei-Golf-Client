@@ -1,4 +1,5 @@
 <template>
+  <div class="white-container"></div>
   <h1>
     연세 골프에서는<br>
     이러한 사람들을 모집합니다.
@@ -15,6 +16,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
   </div>
+  <div class="white-container"></div>
 
 </template>
 
@@ -24,12 +26,14 @@ export default {}
 
 <style lang="scss" scoped>
 h1{
+  margin-top: 100px;
   color: #143673;
 }
 .container{
+  margin-top: 30px;
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
-  //height: 100vh;           /* 뷰포트 높이로 설정 */
+  margin-bottom: 100px;
 }
 
 .text-box {
