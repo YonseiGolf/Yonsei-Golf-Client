@@ -1,12 +1,12 @@
 <template>
   <div class="background-image">
-    <div id="yonsei-golf">
-    YONSEI GOLF<br>
-    </div>
-    <div id="info">
+    <h1 id="yonsei-golf">
+    YONSEI GOLF
+    </h1>
+    <h2 id="info">
     연세 골프는 골프를 시작한지 얼마 되지 않은 초심자부터 프로까지<br>
     다양한 실력을 보유하고 있는 사람들과 함께 합니다.
-    </div>
+    </h2>
   </div>
 </template>
 
@@ -18,7 +18,8 @@ export default {
 
 <style lang="scss" scoped>
 .background-image {
-  //width: 100%;
+  width: 100%;
+  height: 600px;
   padding-top: (1284 / 946) * 10%;
   position: relative;
 
@@ -26,19 +27,36 @@ export default {
 
   background-position: center;
   background-repeat: no-repeat;
+
   background-size: cover;
-  opacity: 0.8;
+  opacity: 0.9;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+  }
 }
 
 #yonsei-golf {
   font-size: 100px;
-
   color: white;
+  text-align: left;
+  margin-left: 10%;
+  position: relative;
 }
 
 #info {
   font-size: 25px;
   color: white;
+  text-align: left;
+  margin-left: 10%;
+  position: relative;
 }
 
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <div class="white-container"></div>
   <div class="contact-card">
     <h1>지금 바로 함께 해요</h1>
     <div class="contact-detail">상세 문의사항</div>
@@ -28,6 +29,7 @@
       </router-link>
     </div>
   </div>
+  <div class="white-container"></div>
 </template>
 
 <script>
@@ -56,6 +58,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.white-container{
+  height: 150px;
+  color: white;
+}
+
 .contact-card {
   //width: 80%;
   max-width: 600px;
