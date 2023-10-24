@@ -8,7 +8,7 @@
     </h1>
     <div class="email-input">
       <input type="email" v-model="email" placeholder="메일을 입력해주세요">
-      <button @click="registerNotification">알림 등록하기</button>
+      <button @click="registerNotification">알림 등록</button>
     </div>
 
   </div>
@@ -70,6 +70,9 @@ h1 {
 }
 
 .email-input {
+  width: 80%;
+  height: 20%;
+  max-width: 800px;
   padding: 10px 5px;
   background-color: #ffffff;  // 흰색 배경 추가
   border-radius: 100px;  // 모서리 둥글게
@@ -79,22 +82,24 @@ h1 {
   gap: 10px;
 
   input {
-    padding: 30px;
-    font-size: 30px;
+    padding: 3%;
+    width: 90%;
+    font-size: 2vh;
     border: 1px solid white;
     border-radius: 100px;
-    width: 500px;
   }
 
   button {
-    padding: 30px 40px;
-    font-size: 30px;
+    padding: 3%;
+    font-size: 18px;
     background-color: #143673;
     color: #fff;
     border: none;
     border-radius: 100px;
     cursor: pointer;
     transition: background-color 0.3s;
+
+    min-width: 140px;
 
     &:hover {
       background-color: #1a5cc8;

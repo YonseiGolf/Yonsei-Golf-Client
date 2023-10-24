@@ -12,7 +12,7 @@
       </div>
 
       <div class="card grey-card">
-        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/new-comer.efdadda2.jpg" alt="정규 활동" class="introduction-image">
+        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/new-comer.efdadda2.jpg" alt="신입 환영 MT" class="introduction-image">
       </div>
       <div class="card">
         <span>신입 환영 MT</span>
@@ -48,19 +48,14 @@ export default {
   color: white; /* 제목 색상 설정 */
 }
 
-
-#title {
-  text-align: center;
-}
-
 .blue-container {
   background-color: #0a3d91;
-  padding: 40px;
-
+  padding: 4%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-bottom: 3%;
 }
 
 
@@ -77,8 +72,6 @@ h2 {
 }
 
 .card {
-  width: 100%; /* 카드의 너비 설정 */
-  height: 100%; /* 카드의 높이 설정 */
   margin-bottom: 5%; /* 카드 간의 위아래 간격 설정 */
   display: flex;
   justify-content: center;
@@ -88,19 +81,13 @@ h2 {
 
   border: 1px solid #a5b1c2;
   border-radius: 10px;
-}
 
-@media (max-width: 768px) {
-  .card-container {
-    width: 90%; /* 모바일 환경에서는 너비를 늘립니다 */
-    grid-template-columns: 1fr; /* 모바일 환경에서는 카드를 한 행에 하나만 표시합니다 */
-  }
+  overflow: hidden;
 }
-
 
 .introduction-image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  height: auto;
   border-radius: 9px;
 }
 

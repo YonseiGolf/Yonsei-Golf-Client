@@ -47,11 +47,12 @@ export default {}
 .answer-container {
   margin: 0 auto;
   border: 1px solid #f2f2f2;
-  background: #f2f2f2;
   border-radius: 20px;
-  width: 800px;
+  width: 95%;
+  max-width: 800px;
   margin-bottom: 20px;
   text-align: left;
+  background: #f2f2f2;
 }
 
 input[id*="answer"] {
@@ -61,6 +62,7 @@ input[id*="answer"] {
 input[id*="answer"] + label {
   display: block;
   padding: 20px;
+  //border: 1px solid #143790;
   border-bottom: 0;
   color: black;
   font-weight: 900;
@@ -79,6 +81,7 @@ input[id*="answer"] + label + div {
 
 input[id*="answer"] + label + p {
   display: inline-block;
+  overflow: hidden;
   padding: 20px;
 }
 

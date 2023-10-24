@@ -30,10 +30,6 @@ export default {
   height: 20px;
 }
 
-#contact {
-  text-align: left;
-}
-
 #copyright {
   align-content: center;
   top: 10px;
