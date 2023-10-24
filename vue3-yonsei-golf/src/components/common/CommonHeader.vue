@@ -1,7 +1,7 @@
 <template>
   <header class="header-container">
     <div class="logo">
-      <img src="../../img/logo.png" alt="Logo" width=727/>
+      <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/logo.5d322a8d.png" alt="Logo" width=727/>
     </div>
     <nav>
       <ul class="header-nav">

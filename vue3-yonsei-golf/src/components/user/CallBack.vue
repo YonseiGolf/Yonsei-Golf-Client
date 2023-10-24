@@ -1,5 +1,5 @@
 <template>
-  <img class="loading-img" src="../../img/loading.gif" alt="loading img">
+  <img class="loading-img" src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="loading img">
 </template>
 
 <script>
@@ -20,12 +20,12 @@ export default {
   methods: {
     async sendCodeToBackend(code) {
       try {
-        const response = await axios.post('http://localhost:8080/oauth/kakao', { kakaoCode: code });
+        const response = await axios.post(`${process.env.VUE_APP_API_URL}/oauth/kakao`, { kakaoCode: code });
         console.log('response:', response);
         if (response.status === 200) {
 
           try {
-            const loginResponse = await axios.post('http://localhost:8080/users/signIn');
+            const loginResponse = await axios.post(`${process.env.VUE_APP_API_URL}/users/signIn`);
 
             if (loginResponse.status === 200) {
               // 로그인이 성공하면 store 에 로그인 정보를 저장해둔다.

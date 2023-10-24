@@ -1,10 +1,5 @@
 <template>
   <footer class="common-footer">
-<!--    <div id="contact">Contact-->
-<!--      <a :href="instaUrl" target="_blank" id="insta">-->
-<!--        <img src="../../img/instalogo.png" alt="Instagram">-->
-<!--      </a>-->
-<!--    </div>-->
     <div id="copyright">Copyright @YONSEI_GOLF. ALL RIGHTS RESERVED.</div>
   </footer>
 </template>
@@ -33,10 +28,6 @@ export default {
 .common-footer img {
   width: 20px;
   height: 20px;
-}
-
-#contact {
-  text-align: left;
 }
 
 #copyright {

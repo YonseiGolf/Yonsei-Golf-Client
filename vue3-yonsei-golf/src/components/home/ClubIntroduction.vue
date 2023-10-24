@@ -66,14 +66,15 @@ h2 {
 }
 
 .card {
-  width: 250px;
-  height: 180px;
+  width: 30%;
+  max-width: 250px;
+  //height: 50%;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   background-color: #f2f2f2;
   margin: 10px;
-  align-content: center;
+  //align-content: center;
 }
 
 .data {
