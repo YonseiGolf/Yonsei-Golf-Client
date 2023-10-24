@@ -85,6 +85,13 @@ h2 {
   overflow: hidden;
 }
 
+@media (max-width: 1024px) {
+  .card-container {
+    width: 90%; /* 모바일 환경에서는 너비를 늘립니다 */
+    grid-template-columns: 1fr; /* 모바일 환경에서는 카드를 한 행에 하나만 표시합니다 */
+  }
+}
+
 .introduction-image {
   max-width: 100%;
   height: auto;
