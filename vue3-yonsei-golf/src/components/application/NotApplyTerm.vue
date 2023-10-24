@@ -7,8 +7,9 @@
       모집 기간이 되면 메일로 알려드립니다.
     </h1>
     <div class="email-input">
-      <input type="email" v-model="email" placeholder="메일을 입력해주세요">
-      <button @click="registerNotification">알림 등록</button>
+      <input type="email" v-model="email" placeholder="메일을 입력해주세요" @input="validateEmail">
+      <p v-if="emailInvalid" class="error-message">올바른 이메일 형식이 아닙니다.</p>
+      <button @click="registerNotification" :disabled="emailInvalid">알림 등록</button>
     </div>
 
   </div>
@@ -22,13 +23,27 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      email: ''
+      email: '',
+
+      emailInvalid: false,
+    }
+  },
+
+  computed: {
+    isFormInvalid() {
+      return this.emailInvalid;
     }
   },
 
   methods: {
     async registerNotification() {
       try {
+
+        if (!this.email.trim()) {
+          alert('이메일을 입력해주세요');
+          return;
+        }
+
         const response =
             await axios.post(`${process.env.VUE_APP_LOCAL_API_URL}/application/emailAlarm`, {
           email: this.email
@@ -45,8 +60,22 @@ export default {
       } catch (error) {
         console.error('API 호출 중 오류 발생:', error);
       }
+    },
+
+    validateEmail() {
+      // Check for the email format something@something
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValidFormat = emailPattern.test(this.email);
+
+      // Check for the length and if it's not blank
+      const isWithinLengthLimit = this.email.length <= 25;
+      const isNotBlank = this.email.trim() !== '';
+
+      // Combine the results
+      this.emailInvalid = !isValidFormat || !isWithinLengthLimit || !isNotBlank;
     }
-  }
+  },
+
 }
 </script>
 
