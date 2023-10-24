@@ -83,7 +83,10 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
-    routes
+    routes,
+    scrollBehavior() {
+        return { left: 0, top: 0 }  // 모든 라우트 변경시 페이지의 최상단으로 스크롤
+    }
 })
 
 router.beforeEach((to, from, next) => {

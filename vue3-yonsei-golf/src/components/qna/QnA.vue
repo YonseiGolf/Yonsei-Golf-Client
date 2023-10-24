@@ -23,18 +23,18 @@
     </button>
   </div>
 
-    <div class="qualifications" v-show="activeTab === 'qualifications'">
-      <QualificationsTab></QualificationsTab>
-    </div>
+  <div class="qualifications" v-show="activeTab === 'qualifications'">
+    <QualificationsTab></QualificationsTab>
+  </div>
 
-    <div class="interview" v-show="activeTab === 'interview'">
-      <InterviewTab></InterviewTab>
-    </div>
+  <div class="interview" v-show="activeTab === 'interview'">
+    <InterviewTab></InterviewTab>
+  </div>
 
-    <div class="activity" v-show="activeTab === 'activity'">
-      <ActivityTab></ActivityTab>
-    </div>
-<!--  </div>-->
+  <div class="activity" v-show="activeTab === 'activity'">
+    <ActivityTab></ActivityTab>
+  </div>
+  <div class="white-container"></div>
 
 
 </template>
@@ -74,6 +74,7 @@ export default {
   width: 530px;
   height: 60px;
   margin: 20px auto;
+  margin-bottom: 50px;
 
   border-radius: 40px;
   border: 1px solid #143790;
@@ -113,4 +114,9 @@ button {
     color: white;
   }
 }
+
+.white-container{
+  height: 100px;
+}
+
 </style>

@@ -73,7 +73,8 @@ h1 {
 .container {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
-  //height: 100vh; /* 뷰포트 높이로 설정 */
+  margin-top: 30px;
+  margin-bottom: 100px;
 }
 
 .text-box {
