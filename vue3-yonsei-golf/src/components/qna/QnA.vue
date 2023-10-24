@@ -71,9 +71,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 530px;
+  width: 100%;
+  max-width: 540px;
   height: 60px;
-  margin: 20px auto;
+  margin: 10px auto;
   margin-bottom: 50px;
 
   border-radius: 40px;
@@ -81,10 +82,6 @@ export default {
 
   background-color: white;
 
-  position: relative; /* position을 relative나 absolute로 설정 */
-  z-index: 2;
-
-  // 버튼의 스타일이 컨테이너를 벗어나지 않도록 설정
   overflow: hidden; // 추가: button의 스타일이 이 컨테이너를 벗어나지 않도록 합니다.
 
 }

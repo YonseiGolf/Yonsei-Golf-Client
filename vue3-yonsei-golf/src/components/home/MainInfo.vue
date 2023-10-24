@@ -23,7 +23,7 @@ export default {
   padding-top: (1284 / 946) * 10%;
   position: relative;
 
-  background-image: url('../../img/main_info_image.jpg');
+  background-image: url('https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/main_info_image.c68f1fb3.jpg');
 
   background-position: center;
   background-repeat: no-repeat;

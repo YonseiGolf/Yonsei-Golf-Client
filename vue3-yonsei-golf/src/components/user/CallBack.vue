@@ -1,5 +1,5 @@
 <template>
-  <img class="loading-img" src="../../img/loading.gif" alt="loading img">
+  <img class="loading-img" src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="loading img">
 </template>
 
 <script>

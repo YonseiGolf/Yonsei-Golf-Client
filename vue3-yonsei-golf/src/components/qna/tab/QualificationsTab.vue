@@ -48,7 +48,8 @@ export default {}
   margin: 0 auto;
   border: 1px solid #f2f2f2;
   border-radius: 20px;
-  width: 800px;
+  width: 95%;
+  max-width: 800px;
   margin-bottom: 20px;
   text-align: left;
   background: #f2f2f2;
