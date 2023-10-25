@@ -15,7 +15,6 @@ jobs:
 
       - name: Build project
         run: |
-          cd vue3-yonsei-golf
           yarn install
           yarn build
 
