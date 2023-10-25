@@ -2,7 +2,7 @@ name: Deploy to CloudFront
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "fix/#50-fix-deploy" ]
       
 
 jobs:
@@ -13,17 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set .env file
+        run: |
+          touch .env
+          echo "${{ secrets.VUE_SECRETS }}" > .env
+
       - name: Build project
         run: |
-          cd vue3-yonsei-golf
           yarn install
           yarn build
 
-      - name: Set .env file
-        run: |
-          cd vue3-yonsei-golf
-          touch .env
-          echo "${{ secrets.VUE_SECRETS }}" > .env
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -34,7 +33,7 @@ jobs:
 
       - name: Upload to S3 test
         run: |
-          aws s3 sync ./vue3-yonsei-golf/dist/ s3://${{ secrets.S3_BUCKET_NAME }} --region ${{ secrets.AWS_REGION }}
+          aws s3 sync ./dist/ s3://${{ secrets.S3_BUCKET_NAME }} --region ${{ secrets.AWS_REGION }}
 
       - name: Invalidate CloudFront Cache
         run: |
