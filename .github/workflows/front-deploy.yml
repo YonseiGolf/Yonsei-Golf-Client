@@ -2,7 +2,7 @@ name: Deploy to CloudFront
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "fix/#50-fix-deploy" ]
       
 
 jobs:
@@ -21,7 +21,6 @@ jobs:
 
       - name: Set .env file
         run: |
-          cd vue3-yonsei-golf
           touch .env
           echo "${{ secrets.VUE_SECRETS }}" > .env
 
