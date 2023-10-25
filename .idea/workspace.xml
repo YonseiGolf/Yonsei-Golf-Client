@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eaf40cfc-b046-4e88-a28c-62891aeb39d5" name="Changes" comment="chore: 프로젝트 초기 세팅 (#1)">
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/ApplicationPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/ApplicationPopUp.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/ApplicationPostPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/NotApplyTerm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application/admin/FormManagement.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/applyinfo/ApplyInfo.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/applyinfo/ApplyPeriod.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/applyinfo/ApplyQualification.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/common/Footer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/common/Header.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/ClubActivityIntroduction.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/ClubIntroduction.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/Contact.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/Home.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/home/MainInfo.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/interview/InterviewSchedule.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/interview/SelectInterview.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/qna/QnA.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/user/AdminLogin.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/user/InterviewSelectLogin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue3-yonsei-golf/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue3-yonsei-golf/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue3-yonsei-golf/src/components/HelloWorld.vue" beforeDir="false" />
-    </list>
+    <list default="true" id="eaf40cfc-b046-4e88-a28c-62891aeb39d5" name="Changes" comment="fix: cicd test3" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +32,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "chore/#1-project-setting",
+    "git-widget-placeholder": "fix/#50-fix-deploy",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -69,6 +45,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/vue3-yonsei-golf/src/components/common" />
       <recent name="$PROJECT_DIR$/vue3-yonsei-golf/src/components/application" />
     </key>
@@ -83,6 +60,7 @@
       <updated>1697591361866</updated>
       <workItem from="1697591364561" duration="292000" />
       <workItem from="1697605245175" duration="3106000" />
+      <workItem from="1698246133182" duration="353000" />
     </task>
     <task id="LOCAL-00001" summary="chore: 프로젝트 초기 세팅 (#1)">
       <option name="closed" value="true" />
@@ -92,7 +70,31 @@
       <option name="project" value="LOCAL" />
       <updated>1697591521656</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix: cicd 수정">
+      <option name="closed" value="true" />
+      <created>1698246187405</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698246187405</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix: cicd test2">
+      <option name="closed" value="true" />
+      <created>1698246233772</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698246233772</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix: cicd test3">
+      <option name="closed" value="true" />
+      <created>1698246326096</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698246326096</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +113,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: 프로젝트 초기 세팅 (#1)" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: 프로젝트 초기 세팅 (#1)" />
+    <MESSAGE value="fix: cicd 수정" />
+    <MESSAGE value="fix: cicd test2" />
+    <MESSAGE value="fix: cicd test3" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: cicd test3" />
   </component>
 </project>
