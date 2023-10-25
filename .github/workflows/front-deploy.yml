@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Build project
         run: |
           cd vue3-yonsei-golf
@@ -21,7 +21,7 @@ jobs:
 
       - name: Set .env file
         run: |
-          echo(pwd)
+          cd vue3-yonsei-golf
           touch .env
           echo "${{ secrets.VUE_SECRETS }}" > .env
 
