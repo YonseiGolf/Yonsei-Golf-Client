@@ -12,7 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      - name: move to vue
+        run: cd vue3-yonsei-golf
       - name: Build project
         run: |
           yarn install
@@ -21,8 +22,8 @@ jobs:
       - name: Set .env file
         run: |
           echo(pwd)
-          touch /vue3-yonsei-golf/.env
-          echo "${{ secrets.VUE_SECRETS }}" > /vue3-yonsei-golf/.env
+          touch .env
+          echo "${{ secrets.VUE_SECRETS }}" > .env
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
