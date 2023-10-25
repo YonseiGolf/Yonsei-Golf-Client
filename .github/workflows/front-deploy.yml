@@ -2,8 +2,8 @@ name: Deploy to CloudFront
 
 on:
   push:
-    branches:
-      - feat/#50-auto-deploy
+    branches: [ "main" ]
+      
 
 jobs:
   deploy:
