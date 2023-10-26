@@ -31,8 +31,13 @@
           <div> {{ item.semester }} </div>
         </td>
         <td>
-          <div> {{ item.userClass}}</div>
+          <select v-model="item.userClass" @change="updateUserClass(item)">
+            <option value="YB">YB</option>
+            <option value="OB">OB</option>
+            <option value="NONE">NONE</option>
+          </select>
         </td>
+
       </tr>
       </tbody>
     </table>
@@ -40,6 +45,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: {
     applications: {
@@ -55,6 +62,26 @@ export default {
       type: Number,
       default: 0,
       required: true
+    }
+  },
+
+  methods: {
+    async updateUserClass(item) {
+      console.log(item.id)
+      console.log(item.userClass)
+
+      try {
+        const response = await axios.patch(`${process.env.VUE_APP_API_URL}/admin/users/${item.id}`, {
+          userClass: item.userClass
+        });
+        if (response.status === 200) {
+          location.reload();
+        } else {
+          console.error("Error updating userClass");
+        }
+      } catch (error) {
+        console.error("There was an error sending the request:", error);
+      }
     }
   }
 }
@@ -78,6 +105,13 @@ th, td {
 
 th {
   min-width: 50px;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #d4d4d4;
+  background-color: #f9f9f9;
 }
 
 </style>

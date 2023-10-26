@@ -17,10 +17,10 @@ export default {
 
   data() {
     return {
-      YBUsers: [],
-      OBUsers: [],
-      NoneUsers: []
-    }
+      YBUsers: { content: [], totalElements: 0 },
+      OBUsers: { content: [], totalElements: 0 },
+      NoneUsers: { content: [], totalElements: 0 },
+    };
   },
 
   async mounted() {
