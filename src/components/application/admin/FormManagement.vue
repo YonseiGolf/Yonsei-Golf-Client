@@ -19,11 +19,11 @@ export default {
 
   data() {
     return {
-      documentReceived: [], // 서류 접수 데이터
-      documentPassed: [],   // 서류 합격 데이터
-      finalPassed: [],      // 최종 합격 데이터
-      documentFailed: [],    // 서류 탈락 데이터
-      finalFailed: []        // 최종 탈락 데이터
+      documentReceived: [],
+      documentPassed: [],
+      finalPassed: [],
+      documentFailed: [],
+      finalFailed: []
     }
   },
 
