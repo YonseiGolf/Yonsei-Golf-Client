@@ -29,19 +29,19 @@ export default {
 
   async mounted() {
     try {
-      const documentReceivedResponse = await axios.get('http://localhost:8080/admin/forms');
+      const documentReceivedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms`);
       this.documentReceived = documentReceivedResponse.data.data;
 
-      const documentPassedResponse = await axios.get('http://localhost:8080/admin/forms?documentPass=true');
+      const documentPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true`);
       this.documentPassed = documentPassedResponse.data.data;
 
-      const finalPassedResponse = await axios.get('http://localhost:8080/admin/forms?finalPass=true');
+      const finalPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=true`);
       this.finalPassed = finalPassedResponse.data.data;
 
-      const documentFailedResponse = await axios.get('http://localhost:8080/admin/forms?documentPass=false');
+      const documentFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=false`);
       this.documentFailed = documentFailedResponse.data.data;
 
-      const finalFailedResponse = await axios.get('http://localhost:8080/admin/forms?finalPass=false');
+      const finalFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=false`);
       this.finalFailed = finalFailedResponse.data.data;
 
     } catch (error) {
@@ -55,18 +55,17 @@ export default {
 <style lang="scss" scoped>
 .application-tables {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); // 오타 수정
-  //gap: 2vh;
+  grid-template-columns: repeat(3, 1fr);
   margin-bottom: 1vh;
 
   & > * {
     margin-left: auto;
     margin-right: auto;
-    max-width: 80%;  // 이 값을 조절하여 원하는 너비로 설정하실 수 있습니다.
+    max-width: 80%;
   }
 
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr; // 모바일 화면에서는 한 컬럼으로 보여줌
+    grid-template-columns: 1fr;
   }
 }
 </style>
