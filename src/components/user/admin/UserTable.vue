@@ -108,7 +108,7 @@ th {
 }
 
 select {
-  width: 100%;
+  width: 90%;
   padding: 5px;
   border: 1px solid #d4d4d4;
   background-color: #f9f9f9;
