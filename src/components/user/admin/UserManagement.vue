@@ -46,6 +46,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: 1vh;
+  width: 80%;
 
   & > * {
     margin-left: auto;
