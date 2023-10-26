@@ -2,7 +2,7 @@ name: Deploy to CloudFront
 
 on:
   push:
-    branches: [ "fix/#50-fix-deploy" ]
+    branches: [ "main" ]
       
 
 jobs:
