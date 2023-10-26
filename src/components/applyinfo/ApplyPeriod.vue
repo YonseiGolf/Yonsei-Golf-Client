@@ -82,12 +82,8 @@ h1 {
   padding: 20px;
   padding-top: 50px;
   max-width: 500px;
-  max-height: 200px;
   width: 95%;
   height: 95%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   border-radius: 20px;
 }
