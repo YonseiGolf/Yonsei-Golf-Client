@@ -78,14 +78,13 @@ h1 {
 }
 
 .text-box {
-  border: 1px solid #e3e3e3; /* 테두리 색상 */
-  padding: 20px; /* 내부 패딩 */
-  width: 600px; /* 박스의 너비 */
-  height: 200px; /* 박스의 높이 */
-  display: flex; /* 텍스트를 중앙에 위치시키기 위한 flex 사용 */
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-  text-align: center; /* 텍스트 중앙 정렬 */
+  border: 1px solid #e3e3e3;
+  padding: 20px;
+  padding-top: 50px;
+  max-width: 500px;
+  width: 95%;
+  height: 95%;
+  text-align: center;
   border-radius: 20px;
 }
 

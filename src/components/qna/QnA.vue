@@ -71,7 +71,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 95%;
   max-width: 540px;
   height: 60px;
   margin: 10px auto;

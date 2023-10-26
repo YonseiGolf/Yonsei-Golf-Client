@@ -89,6 +89,7 @@ export default {
   padding-top: 60px;
   padding-bottom: 150px;
   background-color: #f0f0f0;
+  width: 100%
 }
 
 h1 {
