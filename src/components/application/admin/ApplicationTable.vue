@@ -1,7 +1,7 @@
 <template>
 
   <div class="application-container">
-  <h3> {{ title }} &np {{ totalCount}}개</h3>
+  <h3> {{ title }} &nbsp; {{ totalCount}}개</h3>
   <table>
     <thead>
     <tr>
