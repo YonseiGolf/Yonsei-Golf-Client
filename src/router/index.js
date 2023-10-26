@@ -10,6 +10,7 @@ import CallBack from "@/components/user/CallBack.vue";
 import store from "@/store";
 import FormManagement from "@/components/application/admin/FormManagement.vue";
 import UserManagement from "@/components/user/admin/UserManagement.vue";
+import ApplicationDetail from "@/components/application/admin/ApplicationDetail.vue";
 
 const routes = [
     {
@@ -78,6 +79,11 @@ const routes = [
                 next('/');
             }
         }
+    },
+    {
+        path: '/application/:id',
+        name: 'ApplicationDetail',
+        component: ApplicationDetail
     }
 ]
 

@@ -11,14 +11,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="item in applications" :key="item.id">
+    <tr v-for="item in applications" :key="item.id" @click="viewDetail(item.id)">
       <td>
-        <img :src="item.photo" alt="Applicant Photo" style="max-width: 100px;"> <!-- 사진 출력 -->
+        <img :src="item.photo" alt="Applicant Photo" style="max-width: 100px;">
       </td>
       <td>
-        <div>{{ item.name }}</div> <!-- 이름 출력 -->
+        <div>{{ item.name }}</div>
       </td>
-      <td>{{ item.interviewTime }}</td> <!-- 면접 시간 출력 -->
+      <td>{{ item.interviewTime }}</td>
     </tr>
     </tbody>
   </table>
@@ -42,6 +42,13 @@ export default {
       default: 0,
       required: true
     }
+  },
+
+  methods: {
+    viewDetail(id) {
+      console.log(id)
+      this.$router.push({ name: 'ApplicationDetail', params: { id: id } });
+    }
   }
 }
 </script>
@@ -64,6 +71,13 @@ th, td {
 
 th{
   min-width: 50px;
+}
+
+tbody tr {
+  cursor: pointer;
+  &:hover {
+    background-color: #f5f5f5; // 원하는 배경색으로 설정
+  }
 }
 
 </style>

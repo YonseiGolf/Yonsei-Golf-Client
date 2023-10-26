@@ -19,11 +19,11 @@ export default {
 
   data() {
     return {
-      documentReceived: [],
-      documentPassed: [],
-      finalPassed: [],
-      documentFailed: [],
-      finalFailed: []
+      documentReceived: {content: [], totalElements: 0},
+      documentPassed: {content: [], totalElements: 0},
+      finalPassed: {content: [], totalElements: 0},
+      documentFailed: {content: [], totalElements: 0},
+      finalFailed: {content: [], totalElements: 0},
     }
   },
 
