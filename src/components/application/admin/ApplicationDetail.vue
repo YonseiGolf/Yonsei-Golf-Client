@@ -193,7 +193,7 @@
         면접 시간
       </td>
       <td>
-        {{ applications.interviewTime }}
+        {{ applications.interviewTime }} &nbsp;
         <button @click="showInterviewModal = true">면접 시간 변경</button>
 
         <InterviewModal v-if="showInterviewModal" @close="showInterviewModal = false" @save="updateInterviewTime" />
@@ -208,7 +208,6 @@
         <select v-model="applications.documentPass" @change="updateDocumentPass">
           <option value="true">합격</option>
           <option value="false">불합격</option>
-          <option value="null">보류</option>
         </select>
       </td>
 
@@ -219,7 +218,6 @@
         <select v-model="applications.finalPass" @change="updateFinalPass">
           <option value="true">합격</option>
           <option value="false">불합격</option>
-          <option value="null">보류</option>
         </select>
       </td>
     </tr>
@@ -231,9 +229,55 @@
 <script>
 import axios from "axios";
 import InterviewModal from "@/components/application/admin/IntervieModal.vue";
+import {ref} from "vue";
+import {useRoute} from "vue-router";
 
 export default {
-  components: {InterviewModal},
+  components: {
+    InterviewModal,
+  },
+
+  setup() {
+    const interviewTime = ref('2023-10-28 10:00');
+    const showInterviewModal = ref(false);
+    const route = useRoute();
+    const currentPageId = route.params.id;
+
+    const openModal = () => {
+      showInterviewModal.value = true;
+    };
+
+    const closeModal = () => {
+      showInterviewModal.value = false;
+    };
+
+    const updateInterviewTime = async(newTime) => {
+      interviewTime.value = newTime;
+
+      try{
+        const response = await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${currentPageId}/interviewTime`, {
+            time: interviewTime.value});
+        if (response.status === 200) {
+          alert("면접 시간 변경 완료");
+          closeModal();
+          location.reload();
+        }else {
+          alert("면접 시간 변경 실패");
+        }
+
+      }catch (error) {
+        alert(error);
+      }
+    }
+
+    return {
+      interviewTime,
+      showInterviewModal,
+      openModal,
+      closeModal,
+      updateInterviewTime
+    };
+  },
 
   data() {
     return {
@@ -255,14 +299,12 @@ export default {
   },
 
   methods: {
-    async updateDocumentPass() {
+    updateDocumentPass() {
 
       if (this.applications.finalPass === "true") {
         this.applications.finalPass = true;
       } else if (this.applications.finalPass === "false") {
         this.applications.finalPass = false;
-      } else {
-        this.applications.finalPass = null;
       }
 
       axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/documentPass`, this.applications.documentPass,
@@ -284,14 +326,11 @@ export default {
           });
     },
 
-    async updateFinalPass() {
-
+    updateFinalPass() {
       if (this.applications.finalPass === "true") {
         this.applications.finalPass = true;
       } else if (this.applications.finalPass === "false") {
         this.applications.finalPass = false;
-      } else {
-        this.applications.finalPass = null;
       }
       axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/finalPass`, this.applications.finalPass,
           {
@@ -311,7 +350,8 @@ export default {
             console.error("Error updating finalPass:", error);
           });
     }
-  }
+  },
+
 };
 
 </script>
@@ -332,7 +372,7 @@ img {
 
 table {
   margin: 0 auto;
-  font-size: 10px;
+  font-size: 12px;
   max-width: 70%;
 }
 
@@ -352,7 +392,7 @@ table th {
 }
 
 @media (max-width: 1300px) {
-  .profile-info, .application-body {
+  .profile-info, .application-body, .application-footer {
     max-width: 90%;
     width: 90%;
   }

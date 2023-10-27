@@ -11,7 +11,7 @@
       <tr>
         <th>사진</th>
         <th>이름</th>
-        <th>Interview Time</th>
+        <th>면접 시간</th>
       </tr>
       </thead>
       <tbody>
