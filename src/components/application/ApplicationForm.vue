@@ -9,8 +9,10 @@
         사진
       </td>
       <td rowspan="2">
-        사진 S3로 프론트에서 처리
-        <!--        <img :src="applications.photo" alt="Applicant's Photo"/>-->
+        <input v-if="!applications.photo" type="file" @change="handleFileUpload"/>
+        <button v-if="!applications.photo" @click="uploadImage">사진 업로드</button>
+
+        <img class="apply-photo" v-if="applications.photo" :src="applications.photo" />
       </td>
       <td>
         이름
@@ -214,6 +216,7 @@ export default {
     return {
       applications: {
         name: '',
+        photo: '',
         age: '',
         studentId: '',
         major: '',
@@ -229,6 +232,7 @@ export default {
         golfMemory: '',
         otherClub: '',
         swingVideo: '',
+        selectedFile: null,
       }
     }
   },
@@ -266,6 +270,29 @@ export default {
       } catch (error) {
         alert('지원서 제출에 실패하였습니다.')
       }
+    },
+
+    async uploadImage() {
+      const formData = new FormData();
+      formData.append('image', this.applications.selectedFile);
+
+      try {
+        const response = await axios.post(`${process.env.VUE_APP_API_URL}/apply/forms/image`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+
+        // 응답에서 이미지 URL을 가져와서 저장
+        this.applications.photo = response.data.data;
+
+      } catch (error) {
+        console.error("Image upload failed:", error);
+      }
+    },
+
+    handleFileUpload(event) {
+      this.applications.selectedFile = event.target.files[0];
     },
 
     handleNameInput() {
@@ -536,4 +563,11 @@ button:hover {
 .before-apply {
   font-size: 12px;
 }
+
+.apply-photo{
+  min-width: 100px;
+  min-height: 100px;
+}
+
+
 </style>
