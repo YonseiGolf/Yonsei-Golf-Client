@@ -30,7 +30,14 @@
 </template>
 
 <script>
+import globalState from "@/globalState";
+
 export default {
+  computed: {
+    globalState() {
+      return globalState
+    }
+  },
   props: {
     applications: { // 각 분류별 데이터를 전달받는 props
       type: Array,
@@ -49,6 +56,11 @@ export default {
     passFail: {
       type: String,
       default: "",
+      required: false
+    },
+    sendEmail: {
+      type: Function,
+      default: () => {},
       required: false
     }
   },
