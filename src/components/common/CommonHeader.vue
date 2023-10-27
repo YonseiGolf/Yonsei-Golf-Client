@@ -5,6 +5,9 @@
     </div>
     <nav>
       <ul class="header-nav">
+        <li>
+          <router-link to="/apply/form">지원서</router-link>
+        </li>
         <li v-if="adminStatus">
           <router-link to="/admin/form">
             지원서 관리
