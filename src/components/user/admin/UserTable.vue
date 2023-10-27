@@ -67,8 +67,6 @@ export default {
 
   methods: {
     async updateUserClass(item) {
-      console.log(item.id)
-      console.log(item.userClass)
 
       try {
         const response = await axios.patch(`${process.env.VUE_APP_API_URL}/admin/users/${item.id}`, {

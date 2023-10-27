@@ -1,32 +1,43 @@
 <template>
 
   <div class="application-container">
-  <h3> {{ title }} &nbsp; {{ totalCount}}개</h3>
-  <table>
-    <thead>
-    <tr>
-      <th>사진</th>
-      <th>이름</th>
-      <th>Interview Time</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="item in applications" :key="item.id">
-      <td>
-        <img :src="item.photo" alt="Applicant Photo" style="max-width: 100px;"> <!-- 사진 출력 -->
-      </td>
-      <td>
-        <div>{{ item.name }}</div> <!-- 이름 출력 -->
-      </td>
-      <td>{{ item.interviewTime }}</td> <!-- 면접 시간 출력 -->
-    </tr>
-    </tbody>
-  </table>
+    <h3>
+      {{ title }} {{ totalCount }}개
+
+      <button v-if="passFail" @click="sendEmail">{{ passFail }} 메일 보내기</button>
+    </h3>
+    <table>
+      <thead>
+      <tr>
+        <th>사진</th>
+        <th>이름</th>
+        <th>면접 시간</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="item in applications" :key="item.id" @click="viewDetail(item.id)">
+        <td>
+          <img :src="item.photo" alt="Applicant Photo" style="max-width: 100px;">
+        </td>
+        <td>
+          <div>{{ item.name }}</div>
+        </td>
+        <td>{{ item.interviewTime }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
+import globalState from "@/globalState";
+
 export default {
+  computed: {
+    globalState() {
+      return globalState
+    }
+  },
   props: {
     applications: { // 각 분류별 데이터를 전달받는 props
       type: Array,
@@ -41,6 +52,23 @@ export default {
       type: Number,
       default: 0,
       required: true
+    },
+    passFail: {
+      type: String,
+      default: "",
+      required: false
+    },
+    sendEmail: {
+      type: Function,
+      default: () => {},
+      required: false
+    }
+  },
+
+  methods: {
+    viewDetail(id) {
+      console.log(id)
+      this.$router.push({name: 'ApplicationDetail', params: {id: id}});
     }
   }
 }
@@ -62,8 +90,16 @@ th, td {
   text-align: center;
 }
 
-th{
+th {
   min-width: 50px;
+}
+
+tbody tr {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f5f5f5; // 원하는 배경색으로 설정
+  }
 }
 
 </style>
