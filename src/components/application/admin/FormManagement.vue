@@ -1,10 +1,10 @@
 <template>
   <div class="application-tables">
-    <ApplicationTable :applications="documentReceived.content" title="지원 접수" :total-count="documentReceived.totalElements"/>
-    <ApplicationTable :applications="documentPassed.content" title="1차 합격" :total-count="documentPassed.totalElements"/>
-    <ApplicationTable :applications="finalPassed.content" title="최종 합격" :total-count="finalPassed.totalElements"/>
-    <ApplicationTable :applications="documentFailed.content" title="서류 탈락" :total-count="documentFailed.totalElements"/>
-    <ApplicationTable :applications="finalFailed.content" title="최종 탈락" :total-count="finalFailed.totalElements"/>
+    <ApplicationTable :applications="documentReceived.content" title="지원 접수" :total-count="documentReceived.totalElements" />
+    <ApplicationTable :applications="documentPassed.content" title="1차 합격" :total-count="documentPassed.totalElements" passFail="합격" />
+    <ApplicationTable :applications="finalPassed.content" title="최종 합격" :total-count="finalPassed.totalElements" passFail="합격" />
+    <ApplicationTable :applications="documentFailed.content" title="서류 탈락" :total-count="documentFailed.totalElements" passFail="불합격" />
+    <ApplicationTable :applications="finalFailed.content" title="최종 탈락" :total-count="finalFailed.totalElements" passFail="불합격" />
   </div>
 </template>
 
@@ -20,10 +20,10 @@ export default {
   data() {
     return {
       documentReceived: {content: [], totalElements: 0},
-      documentPassed: {content: [], totalElements: 0},
-      finalPassed: {content: [], totalElements: 0},
-      documentFailed: {content: [], totalElements: 0},
-      finalFailed: {content: [], totalElements: 0},
+      documentPassed: {content: [], totalElements: 0 , passFail: "true"},
+      finalPassed: {content: [], totalElements: 0, passFail: "true"},
+      documentFailed: {content: [], totalElements: 0, passFail: "false"},
+      finalFailed: {content: [], totalElements: 0, passFail: "false"},
     }
   },
 
@@ -35,13 +35,13 @@ export default {
       const documentPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true`);
       this.documentPassed = documentPassedResponse.data.data;
 
-      const finalPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=true`);
+      const finalPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true&finalPass=true`);
       this.finalPassed = finalPassedResponse.data.data;
 
       const documentFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=false`);
       this.documentFailed = documentFailedResponse.data.data;
 
-      const finalFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=false`);
+      const finalFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=false&documentPass=true`);
       this.finalFailed = finalFailedResponse.data.data;
 
     } catch (error) {
