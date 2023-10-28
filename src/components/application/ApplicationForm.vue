@@ -18,14 +18,14 @@
         이름
       </td>
       <td>
-        <textarea v-model="applications.name" @input="handleNameInput"></textarea>
+        <textarea placeholder="김연골" v-model="applications.name" @input="handleNameInput"></textarea>
       </td>
     </tr>
 
     <tr>
       <td>나이</td>
       <td>
-        <textarea v-model="applications.age" @input="handleAgeInput"></textarea>
+        <textarea placeholder="숫자만 입력해주세요" v-model="applications.age" @input="handleAgeInput"></textarea>
       </td>
     </tr>
 
@@ -34,13 +34,13 @@
         학번
       </td>
       <td>
-        <textarea v-model="applications.studentId" @input="handleStudentIdInput"></textarea>
+        <textarea placeholder="숫자만 입력해주세요" v-model="applications.studentId" @input="handleStudentIdInput"></textarea>
       </td>
       <td>
         전공
       </td>
       <td>
-        <textarea v-model="applications.major" @input="handleMajorInput"></textarea>
+        <textarea placeholder="OO학과" v-model="applications.major" @input="handleMajorInput"></textarea>
       </td>
     </tr>
 
@@ -49,14 +49,14 @@
         전화번호
       </td>
       <td>
-        <textarea v-model="applications.phoneNumber" @input="handlePhoneNumberInput"></textarea>
+        <textarea placeholder="숫자만 입력해주세요" v-model="applications.phoneNumber" @input="handlePhoneNumberInput"></textarea>
       </td>
 
       <td>
         이메일
       </td>
       <td>
-        <textarea v-model="applications.email" @input="handleEmailInput"></textarea>
+        <textarea placeholder="yonseigolf@email.com" v-model="applications.email" @input="handleEmailInput"></textarea>
       </td>
     </tr>
 
@@ -122,7 +122,7 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.selfIntroduction" rows="30" @input="handleSelfIntroductionInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.selfIntroduction" rows="30" @input="handleSelfIntroductionInput"></textarea>
       </td>
     </tr>
     </tbody>
@@ -137,7 +137,7 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.applyReason" rows="30" @input="handleApplyReasonInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.applyReason" rows="30" @input="handleApplyReasonInput"></textarea>
       </td>
     </tr>
     </tbody>
@@ -152,7 +152,7 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.skillEvaluation" rows="30" @input="handleSkillEvaluationInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.skillEvaluation" rows="30" @input="handleSkillEvaluationInput"></textarea>
       </td>
     </tr>
     </tbody>
@@ -167,7 +167,7 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.golfMemory" rows="30" @input="handleGolfMemoryInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.golfMemory" rows="30" @input="handleGolfMemoryInput"></textarea>
       </td>
     </tr>
     </tbody>
@@ -182,7 +182,7 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.otherClub" rows="30" @input="handleOtherClubInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.otherClub" rows="30" @input="handleOtherClubInput"></textarea>
       </td>
     </tr>
     </tbody>
@@ -197,7 +197,7 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.swingVideo" rows="30" @input="handleSwingVideoInput"></textarea>
+        <textarea placeholder="유튜브 링크를 첨부해주세요. (비공개 영상이 아닌지 확인해주세요)" v-model="applications.swingVideo" rows="30" @input="handleSwingVideoInput"></textarea>
       </td>
     </tr>
     </tbody>
@@ -233,7 +233,7 @@ export default {
         otherClub: '',
         swingVideo: '',
         selectedFile: null,
-      }
+      },
     }
   },
 
@@ -569,5 +569,10 @@ button:hover {
   min-height: 100px;
 }
 
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
 
 </style>
