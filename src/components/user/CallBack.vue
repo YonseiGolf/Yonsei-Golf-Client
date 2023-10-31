@@ -21,7 +21,7 @@ export default {
     async sendCodeToBackend(code) {
       try {
         const response = await axios.post(`${process.env.VUE_APP_API_URL}/oauth/kakao`, { kakaoCode: code });
-        console.log('response:', response);
+
         if (response.status === 200) {
 
           try {

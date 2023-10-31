@@ -9,23 +9,24 @@
         사진
       </td>
       <td rowspan="2">
-        <input v-if="!applications.photo" type="file" @change="handleFileUpload"/>
-        <button v-if="!applications.photo" @click="uploadImage">사진 업로드</button>
-
-        <img class="apply-photo" v-if="applications.photo" :src="applications.photo" />
+        <div class="file-upload-container">
+          <input v-if="!applications.photo" type="file" @change="handleFileUpload"/>
+          <button class="photo-button" v-if="!applications.photo" @click="uploadImage">사진 업로드</button>
+        </div>
+        <img class="apply-photo" v-if="applications.photo" :src="applications.photo"/>
       </td>
       <td>
         이름
       </td>
       <td>
-        <textarea v-model="applications.name" @input="handleNameInput"></textarea>
+        <textarea placeholder="김연골" v-model="applications.name" @input="handleNameInput"></textarea>
       </td>
     </tr>
 
     <tr>
       <td>나이</td>
       <td>
-        <textarea v-model="applications.age" @input="handleAgeInput"></textarea>
+        <textarea placeholder="숫자만 입력해주세요" v-model="applications.age" @input="handleAgeInput"></textarea>
       </td>
     </tr>
 
@@ -34,13 +35,13 @@
         학번
       </td>
       <td>
-        <textarea v-model="applications.studentId" @input="handleStudentIdInput"></textarea>
+        <textarea placeholder="숫자만 입력해주세요" v-model="applications.studentId" @input="handleStudentIdInput"></textarea>
       </td>
       <td>
         전공
       </td>
       <td>
-        <textarea v-model="applications.major" @input="handleMajorInput"></textarea>
+        <textarea placeholder="OO학과" v-model="applications.major" @input="handleMajorInput"></textarea>
       </td>
     </tr>
 
@@ -49,14 +50,15 @@
         전화번호
       </td>
       <td>
-        <textarea v-model="applications.phoneNumber" @input="handlePhoneNumberInput"></textarea>
+        <textarea placeholder="숫자만 입력해주세요" v-model="applications.phoneNumber"
+                  @input="handlePhoneNumberInput"></textarea>
       </td>
 
       <td>
         이메일
       </td>
       <td>
-        <textarea v-model="applications.email" @input="handleEmailInput"></textarea>
+        <textarea placeholder="yonseigolf@email.com" v-model="applications.email" @input="handleEmailInput"></textarea>
       </td>
     </tr>
 
@@ -66,6 +68,7 @@
       </td>
       <td>
         <select v-model="applications.golfDuration">
+          <option value="0">1년 미만</option>
           <option value="1">1년</option>
           <option value="2">2년</option>
           <option value="3">3년</option>
@@ -79,6 +82,7 @@
       </td>
       <td>
         <select v-model="applications.roundCount">
+          <option value="0">0회</option>
           <option value="1">1회</option>
           <option value="2">2회</option>
           <option value="3">3회</option>
@@ -94,8 +98,8 @@
       </td>
       <td>
         <select v-model="applications.lessonStatus">
-          <option value="true">유</option>
-          <option value="false">무</option>
+          <option value="true">레슨 x</option>
+          <option value="false">레슨 o</option>
         </select>
       </td>
       <td>
@@ -103,8 +107,8 @@
       </td>
       <td>
         <select v-model="applications.clubStatus">
-          <option value="true">유</option>
-          <option value="false">무</option>
+          <option value="true">보유중</option>
+          <option value="false">보유하지 않음</option>
         </select>
       </td>
     </tr>
@@ -122,7 +126,9 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.selfIntroduction" rows="30" @input="handleSelfIntroductionInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.selfIntroduction" rows="30"
+                  @input="handleSelfIntroductionInput"></textarea>
+        <div class="error-message" v-if="selfInfoInvalid"> 최대 500자까지 작성 가능합니다. </div>
       </td>
     </tr>
     </tbody>
@@ -137,7 +143,9 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.applyReason" rows="30" @input="handleApplyReasonInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.applyReason" rows="30"
+                  @input="handleApplyReasonInput"></textarea>
+        <div class="error-message" v-if="applyReasonInvalid"> 최대 500자까지 작성 가능합니다.</div>
       </td>
     </tr>
     </tbody>
@@ -152,7 +160,9 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.skillEvaluation" rows="30" @input="handleSkillEvaluationInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.skillEvaluation" rows="30"
+                  @input="handleSkillEvaluationInput"></textarea>
+        <div class="error-message" v-if="golfSkillInvalid"> 최대 500자까지 작성 가능합니다.</div>
       </td>
     </tr>
     </tbody>
@@ -167,7 +177,9 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.golfMemory" rows="30" @input="handleGolfMemoryInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.golfMemory" rows="30"
+                  @input="handleGolfMemoryInput"></textarea>
+        <div class="error-message" v-if="golfMemoryInvalid"> 최대 500자까지 작성 가능합니다.</div>
       </td>
     </tr>
     </tbody>
@@ -182,7 +194,9 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.otherClub" rows="30" @input="handleOtherClubInput"></textarea>
+        <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.otherClub" rows="30"
+                  @input="handleOtherClubInput"></textarea>
+        <div class="error-message" v-if="otherClubInvalid"> 최대 500자까지 작성 가능합니다.</div>
       </td>
     </tr>
     </tbody>
@@ -197,14 +211,16 @@
     <tbody>
     <tr>
       <td>
-        <textarea v-model="applications.swingVideo" rows="30" @input="handleSwingVideoInput"></textarea>
+        <textarea placeholder="유튜브 링크를 첨부해주세요. (비공개 영상이 아닌지 확인해주세요)" v-model="applications.swingVideo" rows="30"
+                  @input="handleSwingVideoInput"></textarea>
+        <p class="error-message" v-if="golfSwingInvalid"> 최대 500자까지 작성 가능합니다.</p>
       </td>
     </tr>
     </tbody>
   </table>
   <div>* 지원서 제출 전 이메일과 전화번호를 다시 한번 확인해주세요.</div>
   <div>* 결과는 이메일로 전송해드립니다.</div>
-  <button class="apply-button" @click="submitApplication">지원서 제출</button>
+  <button class="apply-button" @click="submitApplication" type="submit">지원서 제출</button>
 </template>
 
 <script>
@@ -222,10 +238,10 @@ export default {
         major: '',
         phoneNumber: '',
         email: '',
-        golfDuration: '',
-        roundCount: '',
-        lessonStatus: '',
-        clubStatus: '',
+        golfDuration: 0,
+        roundCount: 0,
+        lessonStatus: false,
+        clubStatus: false,
         selfIntroduction: '',
         applyReason: '',
         skillEvaluation: '',
@@ -233,7 +249,13 @@ export default {
         otherClub: '',
         swingVideo: '',
         selectedFile: null,
-      }
+      },
+      selfInfoInvalid: false,
+      applyReasonInvalid: false,
+      golfSkillInvalid: false,
+      golfMemoryInvalid: false,
+      otherClubInvalid: false,
+      golfSwingInvalid: false
     }
   },
 
@@ -340,39 +362,45 @@ export default {
     },
 
     handleSelfIntroductionInput() {
-      if (this.applications.selfIntroduction.length > 600) {
-        this.applications.selfIntroduction = this.applications.selfIntroduction.substring(0, 600);
+      if (this.applications.selfIntroduction.length > 500) {
+        this.applications.selfIntroduction = this.applications.selfIntroduction.substring(0, 500);
       }
+      this.selfInfoInvalid = this.applications.selfIntroduction.length >= 500;
     },
 
     handleApplyReasonInput() {
-      if (this.applications.applyReason.length > 600) {
-        this.applications.applyReason = this.applications.applyReason.substring(0, 600);
+      if (this.applications.applyReason.length > 500) {
+        this.applications.applyReason = this.applications.applyReason.substring(0, 500);
       }
+      this.applyReasonInvalid = this.applications.applyReason.length >= 500;
     },
 
     handleSkillEvaluationInput() {
-      if (this.applications.skillEvaluation.length > 600) {
-        this.applications.skillEvaluation = this.applications.skillEvaluation.substring(0, 600);
+      if (this.applications.skillEvaluation.length > 500) {
+        this.applications.skillEvaluation = this.applications.skillEvaluation.substring(0, 500);
       }
+      this.golfSkillInvalid = this.applications.skillEvaluation.length >= 500;
     },
 
     handleGolfMemoryInput() {
-      if (this.applications.golfMemory.length > 600) {
-        this.applications.golfMemory = this.applications.golfMemory.substring(0, 600);
+      if (this.applications.golfMemory.length > 500) {
+        this.applications.golfMemory = this.applications.golfMemory.substring(0, 500);
       }
+      this.golfMemoryInvalid = this.applications.golfMemory.length >= 500;
     },
 
     handleOtherClubInput() {
-      if (this.applications.otherClub.length > 600) {
-        this.applications.otherClub = this.applications.otherClub.substring(0, 600);
+      if (this.applications.otherClub.length > 500) {
+        this.applications.otherClub = this.applications.otherClub.substring(0, 500);
       }
+      this.otherClubInvalid = this.applications.otherClub.length >= 500;
     },
 
     handleSwingVideoInput() {
-      if (this.applications.swingVideo.length > 600) {
-        this.applications.swingVideo = this.applications.swingVideo.substring(0, 600);
+      if (this.applications.swingVideo.length > 500) {
+        this.applications.swingVideo = this.applications.swingVideo.substring(0, 500);
       }
+      this.golfSwingInvalid = this.applications.swingVideo.length >= 500;
     },
   },
 
@@ -493,6 +521,12 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+}
+
 img {
   max-width: 100px;
 }
@@ -515,6 +549,7 @@ table {
 table th, table td {
   border: 1px solid #ddd;
   padding: 10px;
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -539,6 +574,7 @@ textarea {
   border: none;
   outline: none;
   resize: none;
+  margin-top: 10px;
 }
 
 .apply-button {
@@ -564,9 +600,21 @@ button:hover {
   font-size: 12px;
 }
 
-.apply-photo{
+.apply-photo {
   min-width: 100px;
   min-height: 100px;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.photo-button {
+  margin: 0 auto;
+  margin-top: 5px;
+  width: 30%;
 }
 
 
