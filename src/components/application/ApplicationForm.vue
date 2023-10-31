@@ -98,8 +98,8 @@
       </td>
       <td>
         <select v-model="applications.lessonStatus">
-          <option value="true">유</option>
-          <option value="false">무</option>
+          <option value="true">레슨 x</option>
+          <option value="false">레슨 o</option>
         </select>
       </td>
       <td>
@@ -107,8 +107,8 @@
       </td>
       <td>
         <select v-model="applications.clubStatus">
-          <option value="true">유</option>
-          <option value="false">무</option>
+          <option value="true">보유중</option>
+          <option value="false">보유하지 않음</option>
         </select>
       </td>
     </tr>
