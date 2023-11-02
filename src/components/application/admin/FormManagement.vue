@@ -54,58 +54,45 @@ export default {
   },
 
   methods: {
-    sendDocumentPassEmail() {
+    async sendEmail(data) {
       this.isLoading = true;
-      axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/documentPassEmail`)
-          .then(response => {
-            alert(response.data.message)
-            this.isLoading = false;
-          })
-          .catch(error => {
-            alert(error.response.data.message);
-            this.isLoading = false;
-          });
+      try {
+        const response = await axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/results`, data);
+        alert(response.data.message);
+      } catch (error) {
+        alert(error.response.data.message);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    sendDocumentPassEmail() {
+      this.sendEmail({
+        documentPass: true,
+        finalPass: null
+      });
     },
 
     sendFinalPassEmail() {
-      this.isLoading = true;
-      axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/finalPassEmail`)
-          .then(response => {
-            alert(response.data.message)
-            this.isLoading = false;
-          })
-          .catch(error => {
-            alert(error.response.data.message);
-            this.isLoading = false;
-          });
+      this.sendEmail({
+        documentPass: true,
+        finalPass: true
+      });
     },
 
     sendDocumentFailEmail() {
-      this.isLoading = true;
-      axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/documentFailEmail`)
-          .then(response => {
-            alert(response.data.message)
-            this.isLoading = false;
-          })
-          .catch(error => {
-            alert(error.response.data.message);
-            this.isLoading = false;
-          });
+      this.sendEmail({
+        documentPass: false,
+        finalPass: null
+      });
     },
 
     sendFinalFailEmail() {
-      this.isLoading = true;
-      axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/finalFailEmail`)
-          .then(response => {
-            alert(response.data.message)
-            this.isLoading = false;
-          })
-          .catch(error => {
-            alert(error.response.data.message);
-            this.isLoading = false;
-          });
+      this.sendEmail({
+        documentPass: true,
+        finalPass: false
+      });
     },
-
   }
 }
 </script>
