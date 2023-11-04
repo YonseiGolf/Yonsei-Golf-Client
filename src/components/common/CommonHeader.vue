@@ -21,6 +21,10 @@
         </li>
 
         <li>
+          <router-link to="/board">게시판</router-link>
+        </li>
+
+        <li>
           <router-link to="/">Home</router-link>
         </li>
         <li>
