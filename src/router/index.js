@@ -12,6 +12,7 @@ import FormManagement from "@/components/application/admin/FormManagement.vue";
 import UserManagement from "@/components/user/admin/UserManagement.vue";
 import ApplicationDetail from "@/components/application/admin/ApplicationDetail.vue";
 import BoardHom from "@/components/board/BoardHom.vue";
+import PostBoard from "@/components/board/PostBoard.vue";
 
 const routes = [
     {
@@ -90,6 +91,11 @@ const routes = [
         path: '/board',
         name: '/board',
         component: BoardHom
+    },
+    {
+        path: '/board/post',
+        name: 'posting board',
+        component: PostBoard
     }
 ]
 

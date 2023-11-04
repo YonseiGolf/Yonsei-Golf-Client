@@ -1,5 +1,7 @@
 <template>
-  <h1>게시판</h1>
+  <div class="boardList-header">
+    <h1 class="boardList-header-title">게시판</h1>
+  </div>
 
   <ul class="nav nav-tabs">
     <li v-for="category in categories" :key="category.name" :class="{ 'active': activeCategory === category.name }">
@@ -41,6 +43,9 @@
     </ul>
   </nav>
 
+  <div class="board-button">
+    <button @click="goToPost">글쓰기</button>
+  </div>
 </template>
 
 <script>
@@ -114,6 +119,9 @@ export default {
       return categoryNames[categoryCode] || categoryCode;
     },
 
+    goToPost() {
+      this.$router.push('/board/post');
+    }
 
   },
 
@@ -122,6 +130,17 @@ export default {
 
 
 <style lang="scss" scoped>
+.boardList-header {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+
+}
+
+.boardList-header-title {
+  justify-content: flex-start;
+}
+
 div {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
@@ -234,5 +253,10 @@ thead {
   padding: 1rem;
 }
 
-
+.board-button{
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
 </style>
