@@ -11,6 +11,7 @@ import store from "@/store";
 import FormManagement from "@/components/application/admin/FormManagement.vue";
 import UserManagement from "@/components/user/admin/UserManagement.vue";
 import ApplicationDetail from "@/components/application/admin/ApplicationDetail.vue";
+import BoardHom from "@/components/board/BoardHom.vue";
 
 const routes = [
     {
@@ -84,6 +85,11 @@ const routes = [
         path: '/application/:id',
         name: 'ApplicationDetail',
         component: ApplicationDetail
+    },
+    {
+        path: '/board',
+        name: '/board',
+        component: BoardHom
     }
 ]
 
