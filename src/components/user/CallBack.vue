@@ -8,6 +8,7 @@ import globalState from "@/globalState";
 import store from "@/store";
 
 export default {
+
   name: 'KakaoCallback',
   async mounted() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -21,13 +22,15 @@ export default {
     async sendCodeToBackend(code) {
       try {
         const response = await axios.post(`${process.env.VUE_APP_API_URL}/oauth/kakao`, { kakaoCode: code });
-
-        if (response.status === 200) {
+        console.log('response:', response)
+        if (response.data.code === 200) {
 
           try {
             const loginResponse = await axios.post(`${process.env.VUE_APP_API_URL}/users/signIn`);
 
+            console.log(loginResponse)
             if (loginResponse.status === 200) {
+              console.log('로그인 성공')
               // 로그인이 성공하면 store 에 로그인 정보를 저장해둔다.
               const userDetails = {
                 username: loginResponse.data.data.name,

@@ -11,7 +11,7 @@
 
 <script>
 import axios from "axios";
-import ApplicationTable from "@/components/application/admin/ApplicationTable.vue";
+import ApplicationTable from "@/components/admin/ApplicationTable.vue";
 import LoadingModal from "@/components/common/LoadingModal.vue";
 
 export default {

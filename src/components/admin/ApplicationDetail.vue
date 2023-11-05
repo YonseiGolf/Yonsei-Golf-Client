@@ -228,7 +228,7 @@
 
 <script>
 import axios from "axios";
-import InterviewModal from "@/components/application/admin/IntervieModal.vue";
+import InterviewModal from "@/components/admin/IntervieModal.vue";
 import {ref} from "vue";
 import {useRoute} from "vue-router";
 
