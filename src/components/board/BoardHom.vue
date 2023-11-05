@@ -1,47 +1,69 @@
 <template>
-  <h1>게시판</h1>
+  <v-container class="boardList-header">
+    <v-row>
+      <v-col cols="12">
+        <h1 class="text-h4 py-4">게시판</h1>
+      </v-col>
+    </v-row>
+  </v-container>
 
-  <ul class="nav nav-tabs">
-    <li v-for="category in categories" :key="category.name" :class="{ 'active': activeCategory === category.name }">
-      <a href="#" @click.prevent="selectCategory(category)">
-        {{ category.displayName }}
-      </a>
-    </li>
-  </ul>
+  <v-container clsas="boarder-category">
+    <v-row justify="start">
+      <v-col cols="12" md="8">
+        <v-tabs v-model="activeCategory" background-color="transparent">
+          <v-tab v-for="category in categories" :key="category.name" :value="category.name">
+            {{ category.displayName }}
+          </v-tab>
+        </v-tabs>
+      </v-col>
+    </v-row>
+  </v-container>
 
-  <div>
-    <table>
-      <thead>
-      <tr>
-        <th>카테고리</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="boardList" v-for="post in filteredPosts" :key="post.id" @click="goToDetail(post.id)">
-        <td>{{ getCategoryName(post.category) }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.writer }}</td>
-        <td>{{ post.createdAt }}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+  <v-container>
+    <v-row justify="space-between">
+      <v-col cols="12" md="8">
+        <v-simple-table style="width: 100%;">
+          <template v-slot:default>
+            <thead>
+            <tr>
+              <th class="text-center">카테고리</th>
+              <th>제목</th>
+              <th class="text-center">작성자</th>
+              <th class="text-center">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="post in filteredPosts" :key="post.id" @click="goToDetail(post.id)">
+              <td class="text-center">{{ getCategoryName(post.category) }}</td>
+              <td>{{ post.title }}</td>
+              <td class="text-center">{{ post.writer }}</td>
+              <td class="text-center">{{ post.createdAt }}</td>
+            </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-col>
+    </v-row>
+  </v-container>
 
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
-      <li class="page-item" :class="{ disabled: page === 0 }">
-        <button class="page-link" @click="fetchPosts(page - 1)" :disabled="page === 0">이전</button>
-      </li>
-      <li class="page-item" :class="{ disabled: page === totalPages - 1 }">
-        <button class="page-link" @click="fetchPosts(page + 1)" :disabled="page === totalPages - 1">다음</button>
-      </li>
-    </ul>
-  </nav>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" md="8">
+        <v-pagination v-model="page" :length="totalPages" @input="fetchPosts"></v-pagination>
+      </v-col>
+    </v-row>
+  </v-container>
+
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" md="8" class="text-right">
+        <v-btn @click="goToPost">글쓰기</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 
 </template>
+
 
 <script>
 import axios from "axios";
@@ -80,8 +102,8 @@ export default {
 
   methods: {
     // 게시글 세부 정보 페이지로 이동하는 함수
-    goToDetail(postId) {
-      this.$router.push({name: 'BoardDetail', params: {id: postId}});
+    goToDetail(boardId) {
+      this.$router.push(`/board/${boardId}`);
     },
 
 
@@ -114,6 +136,9 @@ export default {
       return categoryNames[categoryCode] || categoryCode;
     },
 
+    goToPost() {
+      this.$router.push('/board/post');
+    }
 
   },
 
@@ -122,25 +147,24 @@ export default {
 
 
 <style lang="scss" scoped>
-div {
+.boardList-header {
+  margin: 0 auto;
+  width: 80%;
   display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
+  text-align: center;
 }
 
 table {
   border-collapse: collapse; /* 경계선을 겹치게 */
   margin-top: 20px; /* 테이블 상단에 여백을 추가 */
-  width: 80%;
-  border-left: 1px solid #ccc; // 테이블의 왼쪽 경계선
-  border-right: 1px solid #ccc; // 테이블의 오른쪽 경계선
+  //border-left: 1px solid #ccc; // 테이블의 왼쪽 경계선
+  //border-right: 1px solid #ccc; // 테이블의 오른쪽 경계선
 }
 
 th, td {
   border-top: 1px solid #ccc; // 가로선만 표시
   border-bottom: 1px solid #ccc; // 가로선만 표시
 }
-
-
 th:nth-child(2), td:nth-child(2) {
   width: 50%; /* 3/6의 비율 */
 }
@@ -151,7 +175,6 @@ th:nth-child(4), td:nth-child(4) {
   width: 16.66%; /* 1/6의 비율 */
   text-align: center;
 }
-
 th {
   padding: 8px; /* 셀 내부에 패딩을 추가하여 내용이 선에 닿지 않도록 */
   text-align: center;
@@ -234,5 +257,10 @@ thead {
   padding: 1rem;
 }
 
-
+.board-button {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
 </style>
