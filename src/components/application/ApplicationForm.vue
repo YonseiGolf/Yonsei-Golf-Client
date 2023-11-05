@@ -1,7 +1,10 @@
 <template>
-  <h1>연세 골프 지원서</h1>
-  <div class="before-apply">* 지원서는 임시저장되지 않습니다.</div>
-  <div class="before-apply">*지원서 작성 시 이모지 사용을 자제해주세요. 이모지 사용으로 인한 불이익은 지원자에게 있습니다.</div>
+  <div class="application-header-container">
+    <h1>연세 골프 지원서</h1>
+    <div class="before-apply">* 지원서는 임시저장되지 않습니다.</div>
+    <div class="before-apply">*지원서 작성 시 이모지 사용을 자제해주세요. 이모지 사용으로 인한 불이익은 지원자에게 있습니다.</div>
+  </div>
+
   <table class="profile-info">
     <tbody>
     <tr>
@@ -128,7 +131,7 @@
       <td>
         <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.selfIntroduction" rows="30"
                   @input="handleSelfIntroductionInput"></textarea>
-        <div class="error-message" v-if="selfInfoInvalid"> 최대 500자까지 작성 가능합니다. </div>
+        <div class="error-message" v-if="selfInfoInvalid"> 최대 500자까지 작성 가능합니다.</div>
       </td>
     </tr>
     </tbody>
@@ -218,10 +221,15 @@
     </tr>
     </tbody>
   </table>
-  <div>* 지원서 제출 전 이메일과 전화번호를 다시 한번 확인해주세요.</div>
-  <div>* 결과는 이메일로 전송해드립니다.</div>
-  <button class="apply-button" @click="submitApplication" type="submit">지원서 제출</button>
+
+  <div class="application-footer-container">
+    <div>* 지원서 제출 전 이메일과 전화번호를 다시 한번 확인해주세요.</div>
+    <div>* 결과는 이메일로 전송해드립니다.</div>
+    <button class="apply-button" @click="submitApplication" type="submit">지원서 제출</button>
+  </div>
+
 </template>
+
 
 <script>
 import axios from "axios";
@@ -617,5 +625,10 @@ button:hover {
   width: 30%;
 }
 
+.application-header-container,
+.application-footer-container {
+  text-align: center;
+  padding: 20px;
+}
 
 </style>

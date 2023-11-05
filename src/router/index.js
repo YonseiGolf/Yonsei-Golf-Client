@@ -13,6 +13,7 @@ import UserManagement from "@/components/user/admin/UserManagement.vue";
 import ApplicationDetail from "@/components/application/admin/ApplicationDetail.vue";
 import BoardHom from "@/components/board/BoardHom.vue";
 import PostBoard from "@/components/board/PostBoard.vue";
+import BoardDetail from "@/components/board/BoardDetail.vue";
 
 const routes = [
     {
@@ -96,6 +97,11 @@ const routes = [
         path: '/board/post',
         name: 'posting board',
         component: PostBoard
+    },
+    {
+        path: '/board/:boardId',
+        name: 'board detail',
+        component: BoardDetail
     }
 ]
 

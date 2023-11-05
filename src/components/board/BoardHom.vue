@@ -1,52 +1,110 @@
+<!--<template>-->
+<!--  <div class="boardList-header">-->
+<!--    <h1 class="boardList-header-title">게시판</h1>-->
+<!--  </div>-->
+
+<!--  <ul class="nav nav-tabs">-->
+<!--    <li v-for="category in categories" :key="category.name" :class="{ 'active': activeCategory === category.name }">-->
+<!--      <a href="#" @click.prevent="selectCategory(category)">-->
+<!--        {{ category.displayName }}-->
+<!--      </a>-->
+<!--    </li>-->
+<!--  </ul>-->
+
+<!--  <div>-->
+<!--    <table>-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>카테고리</th>-->
+<!--        <th>제목</th>-->
+<!--        <th>작성자</th>-->
+<!--        <th>작성일</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr class="boardList" v-for="post in filteredPosts" :key="post.id" @click="goToDetail(post.id)">-->
+<!--        <td>{{ getCategoryName(post.category) }}</td>-->
+<!--        <td>{{ post.title }}</td>-->
+<!--        <td>{{ post.writer }}</td>-->
+<!--        <td>{{ post.createdAt }}</td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+
+<!--  <nav aria-label="Page navigation">-->
+<!--    <ul class="pagination">-->
+<!--      <li class="page-item" :class="{ disabled: page === 0 }">-->
+<!--        <button class="page-link" @click="fetchPosts(page - 1)" :disabled="page === 0">이전</button>-->
+<!--      </li>-->
+<!--      <li class="page-item" :class="{ disabled: page === totalPages - 1 }">-->
+<!--        <button class="page-link" @click="fetchPosts(page + 1)" :disabled="page === totalPages - 1">다음</button>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+
+<!--  <div class="board-button">-->
+<!--    <button @click="goToPost">글쓰기</button>-->
+<!--  </div>-->
+
 <template>
-  <div class="boardList-header">
-    <h1 class="boardList-header-title">게시판</h1>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <h1 class="text-h4 py-4">게시판</h1>
+      </v-col>
+    </v-row>
 
-  <ul class="nav nav-tabs">
-    <li v-for="category in categories" :key="category.name" :class="{ 'active': activeCategory === category.name }">
-      <a href="#" @click.prevent="selectCategory(category)">
-        {{ category.displayName }}
-      </a>
-    </li>
-  </ul>
+    <v-row justify="center">
+      <v-col cols="12" md="8">
+        <v-tabs v-model="activeCategory" background-color="transparent">
+          <v-tab v-for="category in categories" :key="category.name" :value="category.name">
+            {{ category.displayName }}
+          </v-tab>
+        </v-tabs>
+      </v-col>
+    </v-row>
 
-  <div>
-    <table>
-      <thead>
-      <tr>
-        <th>카테고리</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="boardList" v-for="post in filteredPosts" :key="post.id" @click="goToDetail(post.id)">
-        <td>{{ getCategoryName(post.category) }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.writer }}</td>
-        <td>{{ post.createdAt }}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <v-row justify="center">
+      <v-col cols="12" md="8">
+        <v-simple-table>
+          <template v-slot:default>
+            <thead>
+            <tr>
+              <th class="text-center">카테고리</th>
+              <th>제목</th>
+              <th class="text-center">작성자</th>
+              <th class="text-center">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="post in filteredPosts" :key="post.id" @click="goToDetail(post.id)">
+              <td class="text-center">{{ getCategoryName(post.category) }}</td>
+              <td>{{ post.title }}</td>
+              <td class="text-center">{{ post.writer }}</td>
+              <td class="text-center">{{ post.createdAt }}</td>
+            </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-col>
+    </v-row>
 
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
-      <li class="page-item" :class="{ disabled: page === 0 }">
-        <button class="page-link" @click="fetchPosts(page - 1)" :disabled="page === 0">이전</button>
-      </li>
-      <li class="page-item" :class="{ disabled: page === totalPages - 1 }">
-        <button class="page-link" @click="fetchPosts(page + 1)" :disabled="page === totalPages - 1">다음</button>
-      </li>
-    </ul>
-  </nav>
+    <v-row justify="center">
+      <v-col cols="12" md="8">
+        <v-pagination v-model="page" :length="totalPages" @input="fetchPosts"></v-pagination>
+      </v-col>
+    </v-row>
 
-  <div class="board-button">
-    <button @click="goToPost">글쓰기</button>
-  </div>
+    <v-row justify="center">
+      <v-col cols="12" md="8" class="text-right">
+        <v-btn @click="goToPost">글쓰기</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
+
 </template>
+
 
 <script>
 import axios from "axios";
@@ -85,8 +143,8 @@ export default {
 
   methods: {
     // 게시글 세부 정보 페이지로 이동하는 함수
-    goToDetail(postId) {
-      this.$router.push({name: 'BoardDetail', params: {id: postId}});
+    goToDetail(boardId) {
+      this.$router.push(`/board/${boardId}`);
     },
 
 
