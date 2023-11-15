@@ -236,7 +236,4 @@ thead {
   margin-bottom: 30px;
 }
 
-.boardButton {
-}
-
 </style>
