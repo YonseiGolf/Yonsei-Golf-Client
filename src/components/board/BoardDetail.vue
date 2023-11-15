@@ -7,7 +7,6 @@
     <div v-if="boardData" class="board-time">{{ boardData.createdAt }}</div>
     <hr>
     <p v-if="boardData" class="detail-content" v-html="formatContent(boardData.content)"></p>
-
     <hr>
   </div>
 
@@ -173,6 +172,8 @@ export default {
 
 .reply-content {
   font-weight: normal;
+  display: block; /* 댓글 내용을 새로운 줄에 표시 */
+  margin-top: 0.5em; /* 위쪽 여백 추가 */
 }
 
 .reply-date {
