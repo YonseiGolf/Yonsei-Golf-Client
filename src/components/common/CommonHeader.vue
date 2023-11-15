@@ -5,6 +5,11 @@
     </div>
     <nav>
       <ul class="header-nav">
+
+        <li>
+          <router-link to="/board">게시판</router-link>
+        </li>
+
         <li>
           <router-link to="/apply/form">지원서</router-link>
         </li>
