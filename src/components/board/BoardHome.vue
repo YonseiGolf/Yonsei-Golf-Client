@@ -75,8 +75,8 @@ export default {
   },
   methods: {
     // 게시글 세부 정보 페이지로 이동하는 함수
-    goToDetail(postId) {
-      this.$router.push({name: 'BoardDetail', params: {id: postId}});
+    goToDetail(boardId) {
+      this.$router.push({name: 'BoardDetail', params: {boardId: boardId}});
     },
     async fetchPosts(page) {
       // 카테고리가 ALL이 아니라면 category 파라미터를 추가

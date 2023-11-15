@@ -100,7 +100,7 @@ const routes = [
     },
     {
         path: '/board/:boardId',
-        name: 'board detail',
+        name: 'BoardDetail',
         component: BoardDetail
     }
 ]

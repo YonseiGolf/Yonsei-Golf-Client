@@ -8,6 +8,11 @@
     <p v-if="boardData" class="detail-content"> {{ boardData.content }}</p>
   </div>
   <div> 댓글 창 - 구현 예정</div>
+  <!--  <ul v-if="boardData.replies">-->
+  <!--    <li v-for="reply in boardData.replies.replies" :key="reply.id">-->
+  <!--      {{ reply.writer }}: {{ reply.content }} at {{ reply.createdAt }}-->
+  <!--    </li>-->
+  <!--  </ul>-->
 
 </template>
 
