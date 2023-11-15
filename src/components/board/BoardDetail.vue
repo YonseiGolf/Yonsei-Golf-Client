@@ -16,7 +16,7 @@
     <ul class="replies-list">
       <li class="reply" v-for="reply in boardData.replies.replies" :key="reply.id">
         <span class="reply-writer">{{ reply.writer }}</span>
-        <span class="reply-content" v-html="formatReply(reply.content)"></span>
+        <span class="reply-content" v-html="formatContent(reply.content)"></span>
         <span class="reply-date">{{ reply.createdAt }}</span>
       </li>
     </ul>
@@ -77,11 +77,6 @@ export default {
             console.error(error);
             alert('댓글을 등록하는 데 실패했습니다.');
           });
-    },
-
-    formatReply(content) {
-      // 줄바꿈 문자를 <br> 태그로 변환
-      return content.replace(/\n/g, '<br>');
     },
 
     formatContent(content) {
