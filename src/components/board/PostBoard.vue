@@ -74,12 +74,14 @@ export default {
 }
 .select-category {
   width: 17%;
-  border: 1px solid black;
+  border: 1px solid gray;
+  border-radius: 10px;
   height: 100%;
 }
 .input-title {
   width: 70%;
-  border: 1px solid black;
+  border: 1px solid gray;
+  border-radius: 10px;
   height: 100%;
   text-align: left;
   padding-left: 10px;
@@ -87,19 +89,22 @@ export default {
 .board-body-input {
   display: flex;
   margin: 0 auto;
-  border: 1px solid black;
+  border: 1px solid gray;
+  border-radius: 10px;
   width: 50%;
   height: 400px;
   text-align: left;
+  padding: 10px;
 }
 @media (max-width: 1024px) {
   .board-header-container,
   .board-body-container,
   .board-body-input,
   .button-container {
-    width: 80%;
+    width: 50%;
   }
 }
+
 .button-container {
   display: flex;
   justify-content: flex-end;

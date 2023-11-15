@@ -230,9 +230,10 @@ thead {
 }
 
 .createBoardContainer {
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: end;
+  margin-bottom: 30px;
 }
 
 .boardButton {
