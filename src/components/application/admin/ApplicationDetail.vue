@@ -97,8 +97,7 @@
     </thead>
     <tbody>
     <tr>
-      <td>
-        {{ applications.selfIntroduction }}
+      <td v-html="formatContent(applications.selfIntroduction)">
       </td>
     </tr>
     </tbody>
@@ -112,8 +111,7 @@
     </thead>
     <tbody>
     <tr>
-      <td>
-        {{ applications.applyReason }}
+      <td v-html="formatContent(applications.applyReason)">
       </td>
     </tr>
     </tbody>
@@ -127,8 +125,7 @@
     </thead>
     <tbody>
     <tr>
-      <td>
-        {{ applications.skillEvaluation }}
+      <td v-html="formatContent(applications.skillEvaluation)">
       </td>
     </tr>
     </tbody>
@@ -142,8 +139,7 @@
     </thead>
     <tbody>
     <tr>
-      <td>
-        {{ applications.golfMemory }}
+      <td v-html="formatContent(applications.golfMemory)">
       </td>
     </tr>
     </tbody>
@@ -157,8 +153,7 @@
     </thead>
     <tbody>
     <tr>
-      <td>
-        {{ applications.otherClub }}
+      <td v-html="formatContent(applications.otherClub)">
       </td>
     </tr>
     </tbody>
@@ -196,7 +191,7 @@
         {{ applications.interviewTime }} &nbsp;
         <button @click="showInterviewModal = true">면접 시간 변경</button>
 
-        <InterviewModal v-if="showInterviewModal" @close="showInterviewModal = false" @save="updateInterviewTime" />
+        <InterviewModal v-if="showInterviewModal" @close="showInterviewModal = false" @save="updateInterviewTime"/>
       </td>
     </tr>
 
@@ -251,21 +246,22 @@ export default {
       showInterviewModal.value = false;
     };
 
-    const updateInterviewTime = async(newTime) => {
+    const updateInterviewTime = async (newTime) => {
       interviewTime.value = newTime;
 
-      try{
+      try {
         const response = await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${currentPageId}/interviewTime`, {
-            time: interviewTime.value});
+          time: interviewTime.value
+        });
         if (response.status === 200) {
           alert("면접 시간 변경 완료");
           closeModal();
           location.reload();
-        }else {
+        } else {
           alert("면접 시간 변경 실패");
         }
 
-      }catch (error) {
+      } catch (error) {
         alert(error);
       }
     }
@@ -349,7 +345,16 @@ export default {
           .catch(error => {
             console.error("Error updating finalPass:", error);
           });
+    },
+
+    formatContent(content) {
+      // 줄바꿈 문자를 <br> 태그로 변환
+      if (!content) {
+        return '';
+      }
+      return content.replace(/\n/g, '<br>');
     }
+
   },
 
 };
@@ -361,7 +366,7 @@ img {
   max-width: 100px;
 }
 
-.profile-info{
+.profile-info {
   margin-top: 30px;
 }
 
@@ -387,7 +392,7 @@ table th {
   color: #fff;
 }
 
-.application-footer{
+.application-footer {
   margin-bottom: 30px;
 }
 
