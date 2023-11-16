@@ -8,13 +8,19 @@
       <td rowspan="2">
         사진
       </td>
+      <!--          <input v-if="!applications.photo" type="file" @change="handleFileUpload"/>-->
+      <!--          <button class="photo-button" v-if="!applications.photo" @click="uploadImage">사진 업로드</button>-->
+      <!--        </div>-->
+      <!--        <img class="apply-photo" v-if="applications.photo" :src="applications.photo"/>-->
+      <!--      </td>-->
       <td rowspan="2">
         <div class="file-upload-container">
+          <!-- 파일 선택 시 uploadImage 메서드를 호출하도록 변경 -->
           <input v-if="!applications.photo" type="file" @change="handleFileUpload"/>
-          <button class="photo-button" v-if="!applications.photo" @click="uploadImage">사진 업로드</button>
         </div>
         <img class="apply-photo" v-if="applications.photo" :src="applications.photo"/>
       </td>
+
       <td>
         이름
       </td>
@@ -300,28 +306,30 @@ export default {
       }
     },
 
-    async uploadImage() {
+    uploadImage() {
       const formData = new FormData();
       formData.append('image', this.applications.selectedFile);
 
-      try {
-        const response = await axios.post(`${process.env.VUE_APP_API_URL}/apply/forms/image`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-
-        // 응답에서 이미지 URL을 가져와서 저장
-        this.applications.photo = response.data.data.image;
-
-      } catch (error) {
-        console.error("Image upload failed:", error);
-      }
+      axios.post(`${process.env.VUE_APP_API_URL}/apply/forms/image`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+          .then(response => {
+            this.applications.photo = response.data.data.image; // 응답으로 받은 이미지 URL 저장
+          })
+          .catch(error => {
+            console.error("Image upload failed:", error);
+          });
     },
 
     handleFileUpload(event) {
       this.applications.selectedFile = event.target.files[0];
+      if (this.applications.selectedFile) {
+        this.uploadImage(); // 파일 선택 후 uploadImage 메서드 호출
+      }
     },
+
 
     handleNameInput() {
       if (this.applications.name.length > 10) {
