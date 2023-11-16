@@ -60,8 +60,6 @@ export default {
       ],
       activeCategory: 'ALL',
       posts: [], // 이 배열은 서버에서 가져온 게시글 데이터,
-      page: 0, // 현재 페이지 번호
-      totalPages: 0, // 전체 페이지 수
     };
   },
   computed: {
