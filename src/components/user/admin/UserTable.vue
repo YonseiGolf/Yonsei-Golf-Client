@@ -101,10 +101,6 @@ th, td {
   text-align: center;
 }
 
-th {
-  min-width: 50px;
-}
-
 select {
   width: 90%;
   padding: 5px;

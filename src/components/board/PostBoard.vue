@@ -101,7 +101,7 @@ export default {
   .board-body-container,
   .board-body-input,
   .button-container {
-    width: 50%;
+    width: 90%;
   }
 }
 
