@@ -1,9 +1,22 @@
 <template>
 
   <div class="board-container">
-    <p v-if="boardData" class="detail-category"> {{ categoryName }} </p>
-    <p v-if="boardData" class="detail-title"> {{ boardData.title }} </p>
+
+    <div v-if="!editing">
+      <p class="detail-category"> {{ categoryName }} </p>
+      <p v-if="boardData" class="detail-title"> {{ boardData.title }} </p>
+    </div>
+    <div v-else>
+      <select v-model="selectedCategory" class="select-category">
+        <option value="NOTICE">공지</option>
+        <option value="FREE">자유게시판</option>
+      </select>
+      <br>
+      <input @input="validTitle" type="text" v-model="editedTitle" class="edit-title">
+    </div>
+
     <div v-if="boardData" class="board-user"> {{ boardData.writer }}</div>
+
     <div class="post-header">
       <span class="board-time">{{ boardData.createdAt }}</span>
       <div v-if="Number(boardData.writerId) === Number(sessionUserId)" class="post-actions">
@@ -11,9 +24,19 @@
         <button @click="deletePost" class="edit-delete-post">삭제</button>
       </div>
     </div>
+
     <hr>
-    <p v-if="boardData" class="detail-content" v-html="formatContent(boardData.content)"></p>
+
+    <div v-if="editing" class="edit-form">
+      <textarea @input="validContent" v-model="editedContent" class="edit-content"></textarea>
+      <button @click="savePost" :disabled="!isFormValid">저장</button>
+      <button @click="cancelEdit">취소</button>
+    </div>
+    <div v-else>
+      <p v-if="boardData" class="detail-content" v-html="formatContent(boardData.content)"></p>
+    </div>
     <hr>
+
   </div>
 
   <div class="reply-container" v-if="boardData && boardData.replies">
@@ -53,13 +76,17 @@ export default {
       newReply: {
         content: '' // 사용자가 입력한 새 댓글 내용
       },
+      editing: false, // 편집 모드 상태
+      editedTitle: '', // 수정된 제목
+      editedContent: '', // 수정된 내용
+      selectedCategory: ''
     }
   },
+
   created() {
     this.fetchBoardData();
   },
   methods: {
-
     fetchBoardData() {
       const boardId = this.$route.params.boardId;
       axios.get(`${process.env.VUE_APP_API_URL}/boards/${boardId}`)
@@ -81,8 +108,6 @@ export default {
       const boardId = this.$route.params.boardId;
       axios.post(`${process.env.VUE_APP_API_URL}/boards/${boardId}/replies`, this.newReply)
           .then(() => {
-            // 댓글 등록 후 처리
-            // alert('댓글이 등록되었ㅍ습니다.');
             this.newReply.content = ''; // 입력 폼 초기화
             this.fetchBoardData(); // 댓글 목록 새로고침
           })
@@ -98,10 +123,37 @@ export default {
     },
 
     editPost() {
-      if (confirm('게시글을 수정하시겠습니까?')) {
-        this.$router.push(`/boards/${this.boardData.id}/edit`);
+      this.editing = true;
+      this.editedTitle = this.boardData.title;
+      this.editedContent = this.boardData.content;
+      this.selectedCategory = this.boardData.category;
+    },
+
+    cancelEdit() {
+      this.editing = false;
+    },
+
+    async savePost() {
+      const payload = {
+        category: this.selectedCategory,
+        title: this.editedTitle,
+        content: this.editedContent
+      };
+
+      try {
+        await axios.patch(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`, payload);
+        this.boardData.title = this.editedTitle;
+        this.boardData.content = this.editedContent;
+        this.editing = false;
+
+        alert('게시글 수정 성공')
+        location.reload();
+      } catch (error) {
+        console.error('Post update failed:', error);
+        // 에러 처리 로직
       }
     },
+
     deletePost() {
       if (confirm('게시글을 삭제하시겠습니까?')) {
         axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`)
@@ -138,6 +190,21 @@ export default {
         this.newReply.content = this.newReply.content.slice(0, 200);
       }
     },
+
+    validTitle() {
+      if (this.editedTitle.length > 30) {
+        alert('제목은 30자 이내로 작성해주세요.');
+        this.editedTitle = this.editedTitle.slice(0, 30);
+      }
+    },
+
+    validContent(){
+      if (this.editedContent.length > 1000) {
+        alert('내용은 1000자 이내로 작성해주세요.');
+        this.editedContent = this.editedContent.slice(0, 1000);
+      }
+    }
+
   },
   computed: {
     categoryName() {
@@ -156,6 +223,10 @@ export default {
 
     sessionUserId() {
       return this.$store.state.userId;
+    },
+
+    isFormValid() {
+      return this.editedTitle.trim().length > 0 && this.editedContent.trim().length > 0;
     },
 
   }
