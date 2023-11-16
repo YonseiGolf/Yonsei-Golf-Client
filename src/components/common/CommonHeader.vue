@@ -8,13 +8,17 @@
     <nav>
       <ul class="header-nav">
 
-        <li>
-          <router-link to="/board">게시판</router-link>
-        </li>
 
         <li>
-          <router-link to="/apply/form">지원서</router-link>
+          <router-link to="/">Home</router-link>
         </li>
+
+        <li v-if="adminStatus">
+          <router-link to="/admin/apply-alarm">
+            지원 대기
+          </router-link>
+        </li>
+
         <li v-if="adminStatus">
           <router-link to="/admin/form">
             지원서 관리
@@ -27,8 +31,13 @@
           </router-link>
         </li>
 
+
+        <li v-if="adminStatus">
+          <router-link to="/apply/form">지원서</router-link>
+        </li>
+
         <li>
-          <router-link to="/">Home</router-link>
+          <router-link to="/board">게시판</router-link>
         </li>
         <li>
           <router-link to="/recruit">모집안내</router-link>

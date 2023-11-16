@@ -1,9 +1,22 @@
 <template>
 
   <div class="board-container">
-    <p v-if="boardData" class="detail-category"> {{ categoryName }} </p>
-    <p v-if="boardData" class="detail-title"> {{ boardData.title }} </p>
+
+    <div v-if="!editing">
+      <p class="detail-category"> {{ categoryName }} </p>
+      <p v-if="boardData" class="detail-title"> {{ boardData.title }} </p>
+    </div>
+    <div v-else>
+      <select v-model="selectedCategory" class="select-category">
+        <option value="NOTICE">공지</option>
+        <option value="FREE">자유게시판</option>
+      </select>
+      <br>
+      <input @input="validTitle" type="text" v-model="editedTitle" class="edit-title">
+    </div>
+
     <div v-if="boardData" class="board-user"> {{ boardData.writer }}</div>
+
     <div class="post-header">
       <span class="board-time">{{ boardData.createdAt }}</span>
       <div v-if="Number(boardData.writerId) === Number(sessionUserId)" class="post-actions">
@@ -11,9 +24,19 @@
         <button @click="deletePost" class="edit-delete-post">삭제</button>
       </div>
     </div>
+
     <hr>
-    <p v-if="boardData" class="detail-content" v-html="formatContent(boardData.content)"></p>
+
+    <div v-if="editing" class="edit-form">
+      <textarea @input="validContent" v-model="editedContent" class="edit-content"></textarea>
+      <button @click="savePost" :disabled="!isFormValid">저장</button>
+      <button @click="cancelEdit">취소</button>
+    </div>
+    <div v-else>
+      <p v-if="boardData" class="detail-content" v-html="formatContent(boardData.content)"></p>
+    </div>
     <hr>
+
   </div>
 
   <div class="reply-container" v-if="boardData && boardData.replies">
@@ -34,7 +57,8 @@
 
   <div class="reply-form-container">
     <form @submit.prevent="submitReply">
-      <textarea v-model="newReply.content" placeholder="댓글을 입력하세요..." required></textarea>
+      <textarea @input="handleReply" v-model="newReply.content" placeholder="댓글을 입력하세요..." required>
+      </textarea>
       <button type="submit" class="post-reply">댓글 등록</button>
     </form>
   </div>
@@ -44,6 +68,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
@@ -51,13 +76,17 @@ export default {
       newReply: {
         content: '' // 사용자가 입력한 새 댓글 내용
       },
+      editing: false, // 편집 모드 상태
+      editedTitle: '', // 수정된 제목
+      editedContent: '', // 수정된 내용
+      selectedCategory: ''
     }
   },
+
   created() {
     this.fetchBoardData();
   },
   methods: {
-
     fetchBoardData() {
       const boardId = this.$route.params.boardId;
       axios.get(`${process.env.VUE_APP_API_URL}/boards/${boardId}`)
@@ -79,8 +108,6 @@ export default {
       const boardId = this.$route.params.boardId;
       axios.post(`${process.env.VUE_APP_API_URL}/boards/${boardId}/replies`, this.newReply)
           .then(() => {
-            // 댓글 등록 후 처리
-            // alert('댓글이 등록되었ㅍ습니다.');
             this.newReply.content = ''; // 입력 폼 초기화
             this.fetchBoardData(); // 댓글 목록 새로고침
           })
@@ -96,10 +123,37 @@ export default {
     },
 
     editPost() {
-      if (confirm('게시글을 수정하시겠습니까?')) {
-        this.$router.push(`/boards/${this.boardData.id}/edit`);
+      this.editing = true;
+      this.editedTitle = this.boardData.title;
+      this.editedContent = this.boardData.content;
+      this.selectedCategory = this.boardData.category;
+    },
+
+    cancelEdit() {
+      this.editing = false;
+    },
+
+    async savePost() {
+      const payload = {
+        category: this.selectedCategory,
+        title: this.editedTitle,
+        content: this.editedContent
+      };
+
+      try {
+        await axios.patch(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`, payload);
+        this.boardData.title = this.editedTitle;
+        this.boardData.content = this.editedContent;
+        this.editing = false;
+
+        alert('게시글 수정 성공')
+        location.reload();
+      } catch (error) {
+        console.error('Post update failed:', error);
+        // 에러 처리 로직
       }
     },
+
     deletePost() {
       if (confirm('게시글을 삭제하시겠습니까?')) {
         axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`)
@@ -129,6 +183,28 @@ export default {
             });
       }
     },
+
+    handleReply() {
+      if (this.newReply.content.length > 200) {
+        alert('댓글은 200자 이내로 작성해주세요.');
+        this.newReply.content = this.newReply.content.slice(0, 200);
+      }
+    },
+
+    validTitle() {
+      if (this.editedTitle.length > 30) {
+        alert('제목은 30자 이내로 작성해주세요.');
+        this.editedTitle = this.editedTitle.slice(0, 30);
+      }
+    },
+
+    validContent(){
+      if (this.editedContent.length > 1000) {
+        alert('내용은 1000자 이내로 작성해주세요.');
+        this.editedContent = this.editedContent.slice(0, 1000);
+      }
+    }
+
   },
   computed: {
     categoryName() {
@@ -149,6 +225,10 @@ export default {
       return this.$store.state.userId;
     },
 
+    isFormValid() {
+      return this.editedTitle.trim().length > 0 && this.editedContent.trim().length > 0;
+    },
+
   }
 }
 </script>
@@ -161,35 +241,36 @@ export default {
   margin: 0 auto;
   text-align: left;
 }
+
 .detail-category {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.reply-container{
+.reply-container {
   margin: 0 auto;
   width: 50%;
   text-align: left;
 }
 
-.board-time{
+.board-time {
   font-size: 12px;
   color: gray;
 }
 
-.detail-category{
+.detail-category {
   color: gray;
 }
 
-.detail-title{
+.detail-title {
   font-size: 30px;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.detail-content{
+.detail-content {
   margin-top: 40px;
   font-size: 15px;
   margin-bottom: 40px;
@@ -235,11 +316,11 @@ export default {
   margin-top: 5px;
 }
 
-hr{
+hr {
   color: gray;
 }
 
-span{
+span {
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -268,12 +349,12 @@ textarea {
   cursor: pointer;
 }
 
-textarea{
+textarea {
   outline: none;
   resize: none;
 }
 
-.edit-delete-post{
+.edit-delete-post {
   font-size: 15px;
   font-color: gray;
   border: none;

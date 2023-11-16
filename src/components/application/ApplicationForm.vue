@@ -10,11 +10,12 @@
       </td>
       <td rowspan="2">
         <div class="file-upload-container">
+          <!-- 파일 선택 시 uploadImage 메서드를 호출하도록 변경 -->
           <input v-if="!applications.photo" type="file" @change="handleFileUpload"/>
-          <button class="photo-button" v-if="!applications.photo" @click="uploadImage">사진 업로드</button>
         </div>
         <img class="apply-photo" v-if="applications.photo" :src="applications.photo"/>
       </td>
+
       <td>
         이름
       </td>
@@ -128,7 +129,7 @@
       <td>
         <textarea placeholder="최대 500자까지 작성 가능합니다." v-model="applications.selfIntroduction" rows="30"
                   @input="handleSelfIntroductionInput"></textarea>
-        <div class="error-message" v-if="selfInfoInvalid"> 최대 500자까지 작성 가능합니다. </div>
+        <div class="error-message" v-if="selfInfoInvalid"> 최대 500자까지 작성 가능합니다.</div>
       </td>
     </tr>
     </tbody>
@@ -261,61 +262,69 @@ export default {
 
   methods: {
     async submitApplication() {
-      try {
-        const response =
-            await axios.post(`${process.env.VUE_APP_API_URL}/application`, {
-              name: this.applications.name,
-              age: this.applications.age,
-              studentId: this.applications.studentId,
-              major: this.applications.major,
-              phoneNumber: this.applications.phoneNumber,
-              email: this.applications.email,
-              golfDuration: this.applications.golfDuration,
-              roundCount: this.applications.roundCount,
-              lessonStatus: this.applications.lessonStatus,
-              clubStatus: this.applications.clubStatus,
-              selfIntroduction: this.applications.selfIntroduction,
-              applyReason: this.applications.applyReason,
-              skillEvaluation: this.applications.skillEvaluation,
-              golfMemory: this.applications.golfMemory,
-              otherClub: this.applications.otherClub,
-              swingVideo: this.applications.swingVideo,
-            });
+      if (this.isFormValid) {
+        if (confirm(`지원서를 제출하시겠습니까? \n이메일로 결과가 발송되니 이메일을 다시 한번 확인해주세요 \n ${this.applications.email}`)) {
+          try {
+            const response =
+                await axios.post(`${process.env.VUE_APP_API_URL}/application`, {
+                  name: this.applications.name,
+                  age: this.applications.age,
+                  photo: this.applications.photo,
+                  studentId: this.applications.studentId,
+                  major: this.applications.major,
+                  phoneNumber: this.applications.phoneNumber,
+                  email: this.applications.email,
+                  golfDuration: this.applications.golfDuration,
+                  roundCount: this.applications.roundCount,
+                  lessonStatus: this.applications.lessonStatus,
+                  clubStatus: this.applications.clubStatus,
+                  selfIntroduction: this.applications.selfIntroduction,
+                  applyReason: this.applications.applyReason,
+                  skillEvaluation: this.applications.skillEvaluation,
+                  golfMemory: this.applications.golfMemory,
+                  otherClub: this.applications.otherClub,
+                  swingVideo: this.applications.swingVideo,
+                });
 
-        // 응답 처리
-        if (response.status === 200) {
-          alert(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
-          this.$router.push('/');
-        } else {
-          alert('지원서 제출에 실패하였습니다.')
+            // 응답 처리
+            if (response.status === 200) {
+              alert(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
+              this.$router.push('/');
+            }
+          } catch (error) {
+            alert('지원서는 접수되었으나, 이메일 발송에 실패하였습니다. \n인스타를 통해 지원 문의 바랍니다.')
+            this.$router.push('/');
+          }
         }
-      } catch (error) {
-        alert('지원서 제출에 실패하였습니다.')
+      } else {
+        alert('지원서 모든 항목을 작성해주세요.')
       }
     },
 
-    async uploadImage() {
+    uploadImage() {
       const formData = new FormData();
       formData.append('image', this.applications.selectedFile);
 
-      try {
-        const response = await axios.post(`${process.env.VUE_APP_API_URL}/apply/forms/image`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-
-        // 응답에서 이미지 URL을 가져와서 저장
-        this.applications.photo = response.data.data.image;
-
-      } catch (error) {
-        console.error("Image upload failed:", error);
-      }
+      axios.post(`${process.env.VUE_APP_API_URL}/apply/forms/image`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+          .then(response => {
+            this.applications.photo = response.data.data.image; // 응답으로 받은 이미지 URL 저장
+          })
+          .catch(error => {
+            console.error("Image upload failed:", error);
+          });
     },
 
     handleFileUpload(event) {
       this.applications.selectedFile = event.target.files[0];
+      if (this.applications.selectedFile) {
+        this.uploadImage(); // 파일 선택 후 uploadImage 메서드 호출
+      }
     },
+
 
     handleNameInput() {
       if (this.applications.name.length > 10) {
@@ -512,6 +521,26 @@ export default {
         this.applications.swingVideo = val;
       }
     },
+
+    isFormValid() {
+      return this.applications.name.trim().length > 0 &&
+          this.applications.photo.trim().length > 0 &&
+          this.applications.age.trim().length > 0 &&
+          this.applications.studentId.trim().length > 0 &&
+          this.applications.major.trim().length > 0 &&
+          this.applications.phoneNumber.trim().length > 0 &&
+          this.applications.email.trim().length > 0 &&
+          this.applications.golfDuration >= 0 &&
+          this.applications.roundCount >= 0 &&
+          (typeof this.applications.lessonStatus === 'boolean') &&
+          (typeof this.applications.clubStatus === 'boolean') &&
+          this.applications.selfIntroduction.trim().length > 0 &&
+          this.applications.applyReason.trim().length > 0 &&
+          this.applications.skillEvaluation.trim().length > 0 &&
+          this.applications.golfMemory.trim().length > 0 &&
+          this.applications.otherClub.trim().length > 0 &&
+          this.applications.swingVideo.trim().length > 0;
+    }
 
 
   },

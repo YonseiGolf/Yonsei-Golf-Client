@@ -197,22 +197,15 @@
 
     <tr>
       <td>
-        서류 합격 여부
+        합격 여부
       </td>
       <td>
-        <select v-model="applications.documentPass" @change="updateDocumentPass">
-          <option value="true">합격</option>
-          <option value="false">불합격</option>
-        </select>
-      </td>
-
-      <td>
-        최종 합격 여부
-      </td>
-      <td>
-        <select v-model="applications.finalPass" @change="updateFinalPass">
-          <option value="true">합격</option>
-          <option value="false">불합격</option>
+        <select v-model="applications.selection" @change="updateApplicationStatus">
+          <option value="documentPass">서류 합격</option>
+          <option value="finalPass">최종 합격</option>
+          <option value="documentFail">서류 탈락</option>
+          <option value="finalFail">최종 탈락</option>
+          <option value="pending">보류</option>
         </select>
       </td>
     </tr>
@@ -284,67 +277,64 @@ export default {
   beforeRouteEnter(to, from, next) {
     axios.get(`${process.env.VUE_APP_API_URL}/admin/forms/${to.params.id}`)
         .then(response => {
+          const data = response.data.data;
+          let selection = null;
+
+          if (data.documentPass === true && data.finalPass === true) {
+            selection = 'finalPass';
+          } else if (data.documentPass === true && data.finalPass === false) {
+            selection = 'finalFail';
+          } else if (data.documentPass === false) {
+            selection = 'documentFail';
+          } else if (data.documentPass === true && data.finalPass === null) {
+            selection = 'documentPass';
+          } else if (data.documentPass === null && data.finalPass === null) {
+            selection = 'pending';
+          }
+
           next(vm => {
-            vm.applications = response.data.data;
+            vm.applications = data;
+            vm.applications.selection = selection;
           });
         })
         .catch(error => {
           console.error("Error fetching data:", error);
           next(false);
         });
+
   },
 
   methods: {
-    updateDocumentPass() {
 
-      if (this.applications.finalPass === "true") {
-        this.applications.finalPass = true;
-      } else if (this.applications.finalPass === "false") {
-        this.applications.finalPass = false;
+    async updateApplicationStatus() {
+      // 선택에 따라 documentPass와 finalPass 값을 설정
+      let payload = {};
+      switch (this.applications.selection) {
+        case "documentPass":
+          payload = {documentPass: true, finalPass: null};
+          break;
+        case "finalPass":
+          payload = {documentPass: true, finalPass: true};
+          break;
+        case "documentFail":
+          payload = {documentPass: false, finalPass: null};
+          break;
+        case "finalFail":
+          payload = {documentPass: true, finalPass: false};
+          break;
+        case "pending":
+          payload = {documentPass: null, finalPass: null};
+          break;
       }
 
-      axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/documentPass`, this.applications.documentPass,
-          {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-      )
-          .then(response => {
-            if (response.status === 200) {
-              location.reload();
-            } else {
-              console.error("Error updating documentPass");
-            }
-          })
-          .catch(error => {
-            console.error("Error updating documentPass:", error);
-          });
-    },
-
-    updateFinalPass() {
-      if (this.applications.finalPass === "true") {
-        this.applications.finalPass = true;
-      } else if (this.applications.finalPass === "false") {
-        this.applications.finalPass = false;
+      // API 요청 보내기
+      try {
+        await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/pass`, payload);
+        // 추가적인 로직 (예: 응답 처리, 라우팅, 상태 업데이트 등)
+        alert("합격 여부 변경 완료");
+      } catch (error) {
+        console.error('API 요청 실패:', error);
       }
-      axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/finalPass`, this.applications.finalPass,
-          {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-      )
-          .then(response => {
-            if (response.status === 200) {
-              location.reload();
-            } else {
-              console.error("Error updating finalPass");
-            }
-          })
-          .catch(error => {
-            console.error("Error updating finalPass:", error);
-          });
     },
 
     formatContent(content) {

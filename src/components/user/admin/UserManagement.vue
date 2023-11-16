@@ -58,7 +58,7 @@ export default {
   @media (max-width: 1300px) {
     grid-template-columns: 1fr;
     justify-content: center;
-    width: 90%;
+    width: 100%;
   }
 }
 </style>
