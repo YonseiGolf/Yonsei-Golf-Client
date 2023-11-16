@@ -30,8 +30,9 @@ export default {
             if (loginResponse.status === 200) {
               // 로그인이 성공하면 store 에 로그인 정보를 저장해둔다.
               const userDetails = {
+                userId: loginResponse.data.data.id,
                 username: loginResponse.data.data.name,
-                adminStatus: loginResponse.data.data.adminStatus // <-- 수정된 부분
+                adminStatus: loginResponse.data.data.adminStatus
               };
               store.commit('SET_USER_DETAILS', userDetails);
 

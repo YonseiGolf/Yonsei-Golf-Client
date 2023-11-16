@@ -306,7 +306,7 @@ export default {
         });
 
         // 응답에서 이미지 URL을 가져와서 저장
-        this.applications.photo = response.data.data;
+        this.applications.photo = response.data.data.image;
 
       } catch (error) {
         console.error("Image upload failed:", error);

@@ -40,11 +40,15 @@
       </li>
     </ul>
   </nav>
+  <div class="createBoardContainer">
+    <button @click="postNewBoard" class="boardButton">새 글 작성</button>
+  </div>
 
 </template>
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
@@ -78,6 +82,11 @@ export default {
     goToDetail(boardId) {
       this.$router.push({name: 'BoardDetail', params: {boardId: boardId}});
     },
+
+    postNewBoard() {
+      this.$router.push({name: 'posting board'});
+    }
+    ,
     async fetchPosts(page) {
       // 카테고리가 ALL이 아니라면 category 파라미터를 추가
       const categoryParam = this.activeCategory !== 'ALL' ? `&category=${this.activeCategory}` : '';
@@ -113,6 +122,7 @@ div {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
 }
+
 table {
   border-collapse: collapse; /* 경계선을 겹치게 */
   margin-top: 20px; /* 테이블 상단에 여백을 추가 */
@@ -120,51 +130,63 @@ table {
   border-left: 1px solid #ccc; // 테이블의 왼쪽 경계선
   border-right: 1px solid #ccc; // 테이블의 오른쪽 경계선
 }
+
 th, td {
   border-top: 1px solid #ccc; // 가로선만 표시
   border-bottom: 1px solid #ccc; // 가로선만 표시
 }
+
 th:nth-child(2), td:nth-child(2) {
   width: 50%; /* 3/6의 비율 */
 }
+
 th:nth-child(1), td:nth-child(1),
 th:nth-child(3), td:nth-child(3),
 th:nth-child(4), td:nth-child(4) {
   width: 16.66%; /* 1/6의 비율 */
   text-align: center;
 }
+
 th {
   padding: 8px; /* 셀 내부에 패딩을 추가하여 내용이 선에 닿지 않도록 */
   text-align: center;
 }
+
 td {
   padding: 8px; /* 셀 내부에 패딩을 추가하여 내용이 선에 닿지 않도록 */
   text-align: left; /* 텍스트를 왼쪽 정렬 */
 }
+
 thead {
   background-color: #f9f9f9; /* 테이블 헤더의 배경색 */
 }
+
 .boardList:hover {
   background-color: #f1f1f1; /* 마우스를 올렸을 때 행의 배경색을 변경 */
 }
+
 .pagination {
   list-style-type: none;
   display: flex;
   justify-content: center;
   padding: 0;
 }
+
 .page-item {
   margin: 0 5px;
 }
+
 .page-link {
   cursor: pointer;
   padding: 5px 10px;
   border: 1px solid #ddd;
   color: #337ab7;
 }
+
 .page-link:hover {
   background-color: #eee;
 }
+
 /* 탭 컨테이너 스타일 */
 .nav-tabs {
   display: flex;
@@ -174,10 +196,12 @@ thead {
   border-bottom: 1px solid #ccc;
   width: 80%;
 }
+
 /* 각 탭 아이템 스타일 */
 .nav-tabs li {
   margin-bottom: -1px; /* 탭 아래 경계선과 겹치게 하여 선택된 탭 효과 */
 }
+
 /* 탭 링크 기본 스타일 */
 .nav-tabs a {
   display: block;
@@ -189,6 +213,7 @@ thead {
   color: #555;
   transition: background-color 0.2s ease-in-out;
 }
+
 /* 활성 탭 및 호버 스타일 */
 .nav-tabs a:hover,
 .nav-tabs .active a {
@@ -196,10 +221,19 @@ thead {
   border-color: #ccc;
   color: #333;
 }
+
 /* 탭 컨텐츠 영역 스타일 */
 .tab-content {
   border: 1px solid #ccc;
   border-top: none;
   padding: 1rem;
 }
+
+.createBoardContainer {
+  width: 90%;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 30px;
+}
+
 </style>

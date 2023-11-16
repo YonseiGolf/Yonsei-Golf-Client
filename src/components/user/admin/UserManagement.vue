@@ -43,6 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .users-tables {
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: 1vh;
@@ -57,6 +58,7 @@ export default {
   @media (max-width: 1300px) {
     grid-template-columns: 1fr;
     justify-content: center;
+    width: 90%;
   }
 }
 </style>

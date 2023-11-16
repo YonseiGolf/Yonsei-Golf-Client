@@ -1,7 +1,9 @@
 <template>
   <header class="header-container">
     <div class="logo">
-      <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/logo.5d322a8d.png" alt="Logo" width=727/>
+      <router-link to="/">
+        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/logo.5d322a8d.png" alt="Logo" width=727/>
+      </router-link>
     </div>
     <nav>
       <ul class="header-nav">
@@ -37,7 +39,7 @@
         <li v-if="!username">
           <router-link to="/login">로그인</router-link>
         </li>
-        <li v-else>{{ username }}님</li>
+        <li v-else class="logout-button" @click="logout">로그아웃</li>
       </ul>
     </nav>
   </header>
@@ -61,12 +63,16 @@ export default {
     const username = computed(() => store.state.username);
     const adminStatus = computed(() => store.state.adminStatus);
 
-    return {
-      username, adminStatus
+    const logout = async () => {
+      await store.dispatch('logout');
     };
-  }
-}
 
+    return {
+      username, adminStatus, logout
+    };
+  },
+
+}
 </script>
 
 
@@ -107,6 +113,16 @@ nav a {
 
 nav a:hover {
   color: black;
+}
+
+.logout-button {
+  cursor: pointer; /* 커서를 포인터로 설정 */
+  color: white; /* 기본 텍스트 색상 */
+  transition: color 0.3s; /* 호버 효과 적용 */
+}
+
+.logout-button:hover {
+  color: black; /* 호버 시 텍스트 색상 변경 */
 }
 
 </style>

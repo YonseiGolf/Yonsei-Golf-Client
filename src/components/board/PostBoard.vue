@@ -2,6 +2,7 @@
 
   <div class="board-header-container">
     <h2>글쓰기</h2>
+    <hr>
   </div>
 
   <div class="board-body-container">
@@ -26,6 +27,7 @@
 <script>
 import axios from "axios";
 import router from "@/router";
+
 export default {
   data() {
     return {
@@ -57,49 +59,66 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+h2 {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
 .board-header-container {
   padding-top: 20px;
   margin: 0 auto;
   width: 50%;
 }
+
 .board-body-container {
   margin: 0 auto;
   width: 50%;
 }
+
 .select-category-title {
   display: flex;
   height: 30px;
   padding-bottom: 20px;
+  padding-top: 10px;
   justify-content: space-between;
 }
+
 .select-category {
   width: 17%;
-  border: 1px solid black;
+  border: 1px solid gray;
+  border-radius: 10px;
   height: 100%;
 }
+
 .input-title {
   width: 70%;
-  border: 1px solid black;
+  border: 1px solid gray;
+  border-radius: 10px;
   height: 100%;
   text-align: left;
   padding-left: 10px;
 }
+
 .board-body-input {
   display: flex;
   margin: 0 auto;
-  border: 1px solid black;
+  border: 1px solid gray;
+  border-radius: 10px;
   width: 50%;
   height: 400px;
   text-align: left;
+  padding: 10px;
 }
+
 @media (max-width: 1024px) {
   .board-header-container,
   .board-body-container,
-  .board-body-input,
-  .button-container {
-    width: 80%;
+  .board-body-input {
+    width: 90%;
   }
 }
+
 .button-container {
   display: flex;
   justify-content: flex-end;
@@ -107,7 +126,18 @@ export default {
   width: 50%;
   padding-top: 20px;
 }
+
 .posting-button {
   display: flex;
+  justify-content: flex-end;
+}
+
+select,
+input,
+textarea {
+  outline: none;
+}
+textarea{
+  resize: none;
 }
 </style>
