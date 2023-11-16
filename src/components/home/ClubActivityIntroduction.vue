@@ -8,28 +8,36 @@
         <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/rounding.476519da.jpg" alt="정규 활동" class="introduction-image">
       </div>
       <div class="card">
-        <span>정기 활동 </span>
+        <span>정규 활동 <br><br>
+          매주 목요일 신촌역 부근에서<br>
+          정기활동을 진행해요 </span>
       </div>
 
       <div class="card grey-card">
         <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/new-comer.efdadda2.jpg" alt="신입 환영 MT" class="introduction-image">
       </div>
       <div class="card">
-        <span>신입 환영 MT</span>
+        <span>신입 환영 MT<br><br>
+          신입 부원들과 기존 부원들과의 조화를 위해<br>
+          신입 환영 MT를 진행해요</span>
       </div>
 
       <div class="card grey-card">
-        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/rounding.476519da.jpg" alt="단체 라운딩" class="introduction-image">
+        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2023-11-16+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+9.58.19.png" alt="단체 라운딩" class="introduction-image">
       </div>
       <div class="card">
-        <span>단체 라운딩</span>
+        <span>단체 라운딩<br><br>
+          매 학기 경기권에서 라운딩을 진행해요</span>
       </div>
 
       <div class="card grey-card">
-        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/home-coming.9bb01e6a.jpg" alt="홈커밍데이" class="introduction-image">
+        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2023-11-16+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+9.57.21.png" alt="OB 엠티" class="introduction-image">
       </div>
       <div class="card">
-        <span>홈커밍 데이</span>
+        <span>OB 라운딩<br><br>
+          YB 활동이 끝나더라도<br>
+          OB 부원과 라운딩을 함께해요
+        </span>
       </div>
 
     </div>
