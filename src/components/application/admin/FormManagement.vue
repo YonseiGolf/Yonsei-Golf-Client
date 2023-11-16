@@ -5,18 +5,20 @@
     <ApplicationTable :applications="finalPassed.content" title="최종 합격" :total-count="finalPassed.totalElements" passFail="합격" :sendEmail="sendFinalPassEmail" />
     <ApplicationTable :applications="documentFailed.content" title="서류 탈락" :total-count="documentFailed.totalElements" passFail="불합격" :sendEmail="sendDocumentFailEmail" />
     <ApplicationTable :applications="finalFailed.content" title="최종 탈락" :total-count="finalFailed.totalElements" passFail="합격" :sendEmail="sendFinalFailEmail"/>
-    <LoadingModal v-if="isLoading" class="loading-modal" />
   </div>
+
+  <div v-if="isLoading" class="loading-container">
+    <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="Loading">
+  </div>
+
 </template>
 
 <script>
 import axios from "axios";
 import ApplicationTable from "@/components/application/admin/ApplicationTable.vue";
-import LoadingModal from "@/components/common/LoadingModal.vue";
 
 export default {
   components: {
-    LoadingModal,
     ApplicationTable
   },
 
@@ -115,7 +117,24 @@ export default {
   }
 }
 
-.loading-modal{
 
+.loading-container {
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 화면 전체 너비 */
+  height: 100%; /* 화면 전체 높이 */
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 다른 요소들 위에 표시 */
 }
+
+.loading-image {
+  width: 100px; /* 로딩 이미지 크기 조절 */
+  height: 100px;
+}
+
+
 </style>

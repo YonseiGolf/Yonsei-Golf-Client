@@ -14,6 +14,7 @@ import ApplicationDetail from "@/components/application/admin/ApplicationDetail.
 import BoardHome from "@/components/board/BoardHome.vue";
 import PostBoard from "@/components/board/PostBoard.vue";
 import BoardDetail from "@/components/board/BoardDetail.vue";
+import ApplyAlarm from "@/components/application/admin/ApplyAlarm.vue";
 
 const routes = [
     {
@@ -102,6 +103,11 @@ const routes = [
         path: '/board/:boardId',
         name: 'BoardDetail',
         component: BoardDetail
+    },
+    {
+        path: '/admin/apply-alarm',
+        name: 'applyAlarm',
+        component: ApplyAlarm
     }
 ]
 
