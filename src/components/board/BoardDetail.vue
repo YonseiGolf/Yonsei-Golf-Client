@@ -34,8 +34,9 @@
 
   <div class="reply-form-container">
     <form @submit.prevent="submitReply">
-      <textarea v-model="newReply.content" placeholder="댓글을 입력하세요..." required></textarea>
-      <button type="submit" class="post-reply" :disabled="ifFormValid">댓글 등록</button>
+      <textarea @input="handleReply" v-model="newReply.content" placeholder="댓글을 입력하세요..." required>
+      </textarea>
+      <button type="submit" class="post-reply">댓글 등록</button>
     </form>
   </div>
 
@@ -128,6 +129,13 @@ export default {
               console.error(error);
               alert('댓글을 삭제하는 데 실패했습니다.');
             });
+      }
+    },
+
+    handleReply() {
+      if (this.newReply.content.length > 200) {
+        alert('댓글은 200자 이내로 작성해주세요.');
+        this.newReply.content = this.newReply.content.slice(0, 200);
       }
     },
   },
