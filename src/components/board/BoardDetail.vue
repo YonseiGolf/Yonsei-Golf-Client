@@ -35,7 +35,7 @@
   <div class="reply-form-container">
     <form @submit.prevent="submitReply">
       <textarea v-model="newReply.content" placeholder="댓글을 입력하세요..." required></textarea>
-      <button type="submit" class="post-reply">댓글 등록</button>
+      <button type="submit" class="post-reply" :disabled="ifFormValid">댓글 등록</button>
     </form>
   </div>
 
@@ -44,6 +44,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
@@ -161,35 +162,36 @@ export default {
   margin: 0 auto;
   text-align: left;
 }
+
 .detail-category {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.reply-container{
+.reply-container {
   margin: 0 auto;
   width: 50%;
   text-align: left;
 }
 
-.board-time{
+.board-time {
   font-size: 12px;
   color: gray;
 }
 
-.detail-category{
+.detail-category {
   color: gray;
 }
 
-.detail-title{
+.detail-title {
   font-size: 30px;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.detail-content{
+.detail-content {
   margin-top: 40px;
   font-size: 15px;
   margin-bottom: 40px;
@@ -235,11 +237,11 @@ export default {
   margin-top: 5px;
 }
 
-hr{
+hr {
   color: gray;
 }
 
-span{
+span {
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -268,12 +270,12 @@ textarea {
   cursor: pointer;
 }
 
-textarea{
+textarea {
   outline: none;
   resize: none;
 }
 
-.edit-delete-post{
+.edit-delete-post {
   font-size: 15px;
   font-color: gray;
   border: none;

@@ -12,14 +12,14 @@
         <option value="FREE">자유게시판</option>
       </select>
 
-      <input v-model="title" type="text" placeholder="제목을 입력해 주세요." class="input-title">
+      <input v-model="title" type="text" placeholder="제목을 입력해 주세요." class="input-title" @input="handleTitleInput">
     </div>
 
   </div>
   <textarea v-model="content" class="board-body-input" placeholder="내용을 입력하세요."></textarea>
 
   <div class="button-container">
-    <button @click="postArticle" class="posting-button">게시글 등록</button>
+    <button @click="postArticle" class="posting-button" :disabled="!isFormValid">게시글 등록</button>
   </div>
 
 </template>
@@ -54,7 +54,25 @@ export default {
             router.push('/board')
           });
     },
+
+    handleTitleInput() {
+      if (this.title.length > 30) {
+        this.title = this.title.slice(0, 30)
+      }
+    },
+
+    handleContentInput(){
+      if (this.content.length > 1000) {
+        this.content = this.content.slice(0, 1000)
+      }
+    }
   },
+
+  computed:{
+    isFormValid() {
+      return this.title.trim().length > 0 && this.content.trim().length > 0;
+    }
+  }
 }
 </script>
 
