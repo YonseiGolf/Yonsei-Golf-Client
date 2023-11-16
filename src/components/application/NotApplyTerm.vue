@@ -136,4 +136,8 @@ h1 {
     }
   }
 }
+
+input{
+  outline: none;
+}
 </style>

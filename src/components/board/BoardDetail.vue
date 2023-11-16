@@ -5,6 +5,10 @@
     <p v-if="boardData" class="detail-title"> {{ boardData.title }} </p>
     <div v-if="boardData" class="board-user"> {{ boardData.writer }}</div>
     <div v-if="boardData" class="board-time">{{ boardData.createdAt }}</div>
+    <div v-if="boardData && boardData.writerId === sessionUserId">
+      <button @click="editPost">수정</button>
+      <button @click="deletePost">삭제</button>
+    </div>
     <hr>
     <p v-if="boardData" class="detail-content" v-html="formatContent(boardData.content)"></p>
     <hr>
@@ -81,7 +85,14 @@ export default {
     formatContent(content) {
       // 줄바꿈 문자를 <br> 태그로 변환
       return content.replace(/\n/g, '<br>');
-    }
+    },
+
+    editPost() {
+      // 게시글 수정 로직
+    },
+    deletePost() {
+      // 게시글 삭제 로직
+    },
   },
   computed: {
     categoryName() {
@@ -214,6 +225,11 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+textarea{
+  outline: none;
+  resize: none;
 }
 
 
