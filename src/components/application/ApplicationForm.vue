@@ -8,11 +8,6 @@
       <td rowspan="2">
         사진
       </td>
-      <!--          <input v-if="!applications.photo" type="file" @change="handleFileUpload"/>-->
-      <!--          <button class="photo-button" v-if="!applications.photo" @click="uploadImage">사진 업로드</button>-->
-      <!--        </div>-->
-      <!--        <img class="apply-photo" v-if="applications.photo" :src="applications.photo"/>-->
-      <!--      </td>-->
       <td rowspan="2">
         <div class="file-upload-container">
           <!-- 파일 선택 시 uploadImage 메서드를 호출하도록 변경 -->
