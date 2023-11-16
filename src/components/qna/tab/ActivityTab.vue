@@ -3,11 +3,11 @@
   <div class="answer-container">
     <input type="checkbox" id="activity-answer01">
     <label for="activity-answer01">
-      질문글 1
+      Q. 연세 골프 활동은 어떻게 진행되나요?
     </label>
     <div>
       <p>
-        답변글 1
+        A. 매주 목요일 오후 6시 신촌역 부근에서 진행합니다.
       </p>
     </div>
   </div>
@@ -15,11 +15,11 @@
   <div class="answer-container">
     <input type="checkbox" id="activity-answer02">
     <label for="activity-answer02">
-      질문글 2
+      Q. 동아리 회비가 있나요?
     </label>
     <div>
       <p>
-        답변글 2
+        A. 회비는 활동 학기당 2만원으로, 동아리 차원에서 제작하는 볼마커, 숙소비 지원 등으로 사용하고 있습니다.
       </p>
     </div>
   </div>
@@ -27,11 +27,11 @@
   <div class="answer-container">
     <input type="checkbox" id="activity-answer03">
     <label for="activity-answer03">
-      질문글 3
+      Q. 본인 소유의 클럽이 있어야 하나요?
     </label>
     <div>
       <p>
-        답변글 3
+        A. 매주 동아리 활동은 대여채를 사용하실 수 있습니다. 하지만 단체 라운딩의 경우 본인 클럽이 필요합니다.
       </p>
     </div>
   </div>

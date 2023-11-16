@@ -3,11 +3,11 @@
   <div class="answer-container">
     <input type="checkbox" id="interview-answer01">
     <label for="interview-answer01">
-      질문글 1
+      Q. 연세 골프 면접은 언제 진행하나요?
     </label>
     <div>
       <p>
-        답변글 1
+        A. 서류 마감 후, 합격자들에 한해 개별적으로 면접 일정을 안내드리고 있습니다.
       </p>
     </div>
   </div>
@@ -15,25 +15,25 @@
   <div class="answer-container">
     <input type="checkbox" id="interview-answer02">
     <label for="interview-answer02">
-      질문글 2
+      Q. 면접 결과는 언제 알 수 있나요?
     </label>
     <div>
       <p>
-        답변글 2
+        A. 모든 면접이 끝난 후, 지원서에 작성해수신 이메일로 결과를 안내해 드립니다.
       </p>
     </div>
-  </div>
 
-  <div class="answer-container">
-    <input type="checkbox" id="interview-answer03">
-    <label for="interview-answer03">
-      질문글 3
-    </label>
-    <div>
-      <p>
-        답변글 3
-      </p>
-    </div>
+<!--  </div>-->
+<!--  <div class="answer-container">-->
+<!--    <input type="checkbox" id="interview-answer03">-->
+<!--    <label for="interview-answer03">-->
+<!--      질문글 3-->
+<!--    </label>-->
+<!--    <div>-->
+<!--      <p>-->
+<!--        답변글 3-->
+<!--      </p>-->
+<!--    </div>-->
 
   </div>
 </template>

@@ -15,11 +15,11 @@
   <div class="answer-container">
     <input type="checkbox" id="qualifications-answer02">
     <label for="qualifications-answer02">
-      질문글 2
+      Q. 재학생만 지원 가능한가요?
     </label>
     <div>
       <p>
-        답변글 2
+        A. 목요일 정기활동 일정 참여에 제한이 없다면 졸업생, 대학원생도 지원 가능합니다.
       </p>
     </div>
   </div>
@@ -28,11 +28,11 @@
   <div class="answer-container">
     <input type="checkbox" id="qualifications-answer03">
     <label for="qualifications-answer03">
-      질문글 3
+      Q. 골프를 처음 하는 사람도 지원 가능한가요?
     </label>
     <div>
       <p>
-        답변글 3
+        A. 골프에 대한 열정이 있고, 레슨 계획만 있으시다면 지원 가능합니다.
       </p>
     </div>
   </div>
