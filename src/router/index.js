@@ -34,11 +34,6 @@ const routes = [
         component: ApplicationPage
     },
     {
-        path: '/apply/form',
-        name: 'applicationForm',
-        component: ApplicationForm
-    },
-    {
         path: '/login',
         name: 'loginPage',
         component: LoginPage
@@ -90,14 +85,11 @@ const routes = [
         component: AdminPage,
         redirect: '/admin/users',
         children: [
-            // 지원서
             {
                 path: '/admin/apply/form',
                 name: 'applicationForm',
                 component: ApplicationForm
             },
-
-            // 지원서 관리
             {
                 path: '/admin/form',
                 name: 'formManagement',
@@ -110,15 +102,11 @@ const routes = [
                     }
                 }
             },
-
-            // 지원서 상제
             {
                 path: '/application/:id',
                 name: 'ApplicationDetail',
                 component: ApplicationDetail
             },
-
-            // 회원 관리
             {
                 path: '/admin/users',
                 name: 'userManagement',
@@ -131,8 +119,6 @@ const routes = [
                     }
                 }
             },
-
-            // 지원 대기
             {
                 path: '/admin/apply-alarm',
                 name: 'applyAlarm',
@@ -152,7 +138,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.name === 'loginPage' && store.state.isLoggedIn) {
-        next('/');  // 이미 로그인된 상태에서 로그인 페이지 방문 시 홈으로 리디렉션
+        next('/');
     } else {
         next();
     }

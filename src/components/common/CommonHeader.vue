@@ -164,17 +164,6 @@ nav a:hover {
   color: black; /* 호버 시 텍스트 색상 변경 */
 }
 
-
-
-
-
-
-
-
-
-
-
-
 a {text-decoration: none;
   color: black;}
 
@@ -185,7 +174,6 @@ html,body {width: 100%; overflow-x: hidden; overflow-y: auto;}
 .mobile_btn {
   display: none; /* 기본적으로 숨깁니다 */
   position: absolute;
-  //top: 70px;
   right: 15px; /* 왼쪽 대신 오른쪽 정렬 */
   z-index: 100; /* 다른 요소 위에 표시되도록 z-index 설정 */
 }
@@ -298,7 +286,6 @@ input[id="hamburger"]:checked + label + div {
   border: 0px;
 }
 
-//미디어 쿼리
 @media (min-width: 1024px) {
   .mobile_btn, .sidebar {
     display: none;

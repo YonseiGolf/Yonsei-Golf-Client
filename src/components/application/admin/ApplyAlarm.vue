@@ -92,10 +92,10 @@ th{
 }
 
 td {
-  border-top: 1px solid #ccc; // 상단 경계선
-  border-bottom: 1px solid #ccc; // 하단 경계선
-  padding: 10px; // 셀 패딩
-  text-align: center; // 텍스트 정렬
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
 }
 
 
