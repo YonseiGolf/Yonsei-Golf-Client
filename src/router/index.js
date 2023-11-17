@@ -88,6 +88,7 @@ const routes = [
         path: '/admin',
         name: 'admin',
         component: AdminPage,
+        redirect: '/admin/users',
         children: [
             // 지원서
             {
