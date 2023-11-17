@@ -7,33 +7,9 @@
     </div>
     <nav>
       <ul class="header-nav">
-        <li>
-          <router-link to="/">Home</router-link>
-        </li>
-
         <li v-if="adminStatus">
-          <router-link to="/admin/apply-alarm">
-            지원 대기
-          </router-link>
+          <router-link to="/admin">어드민</router-link>
         </li>
-
-        <li v-if="adminStatus">
-          <router-link to="/admin/form">
-            지원서 관리
-          </router-link>
-        </li>
-
-        <li v-if="adminStatus">
-          <router-link to="/admin/users">
-            회원 관리
-          </router-link>
-        </li>
-
-
-        <li v-if="adminStatus">
-          <router-link to="/apply/form">지원서</router-link>
-        </li>
-
         <li>
           <router-link to="/board">게시판</router-link>
         </li>
@@ -68,29 +44,9 @@
           <li>
             <router-link to="/" @click="closeHamburger">Home</router-link>
           </li>
-
-          <li v-if="adminStatus">
-            <router-link to="/admin/apply-alarm" @click="closeHamburger">
-              지원 대기
-            </router-link>
+          <li v-if="adminStatus" @click="closeHamburger">
+            <router-link to="/admin">어드민</router-link>
           </li>
-
-          <li v-if="adminStatus">
-            <router-link to="/admin/form" @click="closeHamburger">
-              지원서 관리
-            </router-link>
-          </li>
-
-          <li v-if="adminStatus">
-            <router-link to="/admin/users" @click="closeHamburger">
-              회원 관리
-            </router-link>
-          </li>
-
-          <li v-if="adminStatus">
-            <router-link to="/apply/form" @click="closeHamburger">지원서</router-link>
-          </li>
-
           <li>
             <router-link to="/board" @click="closeHamburger">게시판</router-link>
           </li>
@@ -100,8 +56,8 @@
           <li>
             <router-link to="/apply" @click="closeHamburger">지원하기</router-link>
           </li>
-          <li v-if="!username">
-            <router-link to="/login" @click="closeHamburger">로그인</router-link>
+          <li v-if="!username" @click="closeHamburger">
+            <router-link to="/login">로그인</router-link>
           </li>
           <li v-else class="logout-button" @click="logout">로그아웃</li>
         </ul>

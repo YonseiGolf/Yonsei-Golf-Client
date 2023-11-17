@@ -11,7 +11,7 @@
     <table>
       <thead>
       <tr>
-        <th>이메일 알람</th>
+        <th>이메일 명단</th>
       </tr>
       </thead>
       <tbody>
@@ -77,6 +77,27 @@ export default {
 .application-container {
   margin: 0 auto;
 }
+
+h3{
+  margin-bottom: 20px;
+}
+
+table{
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th{
+  padding: 10px;
+}
+
+td {
+  border-top: 1px solid #ccc; // 상단 경계선
+  border-bottom: 1px solid #ccc; // 하단 경계선
+  padding: 10px; // 셀 패딩
+  text-align: center; // 텍스트 정렬
+}
+
 
 .loading-container {
   position: fixed; /* 화면에 고정 */
