@@ -113,7 +113,7 @@ export default {
           })
           .catch(error => {
             console.error(error);
-            alert('댓글을 등록하는 데 실패했습니다.');
+            alert('로그인 정보가 유효하지 않습니다. \n 다시 로그인해주세요.');
           });
     },
 

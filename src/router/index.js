@@ -69,7 +69,15 @@ const routes = [
     {
         path: '/board/post',
         name: 'posting board',
-        component: PostBoard
+        component: PostBoard,
+        beforeEnter: (to, from, next) => {
+            if (store.state.isLoggedIn) {
+                next();
+            } else {
+                alert('로그인이 필요한 서비스입니다.');
+                next('/');
+            }
+        }
     },
     {
         path: '/board/:boardId',
