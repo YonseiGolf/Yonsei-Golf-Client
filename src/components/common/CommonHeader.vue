@@ -34,9 +34,6 @@
         <span></span>
       </label>
 
-
-
-
       <div class="sidebar">
         <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/logo.5d322a8d.png" alt="Logo" width=100/>
         <hr style="position: relative; top:100px; border: solid 1px black;">
@@ -69,7 +66,7 @@
 
 <script>
 import {useStore} from 'vuex';
-import {computed, onMounted} from 'vue';
+import {computed, onMounted, ref, watch} from 'vue';
 
 export default {
   name: 'CommonHeader',
@@ -89,27 +86,26 @@ export default {
       await store.dispatch('logout');
     };
 
+    const isHamburgerOpen = ref(false);
+
+    watch(isHamburgerOpen, (newValue) => {
+      console.log("isHamburgerOpen changed:", newValue);
+      if (newValue) {
+        document.body.classList.add('no-scroll');
+      } else {
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
+    const closeHamburger = () => {
+      isHamburgerOpen.value = false;
+    };
+
     return {
-      username, adminStatus, logout
+      username, adminStatus, logout,isHamburgerOpen, closeHamburger
     };
   },
 
-  data() {
-    return {
-      isHamburgerOpen: false, // 햄버거 메뉴의 상태를 저장
-    }
-  },
-
-  methods: {
-    // 햄버거 메뉴를 토글하는 메소드
-    toggleHamburger() {
-      this.isHamburgerOpen = !this.isHamburgerOpen;
-    },
-    // 햄버거 메뉴를 닫는 메소드
-    closeHamburger() {
-      this.isHamburgerOpen = false;
-    },
-  },
 
 }
 </script>
@@ -253,7 +249,6 @@ input[id="hamburger"]:checked + label + div {
   list-style-type:none;
   font-size:20px;
   border-bottom:1px solid #ccc;
-  font-family: 'Noto Sans KR';
   font-weight:bold;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -270,7 +265,7 @@ input[id="hamburger"]:checked + label + div {
   display:block;
   font-weight:bold;
   line-height:40px;
-  margin:0px;
+  margin:0;
   padding:0;
   text-align:center;
   text-decoration:none;
@@ -283,7 +278,7 @@ input[id="hamburger"]:checked + label + div {
   color: #eee;
   padding: 0;
   margin: 0;
-  border: 0px;
+  border: 0;
 }
 
 @media (min-width: 1024px) {
