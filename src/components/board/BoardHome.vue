@@ -116,6 +116,10 @@ export default {
 
 
 <style lang="scss" scoped>
+h1{
+  margin-top: 20px
+}
+
 div {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
