@@ -220,13 +220,6 @@ thead {
   color: #333;
 }
 
-/* 탭 컨텐츠 영역 스타일 */
-.tab-content {
-  border: 1px solid #ccc;
-  border-top: none;
-  padding: 1rem;
-}
-
 .createBoardContainer {
   width: 90%;
   display: flex;

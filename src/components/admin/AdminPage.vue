@@ -15,7 +15,6 @@
     </li>
   </div>
 
-
   <div class="router-container">
     <router-view></router-view>
   </div>
@@ -29,18 +28,15 @@ export default {}
 
 .tab-container {
   display: flex;
-  flex-direction: row; // 가로 방향으로 정렬
-  align-items: center; // 중앙 정렬
-  justify-content: center; // 시작 부분부터 정렬
-  padding:1vh;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1vh;
+  list-style: none;
+  margin: 0;
 }
 
-
 li {
-  list-style: none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 0.5vh;
   margin-right: 1vh;
   margin-bottom: 5vh;
 }
@@ -50,20 +46,16 @@ li {
   padding: 10px 20px;
   color: #333;
   text-decoration: none;
-  border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
-}
-
-.router-link:hover {
+  border-radius: 5px;
   background-color: #f0f0f0;
-  color: #000;
 }
 
-.router-link-active {
+.router-link-active, .router-link-exact-active {
   background-color: gray;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 5px;
+  padding: 1vh;
 }
-
 
 </style>
