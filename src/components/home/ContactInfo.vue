@@ -12,7 +12,8 @@
 
     <div class="contact-detail">자세히 둘러보기</div>
     <p>
-      INSTAGRAM : @yonsei__golf
+      INSTAGRAM :
+      <a href="https://www.instagram.com/yonsei__golf" target="_blank">@yonsei__golf</a>
     </p>
     <div class="buttons">
       <router-link to="/recruit">
@@ -131,6 +132,14 @@ button:hover {
 
 .buttons button:last-child {
   margin-right: 0;
+}
+
+a{
+  color: #094a7a; // 원하는 색상 코드로 변경
+  text-decoration: none; // 밑줄 제거
+  &:hover {
+    text-decoration: underline; // 마우스를 올렸을 때 밑줄 표시
+  }
 }
 
 </style>

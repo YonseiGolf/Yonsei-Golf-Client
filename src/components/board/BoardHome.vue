@@ -116,6 +116,10 @@ export default {
 
 
 <style lang="scss" scoped>
+h1{
+  margin-top: 20px
+}
+
 div {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
@@ -218,13 +222,6 @@ thead {
   background: #fff;
   border-color: #ccc;
   color: #333;
-}
-
-/* 탭 컨텐츠 영역 스타일 */
-.tab-content {
-  border: 1px solid #ccc;
-  border-top: none;
-  padding: 1rem;
 }
 
 .createBoardContainer {

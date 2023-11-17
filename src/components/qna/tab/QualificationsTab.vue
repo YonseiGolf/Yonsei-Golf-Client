@@ -36,6 +36,20 @@
       </p>
     </div>
   </div>
+
+  <div class="answer-container">
+    <input type="checkbox" id="qualifications-answer04">
+    <label for="qualifications-answer04">
+      Q. 추가적인 질문은 어디로 하나요?
+    </label>
+    <div>
+      <p>
+        A. @yonsei__golf 인스타그램으로 DM 주시면 됩니다.
+      </p>
+    </div>
+  </div>
+
+
 </template>
 
 <script>
@@ -87,5 +101,9 @@ input[id*="answer"] + label + p {
 
 input[id*="answer"]:checked + label + div {
   max-height: 100px;
+}
+
+p{
+  padding-bottom: 20px;
 }
 </style>

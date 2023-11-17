@@ -89,4 +89,7 @@ input[id*="answer"]:checked + label + div {
   max-height: 100px;
 }
 
+p{
+  padding-bottom: 20px;
+}
 </style>

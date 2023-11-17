@@ -222,6 +222,11 @@
   <div>* 지원서 제출 전 이메일과 전화번호를 다시 한번 확인해주세요.</div>
   <div>* 결과는 이메일로 전송해드립니다.</div>
   <button class="apply-button" @click="submitApplication" type="submit">지원서 제출</button>
+
+  <div v-if="isLoading" class="loading-container">
+    <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="Loading">
+  </div>
+
 </template>
 
 <script>
@@ -256,7 +261,8 @@ export default {
       golfSkillInvalid: false,
       golfMemoryInvalid: false,
       otherClubInvalid: false,
-      golfSwingInvalid: false
+      golfSwingInvalid: false,
+      isLoading: false,
     }
   },
 
@@ -265,6 +271,7 @@ export default {
       if (this.isFormValid) {
         if (confirm(`지원서를 제출하시겠습니까? \n이메일로 결과가 발송되니 이메일을 다시 한번 확인해주세요 \n ${this.applications.email}`)) {
           try {
+            this.isLoading= true;
             const response =
                 await axios.post(`${process.env.VUE_APP_API_URL}/application`, {
                   name: this.applications.name,
@@ -289,10 +296,12 @@ export default {
             // 응답 처리
             if (response.status === 200) {
               alert(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
+              this.isLoading = false;
               this.$router.push('/');
             }
           } catch (error) {
             alert('지원서는 접수되었으나, 이메일 발송에 실패하였습니다. \n인스타를 통해 지원 문의 바랍니다.')
+            this.isLoading = false;
             this.$router.push('/');
           }
         }
@@ -646,5 +655,22 @@ button:hover {
   width: 30%;
 }
 
+.loading-container {
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 화면 전체 너비 */
+  height: 100%; /* 화면 전체 높이 */
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 다른 요소들 위에 표시 */
+}
+
+.loading-image {
+  width: 100px; /* 로딩 이미지 크기 조절 */
+  height: 100px;
+}
 
 </style>

@@ -15,6 +15,7 @@ import BoardHome from "@/components/board/BoardHome.vue";
 import PostBoard from "@/components/board/PostBoard.vue";
 import BoardDetail from "@/components/board/BoardDetail.vue";
 import ApplyAlarm from "@/components/application/admin/ApplyAlarm.vue";
+import AdminPage from "@/components/admin/AdminPage.vue";
 
 const routes = [
     {
@@ -61,35 +62,6 @@ const routes = [
         component: CallBack
     },
     {
-        path: '/admin/form',
-        name: 'formManagement',
-        component: FormManagement,
-        beforeEnter: (to, from, next) => {
-            if (store.state.adminStatus) {
-                next();
-            } else {
-                next('/');
-            }
-        }
-    },
-    {
-        path: '/admin/users',
-        name: 'userManagement',
-        component: UserManagement,
-        beforeEnter: (to, from, next) => {
-            if (store.state.adminStatus) {
-                next();
-            } else {
-                next('/');
-            }
-        }
-    },
-    {
-        path: '/application/:id',
-        name: 'ApplicationDetail',
-        component: ApplicationDetail
-    },
-    {
         path: '/board',
         name: '/board',
         component: BoardHome
@@ -97,17 +69,76 @@ const routes = [
     {
         path: '/board/post',
         name: 'posting board',
-        component: PostBoard
+        component: PostBoard,
+        beforeEnter: (to, from, next) => {
+            if (store.state.isLoggedIn) {
+                next();
+            } else {
+                alert('로그인이 필요한 서비스입니다.');
+            }
+        }
     },
     {
         path: '/board/:boardId',
         name: 'BoardDetail',
         component: BoardDetail
     },
+
     {
-        path: '/admin/apply-alarm',
-        name: 'applyAlarm',
-        component: ApplyAlarm
+        path: '/admin',
+        name: 'admin',
+        component: AdminPage,
+        redirect: '/admin/users',
+        children: [
+            // 지원서
+            {
+                path: '/admin/apply/form',
+                name: 'applicationForm',
+                component: ApplicationForm
+            },
+
+            // 지원서 관리
+            {
+                path: '/admin/form',
+                name: 'formManagement',
+                component: FormManagement,
+                beforeEnter: (to, from, next) => {
+                    if (store.state.adminStatus) {
+                        next();
+                    } else {
+                        next('/');
+                    }
+                }
+            },
+
+            // 지원서 상제
+            {
+                path: '/application/:id',
+                name: 'ApplicationDetail',
+                component: ApplicationDetail
+            },
+
+            // 회원 관리
+            {
+                path: '/admin/users',
+                name: 'userManagement',
+                component: UserManagement,
+                beforeEnter: (to, from, next) => {
+                    if (store.state.adminStatus) {
+                        next();
+                    } else {
+                        next('/');
+                    }
+                }
+            },
+
+            // 지원 대기
+            {
+                path: '/admin/apply-alarm',
+                name: 'applyAlarm',
+                component: ApplyAlarm
+            },
+        ]
     }
 ]
 

@@ -1,6 +1,6 @@
 <template>
   <h1>
-    모집 일정
+    24-1 모집 일정
   </h1>
   <div class="container">
     <div class="text-box">

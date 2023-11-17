@@ -29,8 +29,8 @@
 
     <div v-if="editing" class="edit-form">
       <textarea @input="validContent" v-model="editedContent" class="edit-content"></textarea>
-      <button @click="savePost" :disabled="!isFormValid">저장</button>
-      <button @click="cancelEdit">취소</button>
+      <button class="save-cancle-edit" @click="savePost" :disabled="!isFormValid">저장</button>
+      <button class="save-cancle-edit" @click="cancelEdit">취소</button>
     </div>
     <div v-else>
       <p v-if="boardData" class="detail-content" v-html="formatContent(boardData.content)"></p>
@@ -113,7 +113,7 @@ export default {
           })
           .catch(error => {
             console.error(error);
-            alert('댓글을 등록하는 데 실패했습니다.');
+            alert('로그인 정보가 유효하지 않습니다. \n 다시 로그인해주세요.');
           });
     },
 
@@ -159,7 +159,7 @@ export default {
         axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`)
             .then(() => {
               alert('게시글이 삭제되었습니다.');
-              this.$router.push('/boards');
+              this.$router.push('/board');
 
             })
             .catch(error => {
@@ -282,6 +282,7 @@ export default {
 
 .replies-title {
   font-size: 15px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -378,6 +379,23 @@ textarea {
   border: none;
   background-color: white;
   cursor: pointer;
+  padding: 0.3vh;
+  margin-bottom: 20px;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.save-cancle-edit{
+  font-size: 15px;
+  font-color: gray;
+  border: none;
+  margin-right: 10px;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.3vh;
+  margin-bottom: 20px;
 
   &:hover {
     color: black;
