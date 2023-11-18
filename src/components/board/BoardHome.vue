@@ -61,6 +61,7 @@ export default {
       ],
       activeCategory: 'ALL',
       posts: [], // 이 배열은 서버에서 가져온 게시글 데이터,
+      page: 0, // 현재 페이지 번호
     };
   },
   computed: {
@@ -95,7 +96,7 @@ export default {
           confirmButtonColor: '#0a3d91',
         });
       } else {
-        this.$router.push({ name: 'posting board' });
+        this.$router.push({name: 'posting board'});
       }
     },
 
