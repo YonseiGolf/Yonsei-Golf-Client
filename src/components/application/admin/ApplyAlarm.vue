@@ -30,6 +30,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
 
@@ -53,9 +54,9 @@ export default {
     async sendEmail() {
       this.loading = true;
       axios.post(`${process.env.VUE_APP_API_URL}/admin/email/apply-start-email`)
-          .then((res) => {
+          .then(async (res) => {
             console.log(res);
-            alert("메일 전송 완료")
+            await Swal.fire("메일 전송 완료");
           })
           .catch((err) => {
             console.error(err);

@@ -21,7 +21,7 @@
       <span class="board-time">{{ boardData.createdAt }}</span>
       <div v-if="Number(boardData.writerId) === Number(sessionUserId)" class="post-actions">
         <button @click="editPost" class="edit-delete-post">수정</button>
-        <button @click="deletePost" class="edit-delete-post">삭제</button>
+        <button @click="confirmDelete" class="edit-delete-post">삭제</button>
       </div>
     </div>
 
@@ -48,7 +48,7 @@
         <div class="reply-header">
           <span class="reply-date">{{ reply.createdAt }}</span>
           <span v-if="Number(reply.writerId) === Number(sessionUserId)" class="reply-actions">
-            <button @click="deleteReply(reply.id)" class="edit-delete-post">삭제</button>
+            <button @click="confirmDeleteReply(reply.id)" class="edit-delete-post">삭제</button>
           </span>
         </div>
       </li>
@@ -68,6 +68,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -94,12 +95,18 @@ export default {
             if (response.data.status === "success") {
               this.boardData = response.data.data;
             } else {
-              alert("게시글을 불러오는데 실패했습니다.");
+              Swal.fire({
+                icon: "error",
+                title: "게시글을 불러오는데 실패했습니다.",
+              });
             }
           })
           .catch(error => {
             console.error(error);
-            alert("게시글을 불러오는데 실패했습니다.");
+            Swal.fire({
+              icon: "error",
+              title: "게시글을 불러오는데 실패했습니다.",
+            });
           });
     },
 
@@ -113,7 +120,10 @@ export default {
           })
           .catch(error => {
             console.error(error);
-            alert('로그인 정보가 유효하지 않습니다. \n 다시 로그인해주세요.');
+            Swal.fire({
+              icon: "error",
+              title: "로그인 정보가 유효하지 않습니다. \n다시 로그인해주세요",
+            });
           });
     },
 
@@ -146,7 +156,8 @@ export default {
         this.boardData.content = this.editedContent;
         this.editing = false;
 
-        alert('게시글 수정 성공')
+        await Swal.fire("게시글 수정 성공");
+
         location.reload();
       } catch (error) {
         console.error('Post update failed:', error);
@@ -154,53 +165,103 @@ export default {
       }
     },
 
-    deletePost() {
-      if (confirm('게시글을 삭제하시겠습니까?')) {
-        axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`)
-            .then(() => {
-              alert('게시글이 삭제되었습니다.');
-              this.$router.push('/board');
+    confirmDelete() {
+      Swal.fire({
+        title: "게시글을 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "삭제"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deletePost();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        }
+      });
+    },
 
-            })
-            .catch(error => {
-              console.error(error);
-              alert('게시글을 삭제하는 데 실패했습니다.');
+    deletePost() {
+      axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`)
+          .then(() => {
+            this.$router.push('/board');
+          })
+          .catch(() => {
+
+            Swal.fire({
+              icon: "error",
+              title: "게시글을 삭제하는데 실패했습니다.",
             });
-      }
+
+          });
+    },
+
+    confirmDeleteReply(replyId) {
+
+      Swal.fire({
+        title: "댓글을 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "삭제"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deleteReply(replyId)
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        }
+      });
+
     },
 
     deleteReply(replyId) {
-      if (confirm('댓글을 삭제하시겠습니까?')) {
-        axios.delete(`${process.env.VUE_APP_API_URL}/replies/${replyId}`)
-            .then(() => {
-              alert('댓글이 삭제되었습니다.');
-              this.$router.push(`/board/${this.boardData.id}`);
-              this.fetchBoardData();
-            })
-            .catch(error => {
-              console.error(error);
-              alert('댓글을 삭제하는 데 실패했습니다.');
+      axios.delete(`${process.env.VUE_APP_API_URL}/replies/${replyId}`)
+          .then(() => {
+            this.$router.push(`/board/${this.boardData.id}`);
+            this.fetchBoardData();
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              title: "댓글을 삭제하는데 실패했습니다.",
             });
-      }
+          });
     },
 
     handleReply() {
       if (this.newReply.content.length > 200) {
-        alert('댓글은 200자 이내로 작성해주세요.');
+        Swal.fire({
+          icon: "error",
+          title: "댓글은 200자 이내로 작성해주세요",
+        });
         this.newReply.content = this.newReply.content.slice(0, 200);
       }
     },
 
     validTitle() {
       if (this.editedTitle.length > 30) {
-        alert('제목은 30자 이내로 작성해주세요.');
+        Swal.fire({
+          icon: "error",
+          title: "제목은 30자 이내로 작성해주세요",
+        });
         this.editedTitle = this.editedTitle.slice(0, 30);
       }
     },
 
-    validContent(){
+    validContent() {
       if (this.editedContent.length > 1000) {
-        alert('내용은 1000자 이내로 작성해주세요.');
+        Swal.fire({
+          icon: "error",
+          title: "본문은 1000자 이내로 작성해주세요",
+        });
         this.editedContent = this.editedContent.slice(0, 1000);
       }
     }
@@ -387,7 +448,7 @@ textarea {
   }
 }
 
-.save-cancle-edit{
+.save-cancle-edit {
   font-size: 15px;
   font-color: gray;
   border: none;

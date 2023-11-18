@@ -16,6 +16,7 @@
 <script>
 import axios from "axios";
 import ApplicationTable from "@/components/application/admin/ApplicationTable.vue";
+import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -60,9 +61,9 @@ export default {
       this.isLoading = true;
       try {
         const response = await axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/results`, data);
-        alert(response.data.message);
+        await Swal.fire(response.data.message);
       } catch (error) {
-        alert(error.response.data.message);
+        await Swal.fire(error.response.data.message);
       } finally {
         this.isLoading = false;
       }

@@ -231,6 +231,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
 
@@ -268,45 +269,58 @@ export default {
 
   methods: {
     async submitApplication() {
-      if (this.isFormValid) {
-        if (confirm(`지원서를 제출하시겠습니까? \n이메일로 결과가 발송되니 이메일을 다시 한번 확인해주세요 \n ${this.applications.email}`)) {
-          try {
-            this.isLoading= true;
-            const response =
-                await axios.post(`${process.env.VUE_APP_API_URL}/application`, {
-                  name: this.applications.name,
-                  age: this.applications.age,
-                  photo: this.applications.photo,
-                  studentId: this.applications.studentId,
-                  major: this.applications.major,
-                  phoneNumber: this.applications.phoneNumber,
-                  email: this.applications.email,
-                  golfDuration: this.applications.golfDuration,
-                  roundCount: this.applications.roundCount,
-                  lessonStatus: this.applications.lessonStatus,
-                  clubStatus: this.applications.clubStatus,
-                  selfIntroduction: this.applications.selfIntroduction,
-                  applyReason: this.applications.applyReason,
-                  skillEvaluation: this.applications.skillEvaluation,
-                  golfMemory: this.applications.golfMemory,
-                  otherClub: this.applications.otherClub,
-                  swingVideo: this.applications.swingVideo,
-                });
 
-            // 응답 처리
-            if (response.status === 200) {
-              alert(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
+      if (this.isFormValid) {
+        Swal.fire({
+          title: "지원서를 제출하시겠습니까?",
+          text: `이메일로 결과가 발송되니 이메일을 다시 한번 확인해주세요 \n${this.applications.email}`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "제출"
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            try {
+              this.isLoading = true;
+              const response =
+                  await axios.post(`${process.env.VUE_APP_API_URL}/application`, {
+                    name: this.applications.name,
+                    age: this.applications.age,
+                    photo: this.applications.photo,
+                    studentId: this.applications.studentId,
+                    major: this.applications.major,
+                    phoneNumber: this.applications.phoneNumber,
+                    email: this.applications.email,
+                    golfDuration: this.applications.golfDuration,
+                    roundCount: this.applications.roundCount,
+                    lessonStatus: this.applications.lessonStatus,
+                    clubStatus: this.applications.clubStatus,
+                    selfIntroduction: this.applications.selfIntroduction,
+                    applyReason: this.applications.applyReason,
+                    skillEvaluation: this.applications.skillEvaluation,
+                    golfMemory: this.applications.golfMemory,
+                    otherClub: this.applications.otherClub,
+                    swingVideo: this.applications.swingVideo,
+                  });
+
+              // 응답 처리
+              if (response.status === 200) {
+                await Swal.fire(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
+
+                this.isLoading = false;
+                this.$router.push('/');
+              }
+            } catch (error) {
+              await Swal.fire(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
               this.isLoading = false;
               this.$router.push('/');
             }
-          } catch (error) {
-            alert('지원서는 접수되었으나, 이메일 발송에 실패하였습니다. \n인스타를 통해 지원 문의 바랍니다.')
-            this.isLoading = false;
-            this.$router.push('/');
           }
-        }
+        });
+
       } else {
-        alert('지원서 모든 항목을 작성해주세요.')
+        await Swal.fire('지원서 모든 항목을 작성해주세요.');
       }
     },
 
@@ -420,116 +434,141 @@ export default {
       }
       this.golfSwingInvalid = this.applications.swingVideo.length >= 500;
     },
-  },
+  }
+  ,
 
   computed: {
     applicationNameInput: {
       get() {
         return this.applications.name;
-      },
+      }
+      ,
       set(val) {
         this.applications.name = val;
       }
-    },
+    }
+    ,
 
     applicationAgeInput: {
       get() {
         return this.applications.age;
-      },
+      }
+      ,
       set(val) {
         this.applications.age = val;
       }
-    },
+    }
+    ,
 
     applicationStudentIdInput: {
       get() {
         return this.applications.studentId;
-      },
+      }
+      ,
       set(val) {
         this.applications.studentId = val;
       }
-    },
+    }
+    ,
 
     applicationMajorInput: {
       get() {
         return this.applications.major;
-      },
+      }
+      ,
       set(val) {
         this.applications.major = val;
       }
-    },
+    }
+    ,
 
     applicationPhoneNumberInput: {
       get() {
         return this.applications.phoneNumber;
-      },
+      }
+      ,
       set(val) {
         this.applications.phoneNumber = val;
       }
-    },
+    }
+    ,
 
     applicationEmailInput: {
       get() {
         return this.applications.email;
-      },
+      }
+      ,
       set(val) {
         this.applications.email = val;
       }
-    },
+    }
+    ,
 
     applicationSelfIntroductionInput: {
       get() {
         return this.applications.selfIntroduction;
-      },
+      }
+      ,
       set(val) {
         this.applications.selfIntroduction = val;
       }
-    },
+    }
+    ,
 
     applicationApplyReasonInput: {
       get() {
         return this.applications.applyReason;
-      },
+      }
+      ,
       set(val) {
         this.applications.applyReason = val;
       }
-    },
+    }
+    ,
 
     applicationSkillEvaluation: {
       get() {
         return this.applications.skillEvaluation;
-      },
+      }
+      ,
       set(val) {
         this.applications.skillEvaluation = val;
       }
-    },
+    }
+    ,
 
     applicationGolfMemory: {
       get() {
         return this.applications.golfMemory;
-      },
+      }
+      ,
       set(val) {
         this.applications.golfMemory = val;
       }
-    },
+    }
+    ,
 
     applicationOtherClub: {
       get() {
         return this.applications.otherClub;
-      },
+      }
+      ,
       set(val) {
         this.applications.otherClub = val;
       }
-    },
+    }
+    ,
 
     applicationSwingVideo: {
       get() {
         return this.applications.swingVideo;
-      },
+      }
+      ,
       set(val) {
         this.applications.swingVideo = val;
       }
-    },
+    }
+    ,
 
     isFormValid() {
       return this.applications.name.trim().length > 0 &&
@@ -552,7 +591,8 @@ export default {
     }
 
 
-  },
+  }
+  ,
 
 }
 </script>
