@@ -276,7 +276,7 @@ export default {
           text: `이메일로 결과가 발송되니 이메일을 다시 한번 확인해주세요 \n${this.applications.email}`,
           icon: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
+          confirmButtonColor: '#0a3d91',
           cancelButtonColor: "#d33",
           confirmButtonText: "제출"
         }).then(async (result) => {
@@ -306,13 +306,19 @@ export default {
 
               // 응답 처리
               if (response.status === 200) {
-                await Swal.fire(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
+                await Swal.fire({
+                  title: `${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`,
+                  confirmButtonColor: '#0a3d91',
+                });
 
                 this.isLoading = false;
                 this.$router.push('/');
               }
             } catch (error) {
-              await Swal.fire(`${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`);
+              await Swal.fire({
+                title: `${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`,
+                confirmButtonColor: '#0a3d91',
+              });
               this.isLoading = false;
               this.$router.push('/');
             }
@@ -320,7 +326,10 @@ export default {
         });
 
       } else {
-        await Swal.fire('지원서 모든 항목을 작성해주세요.');
+        await Swal.fire({
+          title: '지원서 모든 항목을 작성해주세요.',
+          confirmButtonColor: '#0a3d91',
+        });
       }
     },
 

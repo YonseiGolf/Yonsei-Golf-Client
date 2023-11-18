@@ -92,6 +92,7 @@ export default {
         Swal.fire({
           icon: "error",
           title: "로그인이 필요한 서비스입니다.",
+          confirmButtonColor: '#0a3d91',
         });
       } else {
         this.$router.push({ name: 'posting board' });

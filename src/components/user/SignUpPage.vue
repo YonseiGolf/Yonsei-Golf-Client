@@ -81,7 +81,8 @@ export default {
             title: '회원가입에 성공했습니다.',
             text: '다시 로그인 해주세요',
             icon: 'success',
-            confirmButtonText: '확인'
+            confirmButtonText: '확인',
+            confirmButtonColor: '#0a3d91',
           });
           this.$router.push('/login');
         } else {
@@ -89,7 +90,8 @@ export default {
             title: '회원가입에 실패했습니다.',
             text: '다시 시도해주세요',
             icon: 'error',
-            confirmButtonText: '확인'
+            confirmButtonText: '확인',
+            confirmButtonColor: '#0a3d91',
           });
           this.$router.push('/');
         }
@@ -99,7 +101,8 @@ export default {
           title: '회원가입에 실패했습니다.',
           text: '다시 시도해주세요',
           icon: 'error',
-          confirmButtonText: '확인'
+          confirmButtonText: '확인',
+          confirmButtonColor: '#0a3d91',
         });
         this.$router.push('/');
       }

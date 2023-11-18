@@ -98,6 +98,7 @@ export default {
               Swal.fire({
                 icon: "error",
                 title: "게시글을 불러오는데 실패했습니다.",
+                confirmButtonColor: '#0a3d91',
               });
             }
           })
@@ -106,6 +107,7 @@ export default {
             Swal.fire({
               icon: "error",
               title: "게시글을 불러오는데 실패했습니다.",
+              confirmButtonColor: '#0a3d91',
             });
           });
     },
@@ -123,6 +125,7 @@ export default {
             Swal.fire({
               icon: "error",
               title: "로그인 정보가 유효하지 않습니다. \n다시 로그인해주세요",
+              confirmButtonColor: '#0a3d91',
             });
           });
     },
@@ -156,7 +159,10 @@ export default {
         this.boardData.content = this.editedContent;
         this.editing = false;
 
-        await Swal.fire("게시글 수정 성공");
+        await Swal.fire({
+          title: "게시글 수정 성공",
+          confirmButtonColor: '#0a3d91',
+        });
 
         location.reload();
       } catch (error) {
@@ -170,16 +176,16 @@ export default {
         title: "게시글을 삭제하시겠습니까?",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: '#0a3d91',
         cancelButtonColor: "#d33",
         confirmButtonText: "삭제"
       }).then((result) => {
         if (result.isConfirmed) {
           this.deletePost();
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
+            title: "게시글이 삭제되었습니다.",
+            icon: "success",
+            confirmButtonColor: '#0a3d91',
           });
         }
       });
@@ -195,6 +201,7 @@ export default {
             Swal.fire({
               icon: "error",
               title: "게시글을 삭제하는데 실패했습니다.",
+              confirmButtonColor: '#0a3d91',
             });
 
           });
@@ -206,7 +213,7 @@ export default {
         title: "댓글을 삭제하시겠습니까?",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: '#0a3d91',
         cancelButtonColor: "#d33",
         confirmButtonText: "삭제"
       }).then((result) => {
@@ -215,7 +222,8 @@ export default {
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
-            icon: "success"
+            icon: "success",
+            confirmButtonColor: '#0a3d91',
           });
         }
       });
@@ -232,6 +240,7 @@ export default {
             Swal.fire({
               icon: "error",
               title: "댓글을 삭제하는데 실패했습니다.",
+              confirmButtonColor: '#0a3d91',
             });
           });
     },
@@ -241,6 +250,7 @@ export default {
         Swal.fire({
           icon: "error",
           title: "댓글은 200자 이내로 작성해주세요",
+          confirmButtonColor: '#0a3d91',
         });
         this.newReply.content = this.newReply.content.slice(0, 200);
       }
@@ -251,6 +261,7 @@ export default {
         Swal.fire({
           icon: "error",
           title: "제목은 30자 이내로 작성해주세요",
+          confirmButtonColor: '#0a3d91',
         });
         this.editedTitle = this.editedTitle.slice(0, 30);
       }
@@ -261,6 +272,7 @@ export default {
         Swal.fire({
           icon: "error",
           title: "본문은 1000자 이내로 작성해주세요",
+          confirmButtonColor: '#0a3d91',
         });
         this.editedContent = this.editedContent.slice(0, 1000);
       }

@@ -248,16 +248,26 @@ export default {
           time: interviewTime.value
         });
         if (response.status === 200) {
-          await Swal.fire("면접 시간 변경 성공");
+          await Swal.fire({
+            title: "면접 시간 변경 성공",
+            confirmButtonColor: '#0a3d91',
+          });
+
 
           closeModal();
           location.reload();
         } else {
-          await Swal.fire("면접 시간 변경 실패");
+          await Swal.fire({
+            title:"면접 시간 변경 실패",
+            confirmButtonColor: '#0a3d91',
+          });
         }
 
       } catch (error) {
-        await Swal.fire("면접 시간 변경 실패");
+        await Swal.fire({
+          title: "면접 시간 변경 실패",
+          confirmButtonColor: '#0a3d91',
+        });
       }
     }
 
@@ -333,7 +343,10 @@ export default {
       try {
         await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/pass`, payload);
         // 추가적인 로직 (예: 응답 처리, 라우팅, 상태 업데이트 등)
-        await Swal.fire("합격 여부 변경 완료");
+        await Swal.fire({
+          title: "합격 여부 변경 완료",
+          confirmButtonColor: '#0a3d91',
+        });
       } catch (error) {
         console.error('API 요청 실패:', error);
       }

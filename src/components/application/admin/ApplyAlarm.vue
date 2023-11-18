@@ -56,7 +56,10 @@ export default {
       axios.post(`${process.env.VUE_APP_API_URL}/admin/email/apply-start-email`)
           .then(async (res) => {
             console.log(res);
-            await Swal.fire("메일 전송 완료");
+            await Swal.fire({
+              title: "메일 전송 완료",
+              confirmButtonColor: '#0a3d91',
+            });
           })
           .catch((err) => {
             console.error(err);

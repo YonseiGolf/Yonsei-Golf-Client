@@ -16,6 +16,7 @@ import PostBoard from "@/components/board/PostBoard.vue";
 import BoardDetail from "@/components/board/BoardDetail.vue";
 import ApplyAlarm from "@/components/application/admin/ApplyAlarm.vue";
 import AdminPage from "@/components/admin/AdminPage.vue";
+import Swal from "sweetalert2";
 
 const routes = [
     {
@@ -111,7 +112,7 @@ const routes = [
                 path: '/admin/users',
                 name: 'userManagement',
                 component: UserManagement,
-                beforeEnter: (to, from, next) => {
+                beforeEnter: async (to, from, next) => {
                     if (store.state.adminStatus) {
                         next();
                     } else {
@@ -140,6 +141,30 @@ router.beforeEach((to, from, next) => {
     if (to.name === 'loginPage' && store.state.isLoggedIn) {
         next('/');
     } else {
+        next();
+    }
+});
+
+router.beforeEach((to, from, next) => {
+    // 'admin' 경로 또는 하위 경로에 접근하려고 할 때 확인
+    if (to.matched.some(record => record.path.startsWith('/admin'))) {
+        // 관리자 상태를 확인하는 로직
+        if (!store.state.adminStatus) {
+            // 관리자 상태가 아니면 SweetAlert 경고 표시 후 메인 페이지로 리디렉션
+            Swal.fire({
+                icon: 'error',
+                title: '권한이 없습니다',
+                text: '이 페이지에 접근하려면 관리자 권한이 필요합니다.',
+                confirmButtonColor: '#0a3d91',
+            }).then(() => {
+                next('/');
+            });
+        } else {
+            // 관리자 상태가 맞다면 다음 라우트로 진행
+            next();
+        }
+    } else {
+        // 'admin' 경로가 아닌 경우는 다음 라우트로 바로 진행
         next();
     }
 });
