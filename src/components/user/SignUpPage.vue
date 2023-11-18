@@ -40,6 +40,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -76,15 +77,33 @@ export default {
         });
 
         if (response.status === 200) {
-          alert('회원가입에 성공했습니다. 다시 로그인 해주세요');
+          await Swal.fire({
+            title: '회원가입에 성공했습니다.',
+            text: '다시 로그인 해주세요',
+            icon: 'success',
+            confirmButtonText: '확인',
+            confirmButtonColor: '#0a3d91',
+          });
           this.$router.push('/login');
         } else {
-          alert('회원가입에 실패했습니다.');
+          await Swal.fire({
+            title: '회원가입에 실패했습니다.',
+            text: '다시 시도해주세요',
+            icon: 'error',
+            confirmButtonText: '확인',
+            confirmButtonColor: '#0a3d91',
+          });
           this.$router.push('/');
         }
 
       } catch (error) {
-        alert('회원가입에 실패했습니다.');
+        await Swal.fire({
+          title: '회원가입에 실패했습니다.',
+          text: '다시 시도해주세요',
+          icon: 'error',
+          confirmButtonText: '확인',
+          confirmButtonColor: '#0a3d91',
+        });
         this.$router.push('/');
       }
     },

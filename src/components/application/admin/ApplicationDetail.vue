@@ -219,6 +219,7 @@ import axios from "axios";
 import InterviewModal from "@/components/application/admin/IntervieModal.vue";
 import {ref} from "vue";
 import {useRoute} from "vue-router";
+import Swal from "sweetalert2";
 
 export default {
   components: {
@@ -247,15 +248,26 @@ export default {
           time: interviewTime.value
         });
         if (response.status === 200) {
-          alert("면접 시간 변경 완료");
+          await Swal.fire({
+            title: "면접 시간 변경 성공",
+            confirmButtonColor: '#0a3d91',
+          });
+
+
           closeModal();
           location.reload();
         } else {
-          alert("면접 시간 변경 실패");
+          await Swal.fire({
+            title:"면접 시간 변경 실패",
+            confirmButtonColor: '#0a3d91',
+          });
         }
 
       } catch (error) {
-        alert(error);
+        await Swal.fire({
+          title: "면접 시간 변경 실패",
+          confirmButtonColor: '#0a3d91',
+        });
       }
     }
 
@@ -331,7 +343,10 @@ export default {
       try {
         await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/pass`, payload);
         // 추가적인 로직 (예: 응답 처리, 라우팅, 상태 업데이트 등)
-        alert("합격 여부 변경 완료");
+        await Swal.fire({
+          title: "합격 여부 변경 완료",
+          confirmButtonColor: '#0a3d91',
+        });
       } catch (error) {
         console.error('API 요청 실패:', error);
       }

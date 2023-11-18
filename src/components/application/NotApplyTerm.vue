@@ -19,6 +19,7 @@
 <script>
 
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -40,25 +41,34 @@ export default {
       try {
 
         if (!this.email.trim()) {
-          alert('이메일을 입력해주세요');
+          await Swal.fire({
+            title: "이메일을 입력해주세요.",
+            confirmButtonColor: '#0a3d91',
+          });
           return;
         }
 
         const response =
             await axios.post(`${process.env.VUE_APP_API_URL}/application/emailAlarm`, {
-          email: this.email
-        });
+              email: this.email
+            });
 
         // 응답 처리
         if (response.status === 200) {
-          alert('알림이 성공적으로 등록되었습니다.');
+          await Swal.fire({
+            title: "알림이 성공적으로 등록되었습니다.",
+            confirmButtonColor: '#0a3d91',
+          });
           this.$router.push('/');
         } else {
           console.log(process.env.LOCAL_API_URL)
           console.error('알림 등록에 실패하였습니다.');
         }
       } catch (error) {
-        console.error('API 호출 중 오류 발생:', error);
+        await Swal.fire({
+          title: "알림 등록에 실패하였습니다.",
+          confirmButtonColor: '#0a3d91',
+        });
       }
     },
 
@@ -104,8 +114,8 @@ h1 {
   height: 20%;
   max-width: 800px;
   padding: 10px 5px;
-  background-color: #ffffff;  // 흰색 배경 추가
-  border-radius: 100px;  // 모서리 둥글게
+  background-color: #ffffff; // 흰색 배경 추가
+  border-radius: 100px; // 모서리 둥글게
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -137,7 +147,7 @@ h1 {
   }
 }
 
-input{
+input {
   outline: none;
 }
 </style>

@@ -34,11 +34,19 @@ export default {}
   padding: 1vh;
   list-style: none;
   margin: 0;
+
+
 }
 
 li {
-  margin-right: 1vh;
+  padding: 1vh;
   margin-bottom: 5vh;
+  border-radius: 8px;
+
+  &:not(:last-child) { // 마지막 li에는 구분선을 그리지 않음
+    margin-right: 2vh; // 구분선을 고려하여 마진 조정
+  }
+
 }
 
 .router-link {
@@ -51,7 +59,7 @@ li {
   background-color: #f0f0f0;
 }
 
-.router-link-active, .router-link-exact-active {
+.router-link-active{
   background-color: gray;
   color: #fff;
   border-radius: 5px;

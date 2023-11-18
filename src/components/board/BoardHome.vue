@@ -48,6 +48,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -69,7 +70,12 @@ export default {
         return this.posts;
       }
       return this.posts.filter(post => post.category === this.activeCategory);
+    },
+
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
     }
+
   },
   // Vue 라이프 사이클과 함꼐하는 메서드
   async created() {
@@ -82,9 +88,17 @@ export default {
     },
 
     postNewBoard() {
-      this.$router.push({name: 'posting board'});
-    }
-    ,
+      if (!this.isLoggedIn) {
+        Swal.fire({
+          icon: "error",
+          title: "로그인이 필요한 서비스입니다.",
+          confirmButtonColor: '#0a3d91',
+        });
+      } else {
+        this.$router.push({ name: 'posting board' });
+      }
+    },
+
     async fetchPosts(page) {
       // 카테고리가 ALL이 아니라면 category 파라미터를 추가
       const categoryParam = this.activeCategory !== 'ALL' ? `&category=${this.activeCategory}` : '';
@@ -116,7 +130,7 @@ export default {
 
 
 <style lang="scss" scoped>
-h1{
+h1 {
   margin-top: 20px
 }
 
