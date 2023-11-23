@@ -1,11 +1,13 @@
 import {createStore} from 'vuex';
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const store = createStore({
     state: {
         userId: 0,
         username: '',
         adminStatus: false,
+        memberStatus: false,
         isLoggedIn: false
     },
     mutations: {
@@ -13,16 +15,17 @@ const store = createStore({
             state.userId = payload.userId || '';
             state.username = payload.username || '';
             state.adminStatus = payload.adminStatus || false;
+            state.memberStatus = payload.memberStatus || false;
             state.isLoggedIn = !!payload.username;
 
             // 세션 스토리지에 정보 저장
             sessionStorage.setItem('id', state.userId);
             sessionStorage.setItem('username', state.username);
             sessionStorage.setItem('adminStatus', state.adminStatus.toString());
+            sessionStorage.setItem('memberStatus', state.memberStatus.toString());
             sessionStorage.setItem('isLoggedIn', state.isLoggedIn.toString());
-
-            console.log("userId:" , state.userId, "username:", state.username, "adminStatus:", state.adminStatus, "isLoggedIn:", state.isLoggedIn)
         },
+
         RESTORE_SESSION(state) {
             state.userId = sessionStorage.getItem('id') || '';
             state.username = sessionStorage.getItem('username') || '';
@@ -53,7 +56,10 @@ const store = createStore({
 
                 // 로그아웃 성공 시 Vuex 상태 초기화
                 commit('SET_LOGOUT');
-                alert("로그아웃 되었습니다.")
+
+                localStorage.removeItem('accessToken');
+
+                Swal.fire("로그아웃 되었습니다.");
             } catch (error) {
                 console.error("Logout failed:", error);
             }
