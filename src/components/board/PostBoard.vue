@@ -27,6 +27,7 @@
 <script>
 import axios from "axios";
 import router from "@/router";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -43,14 +44,19 @@ export default {
         category: this.selectedCategory,
         title: this.title,
         content: this.content
-      })
+      },
+          {
+            headers:{
+              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+          })
           .then(() => {
             router.push('/board')
-            alert('게시글이 등록되었습니다.')
+            Swal.fire('게시글이 등록되었습니다.')
           })
           .catch(error => {
             console.error(error);
-            alert('게시글 등록에 실패했습니다.')
+            Swal.fire('게시글 등록에 실패했습니다.')
             router.push('/board')
           });
     },

@@ -1,5 +1,6 @@
 <template>
-  <img class="loading-img" src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="loading img">
+  <img class="loading-img" src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif"
+       alt="loading img">
 </template>
 
 <script>
@@ -20,24 +21,44 @@ export default {
   methods: {
     async sendCodeToBackend(code) {
       try {
-        const response = await axios.post(`${process.env.VUE_APP_API_URL}/oauth/kakao`, { kakaoCode: code });
+        const response = await axios.post(`${process.env.VUE_APP_API_URL}/oauth/kakao`, {kakaoCode: code});
 
         if (response.status === 200) {
+          const token = response.data.data.accessToken;
+          localStorage.removeItem('accessToken')
+          localStorage.setItem('accessToken', token);
 
           try {
-            const loginResponse = await axios.post(`${process.env.VUE_APP_API_URL}/users/signIn`);
+            const loginResponse = await axios.post(`${process.env.VUE_APP_API_URL}/users/signIn`,{},{
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
 
+            // localStorage에 저장된 access Token을 삭제한다.
+            localStorage.removeItem('accessToken')
             if (loginResponse.status === 200) {
+              const token = loginResponse.data.data.accessToken;
+              localStorage.setItem('accessToken', token);
+
+              const parts = token.split('.');
+              const payload = parts[1]
+              const decoded = atob(payload);
+              const decodedURIComponent = decodeURIComponent(escape(decoded));
+              const json = JSON.parse(decodedURIComponent);
+
               // 로그인이 성공하면 store 에 로그인 정보를 저장해둔다.
               const userDetails = {
-                userId: loginResponse.data.data.id,
-                username: loginResponse.data.data.name,
-                adminStatus: loginResponse.data.data.adminStatus
+                userId: json.userProfile.id,
+                username: json.userProfile.name,
+                adminStatus: json.userProfile.adminStatus,
+                memberStatus: json.userProfile.memberStatus,
               };
               store.commit('SET_USER_DETAILS', userDetails);
 
               this.$router.push('/');
             }
+
           } catch (error) {
             if (error.response && error.response.status === 401) {
               globalState.loginFailed = true;
@@ -61,7 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.loading-img{
+.loading-img {
   width: 300px;
   height: 300px;
   position: absolute;

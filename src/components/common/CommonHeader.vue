@@ -89,7 +89,7 @@ export default {
     const isHamburgerOpen = ref(false);
 
     watch(isHamburgerOpen, (newValue) => {
-      console.log("isHamburgerOpen changed:", newValue);
+
       if (newValue) {
         document.body.classList.add('no-scroll');
       } else {
