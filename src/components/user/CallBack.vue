@@ -21,25 +21,25 @@ export default {
   methods: {
     async sendCodeToBackend(code) {
       try {
-
         const response = await axios.post(`${process.env.VUE_APP_API_URL}/oauth/kakao`, {kakaoCode: code});
 
         if (response.status === 200) {
           const token = response.data.data.accessToken;
+          localStorage.removeItem('accessToken')
           localStorage.setItem('accessToken', token);
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
           try {
-            const loginResponse = await axios.post(`${process.env.VUE_APP_API_URL}/users/signIn`);
+            const loginResponse = await axios.post(`${process.env.VUE_APP_API_URL}/users/signIn`,{},{
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+
             // localStorage에 저장된 access Token을 삭제한다.
             localStorage.removeItem('accessToken')
-
             if (loginResponse.status === 200) {
               const token = loginResponse.data.data.accessToken;
               localStorage.setItem('accessToken', token);
-
-              // 로그인 성공 후 다시 access Token 설정
-              axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
               const parts = token.split('.');
               const payload = parts[1]
@@ -58,6 +58,7 @@ export default {
 
               this.$router.push('/');
             }
+
           } catch (error) {
             if (error.response && error.response.status === 401) {
               globalState.loginFailed = true;

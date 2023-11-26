@@ -47,14 +47,6 @@ async function initializeApp() {
 
 }
 
-// Axios 인터셉터 설정
-axios.interceptors.request.use(config => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    return config;
-});
 
 
 initializeApp().then(() => {

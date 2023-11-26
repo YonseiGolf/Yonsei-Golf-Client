@@ -31,18 +31,21 @@ const store = createStore({
             state.username = sessionStorage.getItem('username') || '';
             state.adminStatus = (sessionStorage.getItem('adminStatus') === 'true');
             state.isLoggedIn = (sessionStorage.getItem('isLoggedIn') === 'true');
+            state.memberStatus = (sessionStorage.getItem('memberStatus') === 'true');
         },
         SET_LOGOUT(state) {
             state.userId = '';
             state.username = '';
             state.adminStatus = false;
             state.isLoggedIn = false;
+            state.memberStatus = false;
 
             // 세션 스토리지 정보 초기화
             sessionStorage.removeItem('id');
             sessionStorage.removeItem('username');
             sessionStorage.removeItem('adminStatus');
             sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('memberStatus');
         }
     },
     actions: {
@@ -52,12 +55,19 @@ const store = createStore({
         async logout({commit}) {
             try {
                 // 로그아웃 API 요청
-                await axios.post(`${process.env.VUE_APP_API_URL}/users/logout`);
+                await axios.post(`${process.env.VUE_APP_API_URL}/users/logout`, {},
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    });
 
                 // 로그아웃 성공 시 Vuex 상태 초기화
                 commit('SET_LOGOUT');
-
+                console.log("로그아웃 성공");
+                console.log(localStorage.getItem('accessToken'));
                 localStorage.removeItem('accessToken');
+                console.log(localStorage.getItem('accessToken'));
 
                 Swal.fire("로그아웃 되었습니다.");
             } catch (error) {

@@ -115,7 +115,12 @@ export default {
     submitReply() {
       // API에 댓글 등록 요청을 보내는 코드를 여기에 추가합니다.
       const boardId = this.$route.params.boardId;
-      axios.post(`${process.env.VUE_APP_API_URL}/boards/${boardId}/replies`, this.newReply)
+      axios.post(`${process.env.VUE_APP_API_URL}/boards/${boardId}/replies`, this.newReply,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+          })
           .then(() => {
             this.newReply.content = ''; // 입력 폼 초기화
             this.fetchBoardData(); // 댓글 목록 새로고침
@@ -154,7 +159,12 @@ export default {
       };
 
       try {
-        await axios.patch(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`, payload);
+        await axios.patch(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`, payload,
+            {
+              headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              }
+            });
         this.boardData.title = this.editedTitle;
         this.boardData.content = this.editedContent;
         this.editing = false;
@@ -192,7 +202,11 @@ export default {
     },
 
     deletePost() {
-      axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`)
+      axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }})
           .then(() => {
             this.$router.push('/board');
           })
@@ -220,8 +234,7 @@ export default {
         if (result.isConfirmed) {
           this.deleteReply(replyId)
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
+            title: "댓글이 삭제되었습니다.",
             icon: "success",
             confirmButtonColor: '#0a3d91',
           });
@@ -231,7 +244,12 @@ export default {
     },
 
     deleteReply(replyId) {
-      axios.delete(`${process.env.VUE_APP_API_URL}/replies/${replyId}`)
+      axios.delete(`${process.env.VUE_APP_API_URL}/replies/${replyId}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+          })
           .then(() => {
             this.$router.push(`/board/${this.boardData.id}`);
             this.fetchBoardData();
