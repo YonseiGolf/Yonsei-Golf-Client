@@ -68,15 +68,22 @@ export default {
   methods: {
     async register() {
       try {
+        const token = localStorage.getItem('accessToken');
         const response = await axios.post(`${process.env.VUE_APP_API_URL}/users/signUp`, {
           name: this.name,
           phoneNumber: this.phoneNumber,
           studentId: this.studentId,
           major: this.major,
           semester: this.semester
-        });
+        },{
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+            }
+        );
 
         if (response.status === 200) {
+          localStorage.removeItem('accessToken')
           await Swal.fire({
             title: '회원가입에 성공했습니다.',
             text: '다시 로그인 해주세요',
