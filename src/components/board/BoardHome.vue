@@ -41,7 +41,9 @@
     </ul>
   </nav>
   <div class="createBoardContainer">
-    <button @click="postNewBoard" class="boardButton">새 글 작성</button>
+    <button @click="postNewBoard" class="boardButton">
+      <span class="postBoard">새 글 작성</span>
+    </button>
   </div>
 
 </template>
@@ -244,6 +246,25 @@ thead {
   display: flex;
   justify-content: end;
   margin-bottom: 30px;
+}
+
+.button-container{
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.postBoard {
+  padding: 10px 20px; /* 버튼의 내부 여백을 조정합니다 */
+  font-size: 16px; /* 글자 크기를 조정합니다 */
+
+  background-color: #0a3d91; /* 버튼의 배경색을 조정합니다 */
+  color: white; /* 버튼의 글자 색상을 조정합니다 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 합니다 */
+}
+
+button{
+  border: none;
 }
 
 </style>

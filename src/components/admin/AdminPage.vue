@@ -13,6 +13,12 @@
     <li>
       <router-link to="/admin/apply/form">지원서 양식</router-link>
     </li>
+    <li>
+      <router-link to="/admin/board/template">게시판 양식</router-link>
+    </li>
+    <li>
+      <router-link to="/admin/apply-period">지원 기간 관리</router-link>
+    </li>
   </div>
 
   <div class="router-container">
