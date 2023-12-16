@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import BoardTemplateHome from "@/components/board/admin/BoardTemplateHome.vue";
 import BoardTemplateDetail from "@/components/board/admin/BoardTemplateDetail.vue";
 import ApplyPeriodAdmin from "@/components/applyinfo/admin/ApplyPeriodAdmin.vue";
+import PostTemplate from "@/components/board/admin/PostTemplate.vue";
 
 const routes = [
     {
@@ -134,15 +135,21 @@ const routes = [
                 component: BoardTemplateHome
             },
             {
-                path: '/admin/board/template/:boardId',
+                path: '/admin/board/template/:templateId',
                 name: 'boardTemplateDetail',
                 component: BoardTemplateDetail
+            },
+            {
+                path: '/admin/board/template/post',
+                name: 'postBoardTemplate',
+                component: PostTemplate
+
             },
             {
                 path: '/admin/apply-period',
                 name: 'applyPeriod',
                 component: ApplyPeriodAdmin
-            }
+            },
         ]
     }
 ]
@@ -151,7 +158,7 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
     scrollBehavior() {
-        return { left: 0, top: 0 }  // 모든 라우트 변경시 페이지의 최상단으로 스크롤
+        return {left: 0, top: 0}  // 모든 라우트 변경시 페이지의 최상단으로 스크롤
     }
 })
 
