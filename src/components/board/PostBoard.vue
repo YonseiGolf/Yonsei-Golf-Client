@@ -16,8 +16,8 @@
       <input v-model="title" type="text" placeholder="제목을 입력해 주세요." class="input-title" @input="handleTitleInput">
     </div>
 
-    <div class="select-template">
-      <select v-if="isAdmin" v-model="selectedTemplate" class="select-template-option">
+    <div class="select-template" v-if="isAdmin">
+      <select v-model="selectedTemplate" class="select-template-option">
         <option value="">
           템플릿 없음
         </option>
