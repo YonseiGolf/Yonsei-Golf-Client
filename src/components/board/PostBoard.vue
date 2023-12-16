@@ -8,11 +8,23 @@
   <div class="board-body-container">
     <div class="select-category-title">
       <select v-model="selectedCategory" class="select-category">
-        <option value="NOTICE">공지</option>
+        <option v-if="isAdmin" value="NOTICE">공지</option>
         <option value="FREE">자유게시판</option>
       </select>
 
+
       <input v-model="title" type="text" placeholder="제목을 입력해 주세요." class="input-title" @input="handleTitleInput">
+    </div>
+
+    <div class="select-template">
+      <select v-if="isAdmin" v-model="selectedTemplate" class="select-template-option">
+        <option value="">
+          템플릿 없음
+        </option>
+        <option v-for="template in templates" :key="template.id" :value="template.id">
+          {{ template.title }}
+        </option>
+      </select>
     </div>
 
   </div>
@@ -32,23 +44,44 @@ import router from "@/router";
 import Swal from "sweetalert2";
 
 export default {
+
+  created() {
+
+    if (this.isAdmin) {
+      this.fetchTemplates();
+    }
+  },
+
+  watch: {
+    selectedTemplate(newVal) {
+      if (newVal) {
+        this.fetchTemplateData(newVal);
+      } else {
+        this.title = '';
+        this.content = '';
+      }
+    },
+  },
+
   data() {
     return {
       selectedCategory: 'FREE',
       title: '',
       content: '',
+      templates: [],
+      selectedTemplate: ''
     };
   },
   methods: {
     postArticle() {
       // 여기에 API 요청을 보내는 코드를 작성합니다
       axios.post(`${process.env.VUE_APP_API_URL}/boards`, {
-        category: this.selectedCategory,
-        title: this.title,
-        content: this.content
-      },
+            category: this.selectedCategory,
+            title: this.title,
+            content: this.content
+          },
           {
-            headers:{
+            headers: {
               'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
           })
@@ -69,17 +102,46 @@ export default {
       }
     },
 
-    handleContentInput(){
+    handleContentInput() {
       if (this.content.length > 1000) {
         this.content = this.content.slice(0, 1000)
       }
-    }
+    },
+
+    fetchTemplates() {
+      axios.get(`${process.env.VUE_APP_API_URL}/admin/boards/templates`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+          .then(response => {
+            this.templates = response.data.data.templates;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    },
+
+    fetchTemplateData(templateId) {
+      axios.get(`${process.env.VUE_APP_API_URL}/admin/boards/templates/${templateId}`)
+          .then(response => {
+            this.title = response.data.data.title;
+            this.content = response.data.data.contents;
+          })
+          .catch(error => {
+            console.error('Error fetching template data:', error);
+          });
+    },
   },
 
-  computed:{
+  computed: {
     isFormValid() {
       return this.title.trim().length > 0 && this.content.trim().length > 0;
-    }
+    },
+
+    isAdmin() {
+      return this.$store.state.adminStatus;
+    },
   }
 }
 </script>
@@ -163,11 +225,12 @@ input,
 textarea {
   outline: none;
 }
-textarea{
+
+textarea {
   resize: none;
 }
 
-.button-container{
+.button-container {
   display: flex;
   justify-content: right;
   margin-top: 20px;
@@ -182,7 +245,24 @@ textarea{
   border-radius: 5px; /* 버튼의 모서리를 둥글게 합니다 */
 }
 
-button{
+button {
   border: none;
 }
+
+.select-template {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  justify-content: space-between;
+}
+
+.select-template-option{
+  width: 70%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  height: 100%;
+}
+
 </style>
