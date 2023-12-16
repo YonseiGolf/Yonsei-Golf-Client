@@ -19,7 +19,9 @@
   <textarea v-model="content" class="board-body-input" placeholder="내용을 입력하세요."></textarea>
 
   <div class="button-container">
-    <button @click="postArticle" class="posting-button" :disabled="!isFormValid">게시글 등록</button>
+    <button @click="postArticle" class="posting-button" :disabled="!isFormValid">
+      <span class="postBoard">게시글 등록</span>
+    </button>
   </div>
 
 </template>
@@ -163,5 +165,24 @@ textarea {
 }
 textarea{
   resize: none;
+}
+
+.button-container{
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.postBoard {
+  padding: 10px 20px; /* 버튼의 내부 여백을 조정합니다 */
+  font-size: 16px; /* 글자 크기를 조정합니다 */
+
+  background-color: #0a3d91; /* 버튼의 배경색을 조정합니다 */
+  color: white; /* 버튼의 글자 색상을 조정합니다 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 합니다 */
+}
+
+button{
+  border: none;
 }
 </style>
