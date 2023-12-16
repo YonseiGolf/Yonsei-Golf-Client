@@ -7,6 +7,9 @@
     </div>
     <nav>
       <ul class="header-nav">
+        <li>
+          <router-link to="/">Home</router-link>
+        </li>
         <li v-if="adminStatus">
           <router-link to="/admin">어드민</router-link>
         </li>

@@ -17,6 +17,9 @@ import BoardDetail from "@/components/board/BoardDetail.vue";
 import ApplyAlarm from "@/components/application/admin/ApplyAlarm.vue";
 import AdminPage from "@/components/admin/AdminPage.vue";
 import Swal from "sweetalert2";
+import BoardTemplateHome from "@/components/board/admin/BoardTemplateHome.vue";
+import BoardTemplateDetail from "@/components/board/admin/BoardTemplateDetail.vue";
+import ApplyPeriodAdmin from "@/components/applyinfo/admin/ApplyPeriodAdmin.vue";
 
 const routes = [
     {
@@ -125,6 +128,21 @@ const routes = [
                 name: 'applyAlarm',
                 component: ApplyAlarm
             },
+            {
+                path: '/admin/board/template',
+                name: 'boardTemplate',
+                component: BoardTemplateHome
+            },
+            {
+                path: '/admin/board/template/:boardId',
+                name: 'boardTemplateDetail',
+                component: BoardTemplateDetail
+            },
+            {
+                path: '/admin/apply-period',
+                name: 'applyPeriod',
+                component: ApplyPeriodAdmin
+            }
         ]
     }
 ]
