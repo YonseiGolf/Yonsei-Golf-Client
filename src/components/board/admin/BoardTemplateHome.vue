@@ -123,7 +123,7 @@ thead {
   padding: 10px 20px; /* 버튼의 내부 여백을 조정합니다 */
   font-size: 16px; /* 글자 크기를 조정합니다 */
 
-  background-color: #0a3d91; /* 버튼의 배경색을 조정합니다 */
+  background-color: #08366f; /* 버튼의 배경색을 조정합니다 */
   color: white; /* 버튼의 글자 색상을 조정합니다 */
   border-radius: 5px; /* 버튼의 모서리를 둥글게 합니다 */
 }

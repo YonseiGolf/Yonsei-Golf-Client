@@ -89,16 +89,14 @@ export default {
 }
 
 .blue-container {
-  background-color: #0a3d91;
+
+  background-color: #08366f;
   padding: 4%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-bottom: 3%;
-
-  font-family: 'Pretendard-Regular', sans-serif;
-
 }
 
 
@@ -146,9 +144,11 @@ h2 {
 main-title {
   font-size: 30px;
   font-weight: bold;
+  font-family: 'GmarketSansMedium', sans-serif;
 }
 
 main-body {
-  font-size: 20px;
+  font-size: 18px;
+  font-family: 'Pretendard-Regular', sans-serif;
 }
 </style>

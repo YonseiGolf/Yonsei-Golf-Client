@@ -58,7 +58,7 @@ export default {
             console.log(res);
             await Swal.fire({
               title: "메일 전송 완료",
-              confirmButtonColor: '#0a3d91',
+              confirmButtonColor: '#08366f',
             });
           })
           .catch((err) => {

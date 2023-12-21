@@ -31,7 +31,7 @@ export default {}
 <style lang="scss" scoped>
 h1 {
   margin-top: 100px;
-  color: #143673;
+  color: #08366f;
 
   font-family: 'GmarketSansMedium', sans-serif;
 

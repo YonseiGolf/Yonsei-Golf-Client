@@ -67,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 
 h1 {
-  color: #143673;
+  color: #08366f;
   font-family: 'GmarketSansMedium', sans-serif;
 }
 

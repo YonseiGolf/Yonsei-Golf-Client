@@ -47,7 +47,7 @@ export default {
 }
 
 h2 {
-  color: #143673;
+  color: #08366f;
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -61,7 +61,7 @@ h2 {
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .statistic-cards {

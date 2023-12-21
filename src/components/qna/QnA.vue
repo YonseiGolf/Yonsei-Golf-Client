@@ -82,7 +82,7 @@ h1{
   margin-bottom: 50px;
 
   border-radius: 40px;
-  border: 1px solid #143790;
+  border: 1px solid #08366f;
 
   background-color: white;
 
@@ -111,7 +111,7 @@ button {
   }
 
   &.active {
-    background-color: #143790;
+    background-color: #08366f;
     color: white;
   }
 }
@@ -123,9 +123,6 @@ button {
 button-title{
   font-size: 16px;
   font-weight: bold;
-}
-
-template{
   font-family: 'Pretendard-Regular', sans-serif;
 }
 
