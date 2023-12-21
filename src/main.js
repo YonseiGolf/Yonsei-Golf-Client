@@ -6,6 +6,7 @@ import store from './store';
 import './assets/global.css';
 import Vue3Toast from 'vue3-toastify'
 import axios from "axios";
+import './assets/global.css';
 
 async function initializeApp() {
 

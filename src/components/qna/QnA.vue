@@ -7,19 +7,19 @@
     <button
         @click="activeTab='qualifications'"
         :class="{'active': isActive('qualifications')}">
-      지원자격
+      <button-title>지원자격</button-title>
     </button>
 
     <button
         @click="activeTab='interview'"
         :class="{'active': isActive('interview')}">
-      면접
+      <button-title>면접</button-title>
     </button>
 
     <button
         @click="activeTab='activity'"
         :class="{'active': isActive('activity')}">
-      활동
+      <button-title>활동</button-title>
     </button>
   </div>
 
@@ -66,6 +66,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1{
+  font-family: 'GmarketSansMedium', sans-serif;
+}
+
 
 #tab-container {
   display: flex;
@@ -114,6 +118,15 @@ button {
 
 .white-container{
   height: 100px;
+}
+
+button-title{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+template{
+  font-family: 'Pretendard-Regular', sans-serif;
 }
 
 </style>

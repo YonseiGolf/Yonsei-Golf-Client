@@ -4,8 +4,8 @@
   <div class="info-container">
     <h2>연골 동아리 소개</h2>
     <div class="description">
-      연세대학교 골프동아리 연세골프는<br>
-      KPGA, KLPGA 투어프로<br>
+      연세대학교 골프동아리 연세골프는<br><br>
+      KPGA, KLPGA 투어프로<br><br>
       이효린, 염은호, 신의경, 김재희, 서어진 프로와 함께합니다.
     </div>
 
@@ -42,6 +42,8 @@ export default {
 
 .info-container {
   padding: 20px;
+  font-family: 'Pretendard-Regular', sans-serif;
+
 }
 
 h2 {
@@ -50,6 +52,8 @@ h2 {
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+
+  font-family: 'GmarketSansMedium', sans-serif;
 }
 
 .description {
@@ -57,6 +61,7 @@ h2 {
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
+  font-size: 20px;
 }
 
 .statistic-cards {
@@ -79,6 +84,6 @@ h2 {
 
 .data {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 30px;
 }
 </style>
