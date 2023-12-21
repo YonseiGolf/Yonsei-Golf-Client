@@ -32,6 +32,9 @@ export default {}
 h1 {
   margin-top: 100px;
   color: #143673;
+
+  font-family: 'GmarketSansMedium', sans-serif;
+
 }
 
 .container {
@@ -39,6 +42,9 @@ h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 100px;
+
+  font-family: 'Pretendard-Regular', sans-serif;
+
 }
 
 .text-box {
@@ -57,4 +63,5 @@ h1 {
   padding: 1vh;
   padding-left: 4vh;
 }
+
 </style>

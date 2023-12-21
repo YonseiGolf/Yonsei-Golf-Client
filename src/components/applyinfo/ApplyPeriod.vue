@@ -4,28 +4,28 @@
   </h1>
   <div class="container">
     <div class="text-box">
-      서류 접수
-      &nbsp;&nbsp;&nbsp;&nbsp;
+      <apply-title>서류 접수</apply-title>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       {{ applicationDates.startDate }} ~ {{ applicationDates.endDate }}
       <br><br>
 
-      서류 합격 발표
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <apply-title>서류 합격 발표</apply-title>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       {{ applicationDates.firstResultDate }}
       <br><br>
 
-      면접
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <apply-title>면접</apply-title>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       {{ applicationDates.interviewStartDate }} ~ {{ applicationDates.interviewEndDate }}
       <br><br>
 
-      최종 결과 발표
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <apply-title>최종 결과 발표</apply-title>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       {{ applicationDates.finalResultDate }}
       <br><br>
 
-      오리엔테이션
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <apply-title>오리엔테이션</apply-title>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       {{ applicationDates.orientationDate }}
       <br><br>
     </div>
@@ -68,6 +68,7 @@ export default {
 
 h1 {
   color: #143673;
+  font-family: 'GmarketSansMedium', sans-serif;
 }
 
 .container {
@@ -75,6 +76,9 @@ h1 {
   justify-content: center; /* 가로 중앙 정렬 */
   margin-top: 30px;
   margin-bottom: 100px;
+
+  font-family: 'Pretendard-Regular', sans-serif;
+
 }
 
 .text-box {
@@ -86,6 +90,11 @@ h1 {
   height: 95%;
   text-align: center;
   border-radius: 20px;
+  font-size: 16px;
 }
 
+apply-title {
+  font-size: 16px;
+  font-weight: bold;
+}
 </style>

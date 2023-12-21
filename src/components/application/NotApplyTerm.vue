@@ -150,4 +150,10 @@ h1 {
 input {
   outline: none;
 }
+
+h1{
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-weight: bold;
+}
+
 </style>

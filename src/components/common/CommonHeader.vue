@@ -115,6 +115,11 @@ export default {
 
 
 <style>
+
+li{
+  font-size: 16px;
+}
+
 .header-container {
   display: flex;
   align-items: center;

@@ -4,13 +4,13 @@
     <h1>지금 바로 함께 해요</h1>
     <div class="contact-detail">상세 문의사항</div>
     <div v-if="leader" class="contact-info">
-      &nbsp;&nbsp;회장&nbsp;&nbsp;:&nbsp;{{ leader.name }}  {{ leader.phoneNumber }}
+      &nbsp;&nbsp;<leaders>회장</leaders>&nbsp;&nbsp;:&nbsp;{{ leader.name }}  {{ leader.phoneNumber }}
     </div>
     <div v-for="assistant in assistantLeaders" :key="assistant.name" class="contact-info">
-      부회장 :{{ assistant.name }} {{ assistant.phoneNumber }}
+      <leaders>부회장</leaders>&nbsp;&nbsp;:&nbsp;{{ assistant.name }} {{ assistant.phoneNumber }}
     </div>
 
-    <div class="contact-detail">자세히 둘러보기</div>
+    <div class="contact-detail"><br>자세히 둘러보기</div>
     <p>
       INSTAGRAM :
       <a href="https://www.instagram.com/yonsei__golf" target="_blank">@yonsei__golf</a>
@@ -69,22 +69,25 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
+
+  font-family: 'Pretendard-Regular', sans-serif;
 }
 
 h1 {
   font-size: 32px;
   margin-bottom: 30px;
   color: #143673;
-  font-weight: 500;
+  font-weight: bold;
+
+  font-family: 'GmarketSansMedium', sans-serif;
 }
 
 .contact-detail {
   font-size: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
-  font-weight: 400;
+  font-weight: bold;
   color: #4d4d4d;
 }
 
@@ -142,4 +145,13 @@ a{
   }
 }
 
+.contact-main{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+leaders{
+  font-size: 16px;
+  font-weight: bold;
+}
 </style>

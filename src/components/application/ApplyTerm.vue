@@ -48,4 +48,14 @@ button {
   }
 }
 
+h1{
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-weight: bold;
+}
+
+h2{
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-weight: bold;
+}
+
 </style>
