@@ -77,7 +77,7 @@ export default {
 h1 {
   font-size: 32px;
   margin-bottom: 30px;
-  color: #143673;
+  color: #08366f;
   font-weight: bold;
 
   font-family: 'GmarketSansMedium', sans-serif;
@@ -112,9 +112,9 @@ button {
   padding: 10px 20px;
 
   background-color: white;
-  color: #143673;
+  color: #08366f;
 
-  border: 2px solid #094a7a;
+  border: 2px solid #08366f;
   border-radius: 30px;
   cursor: pointer;
 
@@ -138,7 +138,7 @@ button:hover {
 }
 
 a{
-  color: #094a7a; // 원하는 색상 코드로 변경
+  color: #08366f;
   text-decoration: none; // 밑줄 제거
   &:hover {
     text-decoration: underline; // 마우스를 올렸을 때 밑줄 표시

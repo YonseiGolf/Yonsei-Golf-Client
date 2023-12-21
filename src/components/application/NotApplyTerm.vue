@@ -43,7 +43,7 @@ export default {
         if (!this.email.trim()) {
           await Swal.fire({
             title: "이메일을 입력해주세요.",
-            confirmButtonColor: '#0a3d91',
+            confirmButtonColor: '#08366f',
           });
           return;
         }
@@ -57,7 +57,7 @@ export default {
         if (response.status === 200) {
           await Swal.fire({
             title: "알림이 성공적으로 등록되었습니다.",
-            confirmButtonColor: '#0a3d91',
+            confirmButtonColor: '#08366f',
           });
           this.$router.push('/');
         } else {
@@ -67,7 +67,7 @@ export default {
       } catch (error) {
         await Swal.fire({
           title: "알림 등록에 실패하였습니다.",
-          confirmButtonColor: '#0a3d91',
+          confirmButtonColor: '#08366f',
         });
       }
     },
@@ -132,7 +132,7 @@ h1 {
   button {
     padding: 3%;
     font-size: 18px;
-    background-color: #143673;
+    background-color: #08366f;
     color: #fff;
     border: none;
     border-radius: 100px;

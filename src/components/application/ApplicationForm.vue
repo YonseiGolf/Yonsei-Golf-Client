@@ -308,7 +308,7 @@ export default {
               if (response.status === 200) {
                 await Swal.fire({
                   title: `${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`,
-                  confirmButtonColor: '#0a3d91',
+                  confirmButtonColor: '#08366f',
                 });
 
                 this.isLoading = false;
@@ -317,7 +317,7 @@ export default {
             } catch (error) {
               await Swal.fire({
                 title: `${this.applications.email}로 지원서 접수 메일을 전송해드릴 예정입니다. 10분 내로 접수 메일을 받지 못했다면 인스타로 문의 부탁드립니다.`,
-                confirmButtonColor: '#0a3d91',
+                confirmButtonColor: '#08366f',
               });
               this.isLoading = false;
               this.$router.push('/');
@@ -328,7 +328,7 @@ export default {
       } else {
         await Swal.fire({
           title: '지원서 모든 항목을 작성해주세요.',
-          confirmButtonColor: '#0a3d91',
+          confirmButtonColor: '#08366f',
         });
       }
     },
@@ -673,8 +673,8 @@ textarea {
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
-  border: 1px solid #143673;
-  background-color: #143673;
+  border: 1px solid #08366f;
+  background-color: #08366f;
   transition: background-color 0.3s;
 }
 

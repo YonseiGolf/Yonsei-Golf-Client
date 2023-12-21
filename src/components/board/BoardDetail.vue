@@ -435,7 +435,7 @@ textarea {
 
 .post-reply {
   padding: 10px 15px;
-  background-color: #1a5cc8;
+  background-color: #08366f;
   color: white;
   border: none;
   border-radius: 5px;

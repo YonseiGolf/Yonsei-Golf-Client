@@ -125,7 +125,7 @@ li{
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  background-color: #143790;
+  background-color: #08366f;
 }
 
 .logo img {

@@ -35,7 +35,7 @@ export default {}
 button {
   padding: 30px 40px;
   font-size: 30px;
-  background-color: #143673;
+  background-color: #08366f;
   color: #fff;
   border: none;
   border-radius: 100px;

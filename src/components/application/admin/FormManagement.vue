@@ -68,12 +68,12 @@ export default {
         const response = await axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/results`, data);
         await Swal.fire({
           title: response.data.message,
-          confirmButtonColor: '#0a3d91',
+          confirmButtonColor: '#08366f',
         });
       } catch (error) {
         await Swal.fire({
           title: error.response.data.message,
-          confirmButtonColor: '#0a3d91',
+          confirmButtonColor: '#08366f',
         });
       } finally {
         this.isLoading = false;

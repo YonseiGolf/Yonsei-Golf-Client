@@ -89,7 +89,7 @@ export default {
             text: '다시 로그인 해주세요',
             icon: 'success',
             confirmButtonText: '확인',
-            confirmButtonColor: '#0a3d91',
+            confirmButtonColor: '#08366f',
           });
           this.$router.push('/login');
         } else {
@@ -98,7 +98,7 @@ export default {
             text: '다시 시도해주세요',
             icon: 'error',
             confirmButtonText: '확인',
-            confirmButtonColor: '#0a3d91',
+            confirmButtonColor: '#08366f',
           });
           this.$router.push('/');
         }
@@ -109,7 +109,7 @@ export default {
           text: '다시 시도해주세요',
           icon: 'error',
           confirmButtonText: '확인',
-          confirmButtonColor: '#0a3d91',
+          confirmButtonColor: '#08366f',
         });
         this.$router.push('/');
       }
@@ -199,7 +199,7 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #007BFF;
+  background-color: #08366f;
   color: #fff;
   border: none;
   border-radius: 4px;
