@@ -6,7 +6,7 @@
       <p v-if="templateData" class="detail-title"> {{ templateData.title }} </p>
     </div>
     <div v-else>
-      <input @input="validTitle" type="text" v-model="editedTitle" class="edit-title">
+      <textarea @input="validTitle" type="text" v-model="editedTitle" class="edit-title"></textarea>
     </div>
 
 
@@ -255,6 +255,7 @@ span {
 
 textarea {
   width: 100%;
+  height: 500px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -330,6 +331,10 @@ textarea {
 
 button{
   border: none;
+}
+
+.edit-title{
+  height: 20px;
 }
 
 </style>

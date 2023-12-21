@@ -12,7 +12,7 @@
         <option value="FREE">자유게시판</option>
       </select>
       <br>
-      <input @input="validTitle" type="text" v-model="editedTitle" class="edit-title">
+      <textarea @input="validTitle" v-model="editedTitle" class="edit-title"></textarea>
     </div>
 
     <div v-if="boardData" class="board-user"> {{ boardData.writer }}</div>
@@ -425,6 +425,7 @@ span {
 
 textarea {
   width: 100%;
+  height: 300px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -493,4 +494,8 @@ textarea {
   }
 }
 
+
+.edit-title{
+  height: 20px;
+}
 </style>
