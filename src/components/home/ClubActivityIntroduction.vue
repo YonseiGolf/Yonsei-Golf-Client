@@ -96,9 +96,6 @@ export default {
   align-items: center;
   text-align: center;
   margin-bottom: 3%;
-
-  font-family: 'Pretendard-Regular', sans-serif;
-
 }
 
 
@@ -128,6 +125,9 @@ h2 {
   border-radius: 10px;
 
   overflow: hidden;
+
+  font-family: 'Pretendard-Regular', sans-serif;
+
 }
 
 @media (max-width: 1024px) {
@@ -149,6 +149,6 @@ main-title {
 }
 
 main-body {
-  font-size: 20px;
+  font-size: 18px;
 }
 </style>

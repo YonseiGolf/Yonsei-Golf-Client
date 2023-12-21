@@ -67,6 +67,8 @@ export default {}
   margin-bottom: 20px;
   text-align: left;
   background: #f2f2f2;
+
+  font-family: 'Pretendard-Regular', sans-serif;
 }
 
 input[id*="answer"] {

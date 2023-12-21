@@ -123,9 +123,6 @@ button {
 button-title{
   font-size: 16px;
   font-weight: bold;
-}
-
-template{
   font-family: 'Pretendard-Regular', sans-serif;
 }
 

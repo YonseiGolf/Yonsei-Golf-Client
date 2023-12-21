@@ -98,7 +98,7 @@ p {
 }
 
 .contact-info {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: normal;
   color: #4d4d4d;
   margin-bottom: 10px;

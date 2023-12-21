@@ -61,7 +61,7 @@ h2 {
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .statistic-cards {
