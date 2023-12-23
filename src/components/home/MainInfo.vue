@@ -77,5 +77,12 @@ export default {}
 
 }
 
+#yonsei-golf{
+  font-family: 'GmarketSansMedium', sans-serif;
+}
+
+#info{
+  font-family: 'GmarketSansMedium', sans-serif;
+}
 
 </style>
