@@ -57,7 +57,7 @@ export default {}
   position: relative;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 768px) {
 
   #yonsei-golf {
     font-size: 50px;
@@ -68,11 +68,7 @@ export default {}
   }
 
   #info {
-    font-size: 20px;
-    color: white;
-    text-align: left;
-    margin-left: 10%;
-    position: relative;
+    display: none;
   }
 
 }
