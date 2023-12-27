@@ -12,15 +12,15 @@
     <div class="statistic-cards">
       <div class="card">
         <div class="info-title"><br>창립 년도<br><br><br></div>
-        <div class="data">2019년<br><br></div>
+        <div class="data">2019<span id="for-media">년</span><br><br></div>
       </div>
       <div class="card">
         <span><br>누적 회원 <br><br><br></span>
-        <span class="data">130+ 명<br><br></span>
+        <span class="data">130+ <span id="for-media">명</span><br><br></span>
       </div>
       <div class="card">
         <span><br>활동 회원 <br><br><br></span>
-        <span class="data">70+ 명<br><br></span>
+        <span class="data">70+ <span id="for-media">명</span><br><br></span>
       </div>
     </div>
   </div>
@@ -85,5 +85,11 @@ h2 {
 .data {
   font-weight: bold;
   font-size: 30px;
+}
+
+@media (max-width: 768px) {
+  #for-media{
+    display: none;
+  }
 }
 </style>
