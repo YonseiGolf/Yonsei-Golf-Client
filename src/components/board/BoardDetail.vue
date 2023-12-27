@@ -28,7 +28,7 @@
     <hr>
 
     <div v-if="editing" class="edit-form">
-      <textarea @input="validContent" v-model="editedContent" class="edit-content"></textarea>
+      <textarea id="update-textarea" @input="validContent" v-model="editedContent" class="edit-content"></textarea>
       <button class="save-cancle-edit" @click="savePost" :disabled="!isFormValid">저장</button>
       <button class="save-cancle-edit" @click="cancelEdit">취소</button>
     </div>
@@ -425,7 +425,7 @@ span {
 
 textarea {
   width: 100%;
-  height: 300px;
+  //height: 300px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -445,6 +445,10 @@ textarea {
 textarea {
   outline: none;
   resize: none;
+}
+
+#update-textarea{
+  height: 300px;
 }
 
 .edit-delete-post {
