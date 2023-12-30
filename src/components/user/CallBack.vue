@@ -25,8 +25,8 @@ export default {
 
         if (response.status === 200) {
           const token = response.data.data.accessToken;
-          localStorage.removeItem('accessToken')
-          localStorage.setItem('accessToken', token);
+          sessionStorage.removeItem('accessToken')
+          sessionStorage.setItem('accessToken', token);
 
           try {
             const loginResponse = await axios.post(`${process.env.VUE_APP_API_URL}/users/signIn`,{},{
@@ -35,11 +35,11 @@ export default {
               }
             });
 
-            // localStorage에 저장된 access Token을 삭제한다.
-            localStorage.removeItem('accessToken')
+            // sessionStorage 저장된 access Token을 삭제한다.
+            sessionStorage.removeItem('accessToken')
             if (loginResponse.status === 200) {
               const token = loginResponse.data.data.accessToken;
-              localStorage.setItem('accessToken', token);
+              sessionStorage.setItem('accessToken', token);
 
               const parts = token.split('.');
               const payload = parts[1]

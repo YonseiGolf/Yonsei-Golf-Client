@@ -17,10 +17,10 @@ import BoardDetail from "@/components/board/BoardDetail.vue";
 import ApplyAlarm from "@/components/application/admin/ApplyAlarm.vue";
 import AdminPage from "@/components/admin/AdminPage.vue";
 import Swal from "sweetalert2";
-import BoardTemplateHome from "@/components/board/admin/BoardTemplateHome.vue";
-import BoardTemplateDetail from "@/components/board/admin/BoardTemplateDetail.vue";
+import BoardTemplateHome from "@/components/board/admin/boardtemplate/BoardTemplateHome.vue";
+import BoardTemplateDetail from "@/components/board/admin/boardtemplate/BoardTemplateDetail.vue";
 import ApplyPeriodAdmin from "@/components/applyinfo/admin/ApplyPeriodAdmin.vue";
-import PostTemplate from "@/components/board/admin/PostTemplate.vue";
+import PostTemplate from "@/components/board/admin/boardtemplate/PostTemplate.vue";
 
 const routes = [
     {

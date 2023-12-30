@@ -58,6 +58,7 @@ export default {
       categories: [
         {name: 'ALL', displayName: '전체'},
         {name: 'NOTICE', displayName: '공지'},
+        {name: 'EVENT', displayName: '행사'},
         {name: 'FREE', displayName: '자유게시판'},
         // 여기에 추가 카테고리
       ],
@@ -122,6 +123,7 @@ export default {
       const categoryNames = {
         'NOTICE': '공지',
         'FREE': '자유게시판',
+        'EVENT': '행사',
         // 기타 카테고리 코드에 대한 이름도 이곳에 추가할 수 있습니다.
       };
       // categoryCode에 해당하는 이름을 반환하거나, 없다면 코드 그대로 반환

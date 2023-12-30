@@ -20,7 +20,7 @@
     <hr>
 
     <div v-if="editing" class="edit-form">
-      <textarea @input="validContent" v-model="editedContent" class="edit-content"></textarea>
+      <textarea id="update-textarea" @input="validContent" v-model="editedContent" class="edit-content"></textarea>
       <button class="save-cancle-edit" @click="savePost" :disabled="!isFormValid">저장</button>
       <button class="save-cancle-edit" @click="cancelEdit">취소</button>
     </div>
@@ -95,7 +95,7 @@ export default {
         await axios.patch(`${process.env.VUE_APP_API_URL}/admin/boards/templates/${this.templateData.id}`, payload,
             {
               headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
               }
             });
         this.templateData.title = this.editedTitle;
@@ -138,7 +138,7 @@ export default {
       axios.delete(`${process.env.VUE_APP_API_URL}/admin/boards/templates/${this.templateData.id}`,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }})
           .then(() => {
             this.$router.push('/admin/board/template');
@@ -255,7 +255,6 @@ span {
 
 textarea {
   width: 100%;
-  height: 500px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -267,6 +266,10 @@ textarea {
   outline: none;
   resize: none;
 }
+
+//#update-textarea{
+//  height: 500px;
+//}
 
 .edit-delete-post {
   font-size: 15px;

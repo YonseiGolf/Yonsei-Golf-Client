@@ -28,7 +28,7 @@
     <hr>
 
     <div v-if="editing" class="edit-form">
-      <textarea @input="validContent" v-model="editedContent" class="edit-content"></textarea>
+      <textarea id="update-textarea" @input="validContent" v-model="editedContent" class="edit-content"></textarea>
       <button class="save-cancle-edit" @click="savePost" :disabled="!isFormValid">저장</button>
       <button class="save-cancle-edit" @click="cancelEdit">취소</button>
     </div>
@@ -118,7 +118,7 @@ export default {
       axios.post(`${process.env.VUE_APP_API_URL}/boards/${boardId}/replies`, this.newReply,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }
           })
           .then(() => {
@@ -162,7 +162,7 @@ export default {
         await axios.patch(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`, payload,
             {
               headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
               }
             });
         this.boardData.title = this.editedTitle;
@@ -205,7 +205,7 @@ export default {
       axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }})
           .then(() => {
             this.$router.push('/board');
@@ -247,7 +247,7 @@ export default {
       axios.delete(`${process.env.VUE_APP_API_URL}/replies/${replyId}`,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }
           })
           .then(() => {
@@ -425,7 +425,7 @@ span {
 
 textarea {
   width: 100%;
-  height: 300px;
+  //height: 300px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -445,6 +445,10 @@ textarea {
 textarea {
   outline: none;
   resize: none;
+}
+
+#update-textarea{
+  height: 300px;
 }
 
 .edit-delete-post {

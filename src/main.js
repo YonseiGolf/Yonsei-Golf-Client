@@ -16,6 +16,7 @@ async function initializeApp() {
         if (response.status === 200) {
             const token = response.data.data.accessToken;
 
+            sessionStorage.removeItem('accessToken');
             // Session Storage에 Access Token 저장
             sessionStorage.setItem('accessToken', token);
 
