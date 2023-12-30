@@ -95,7 +95,7 @@ export default {
         await axios.patch(`${process.env.VUE_APP_API_URL}/admin/boards/templates/${this.templateData.id}`, payload,
             {
               headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
               }
             });
         this.templateData.title = this.editedTitle;
@@ -138,7 +138,7 @@ export default {
       axios.delete(`${process.env.VUE_APP_API_URL}/admin/boards/templates/${this.templateData.id}`,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }})
           .then(() => {
             this.$router.push('/admin/board/template');

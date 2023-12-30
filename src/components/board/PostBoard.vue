@@ -10,6 +10,7 @@
       <select v-model="selectedCategory" class="select-category">
         <option v-if="isAdmin" value="NOTICE">공지</option>
         <option value="FREE">자유게시판</option>
+        <option value="EVENT">행사</option>
       </select>
 
 
@@ -26,6 +27,13 @@
         </option>
       </select>
     </div>
+<!--    <div class="add-photos">-->
+<!--      <input type="file" @change="uploadPhoto" accept="image/*">-->
+<!--    </div>-->
+
+<!--    <div class="photos-container">-->
+<!--      <img v-for="url in images" :src="url" :key="url" class="uploaded-photo">-->
+<!--    </div>-->
 
   </div>
   <textarea v-model="content" class="board-body-input" placeholder="내용을 입력하세요."></textarea>
@@ -69,20 +77,21 @@ export default {
       title: '',
       content: '',
       templates: [],
-      selectedTemplate: ''
+      selectedTemplate: '',
+      images: { images: [] }, // ImagesRequest 형태로 초기화
     };
   },
   methods: {
     postArticle() {
-      // 여기에 API 요청을 보내는 코드를 작성합니다
       axios.post(`${process.env.VUE_APP_API_URL}/boards`, {
             category: this.selectedCategory,
             title: this.title,
-            content: this.content
+            content: this.content,
+            // images: this.images,
           },
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }
           })
           .then(() => {
@@ -111,7 +120,7 @@ export default {
     fetchTemplates() {
       axios.get(`${process.env.VUE_APP_API_URL}/admin/boards/templates`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
         }
       })
           .then(response => {
@@ -130,6 +139,33 @@ export default {
           })
           .catch(error => {
             console.error('Error fetching template data:', error);
+          });
+    },
+
+    uploadPhoto(event) {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+
+      axios.post(`${process.env.VUE_APP_API_URL}/boards/images`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`,
+        }
+      })
+          .then(response => {
+            if (response.data.status === "success") {
+              this.images.images.push(response.data.data.url); // URL 배열에 추가
+              console.log(response.data.data.url)
+              // console.log(this.images.images.)
+            } else {
+              // 에러 처리
+              Swal.fire('사진 업로드에 실패했습니다.');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            Swal.fire('사진 업로드에 실패했습니다.');
           });
     },
   },
@@ -263,6 +299,12 @@ button {
   border: 1px solid gray;
   border-radius: 10px;
   height: 100%;
+}
+
+.uploaded-photo {
+  max-width: 100%;
+  height: auto;
+  margin: 10px;
 }
 
 </style>

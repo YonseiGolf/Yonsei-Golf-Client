@@ -118,7 +118,7 @@ export default {
       axios.post(`${process.env.VUE_APP_API_URL}/boards/${boardId}/replies`, this.newReply,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }
           })
           .then(() => {
@@ -162,7 +162,7 @@ export default {
         await axios.patch(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`, payload,
             {
               headers: {
-                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
               }
             });
         this.boardData.title = this.editedTitle;
@@ -205,7 +205,7 @@ export default {
       axios.delete(`${process.env.VUE_APP_API_URL}/boards/${this.boardData.id}`,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }})
           .then(() => {
             this.$router.push('/board');
@@ -247,7 +247,7 @@ export default {
       axios.delete(`${process.env.VUE_APP_API_URL}/replies/${replyId}`,
           {
             headers: {
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }
           })
           .then(() => {

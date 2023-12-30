@@ -40,7 +40,7 @@ export default {
           },
           {
             headers:{
-              'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }
           })
           .then(() => {
