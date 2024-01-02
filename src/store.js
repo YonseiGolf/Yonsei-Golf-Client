@@ -58,16 +58,16 @@ const store = createStore({
                 await axios.post(`${process.env.VUE_APP_API_URL}/users/logout`, {},
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                            Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`
                         }
                     });
 
                 // 로그아웃 성공 시 Vuex 상태 초기화
                 commit('SET_LOGOUT');
                 console.log("로그아웃 성공");
-                console.log(localStorage.getItem('accessToken'));
-                localStorage.removeItem('accessToken');
-                console.log(localStorage.getItem('accessToken'));
+                console.log(sessionStorage.getItem('accessToken'));
+                sessionStorage.removeItem('accessToken');
+                console.log(sessionStorage.getItem('accessToken'));
 
                 Swal.fire("로그아웃 되었습니다.");
             } catch (error) {
