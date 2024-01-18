@@ -66,6 +66,7 @@ async function initializeApp() {
 
                     // 헤더 삭제
                     delete axios.defaults.headers.common['Authorization'];
+                    location.reload()
                 }
             }
         }
