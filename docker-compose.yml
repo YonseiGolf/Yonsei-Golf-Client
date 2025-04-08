@@ -5,7 +5,7 @@ services:
     build: .
     container_name: yg-client
     ports:
-      - "8080:8100"
+      - "8100:80"
     networks:
       - yg-client
 
