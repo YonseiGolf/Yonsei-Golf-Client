@@ -21,7 +21,7 @@ export default {}
   padding-top: (1284 / 946) * 10%;
   position: relative;
 
-  background-image: url('https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/main_info_image.c68f1fb3.jpg');
+  background-image: url('https://minio.birdiehyun.store/yg-img-storage/store-image/ob-homecoming.pngxZxQzmnk9l');
 
   background-position: center;
   background-repeat: no-repeat;
