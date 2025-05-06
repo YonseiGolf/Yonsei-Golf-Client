@@ -22,3 +22,10 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+```
+docker build -t yg-client:latest .
+docker tag yg-client:latest birdiehyun/yg-client:latest
+docker push birdiehyun/yg-client:latest
+```
