@@ -5,7 +5,7 @@
     <div class="card-container">
 
       <div class="card grey-card">
-        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/rounding.476519da.jpg" alt="정규 활동"
+        <img src="https://minio.birdiehyun.store/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD" alt="정규 활동"
              class="introduction-image">
       </div>
       <div class="card">
@@ -21,7 +21,7 @@
       </div>
 
       <div class="card grey-card">
-        <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/new-comer.efdadda2.jpg" alt="신입 환영 MT"
+        <img src="https://minio.birdiehyun.store/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD" alt="신입 환영 MT"
              class="introduction-image">
       </div>
       <div class="card">
@@ -38,7 +38,7 @@
 
       <div class="card grey-card">
         <img
-            src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2023-11-16+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+9.58.19.png"
+            src="https://minio.birdiehyun.store/yg-img-storage/store-image/yb-rounding.jpegm2v2OBd1a3"
             alt="단체 라운딩" class="introduction-image">
       </div>
       <div class="card">
@@ -55,7 +55,7 @@
 
       <div class="card grey-card">
         <img
-            src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA+2023-11-16+%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE+9.57.21.png"
+            src="https://minio.birdiehyun.store/yg-img-storage/store-image/ob-rounding.jpegfy6Y06Pp3R"
             alt="OB 엠티" class="introduction-image">
       </div>
       <div class="card">
