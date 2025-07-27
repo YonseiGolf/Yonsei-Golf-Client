@@ -14,9 +14,6 @@
           <router-link to="/admin">어드민</router-link>
         </li>
         <li>
-          <router-link to="/test">test form</router-link>
-        </li>
-        <li>
           <router-link to="/recruit">모집안내</router-link>
         </li>
         <li>
