@@ -3,6 +3,7 @@
     <user-table :applications="YBUsers.content" title="YB" :totalCount="YBUsers.totalElements"></user-table>
     <user-table :applications="OBUsers.content" title="OB" :totalCount="OBUsers.totalElements"></user-table>
     <user-table :applications="NoneUsers.content" title="회원 대기" :totalCount="NoneUsers.totalElements"></user-table>
+    <user-table :applications="BlackListUsers.content" title="블랙리스트" :totalCount="BlackListUsers.totalElements"></user-table>
   </div>
 </template>
 
@@ -20,6 +21,7 @@ export default {
       YBUsers: { content: [], totalElements: 0 },
       OBUsers: { content: [], totalElements: 0 },
       NoneUsers: { content: [], totalElements: 0 },
+      BlackListUsers: { content: [], totalElements: 0 },
     };
   },
 
@@ -34,6 +36,9 @@ export default {
       const NoneUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=NONE`);
       this.NoneUsers = NoneUsersResponse.data.data;
 
+      const BlackListUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=BLACK_LIST`);
+      this.BlackListUsers = BlackListUsersResponse.data.data;
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -45,6 +50,7 @@ export default {
 .users-tables {
   margin: 0 auto;
   display: grid;
+  gap: 30px;
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: 1vh;
   width: 80%;
