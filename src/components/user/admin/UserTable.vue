@@ -35,6 +35,7 @@
             <option value="YB">YB</option>
             <option value="OB">OB</option>
             <option value="NONE">NONE</option>
+            <option value="BLACK_LIST">BLACK_LIST</option>
           </select>
         </td>
 
