@@ -8,7 +8,7 @@
 
   <div class="default_info">
     <div class="section-title">지원자 정보</div>
-    
+
     <div class="photo-upload-section">
       <div class="photo-container">
         <div class="file-upload-container">
@@ -177,6 +177,7 @@ export default {
                     golfMemory: this.applications.golfMemory,
                     otherClub: this.applications.otherClub,
                     swingVideo: this.applications.swingVideo,
+                    semester: 1
                   });
 
               // 응답 처리
@@ -237,7 +238,6 @@ export default {
       this.applications.selectedFile = null;
     },
 
-
     handleNameInput() {
       if (this.applications.name.length > 10) {
         this.applications.name = this.applications.name.substring(0, 10);
@@ -271,10 +271,10 @@ export default {
     handlePhoneNumberInput() {
       // 숫자만 추출
       const numbers = this.applications.phoneNumber.replace(/[^0-9]/g, '');
-      
+
       // 11자리로 제한
       const limitedNumbers = numbers.substring(0, 11);
-      
+
       // 하이픈 추가
       let formattedNumber = '';
       if (limitedNumbers.length <= 3) {
@@ -284,7 +284,7 @@ export default {
       } else {
         formattedNumber = limitedNumbers.substring(0, 3) + '-' + limitedNumbers.substring(3, 7) + '-' + limitedNumbers.substring(7);
       }
-      
+
       this.applications.phoneNumber = formattedNumber;
     },
 
@@ -865,16 +865,16 @@ button:hover {
   .email-confirm-btn {
     align-self: flex-start;
   }
-  
+
   .photo-container {
     padding: 15px;
   }
-  
+
   .apply-photo {
     max-width: 120px;
     max-height: 120px;
   }
-  
+
   .photo-delete-btn {
     width: 20px;
     height: 20px;
@@ -882,20 +882,20 @@ button:hover {
     top: -6px;
     right: -6px;
   }
-  
+
   .upload-placeholder {
     min-height: 100px;
     padding: 15px;
   }
-  
+
   .upload-icon {
     font-size: 28px;
   }
-  
+
   .upload-text {
     font-size: 13px;
   }
-  
+
   .upload-hint {
     font-size: 11px;
   }

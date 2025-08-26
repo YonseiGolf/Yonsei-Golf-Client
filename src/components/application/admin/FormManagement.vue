@@ -1,21 +1,36 @@
 <template>
-  <div class="application-tables">
-    <ApplicationTable :applications="documentReceived.content" title="지원 접수"
-                      :total-count="documentReceived.totalElements"/>
-    <ApplicationTable :applications="documentPassed.content" title="1차 합격" :total-count="documentPassed.totalElements"
-                      passFail="합격" :sendEmail="sendDocumentPassEmail"/>
-    <ApplicationTable :applications="finalPassed.content" title="최종 합격" :total-count="finalPassed.totalElements"
-                      passFail="합격" :sendEmail="sendFinalPassEmail"/>
-    <ApplicationTable :applications="documentFailed.content" title="서류 탈락" :total-count="documentFailed.totalElements"
-                      passFail="불합격" :sendEmail="sendDocumentFailEmail"/>
-    <ApplicationTable :applications="finalFailed.content" title="최종 탈락" :total-count="finalFailed.totalElements"
-                      passFail="합격" :sendEmail="sendFinalFailEmail"/>
-  </div>
+  <div>
+    <!-- 헤더 부분에 기수 필터 추가 -->
+    <div class="header-section">
+      <h2>지원서 관리</h2>
+      <div class="filter-section">
+        <label for="semester-select">지원 기수:</label>
+        <select id="semester-select" v-model="selectedSemester" @change="fetchApplicationsByFilter">
+<!--          <option value="">전체</option>-->
+          <option v-for="semester in availableSemesters" :key="semester" :value="semester">
+            {{ semester }}기
+          </option>
+        </select>
+      </div>
+    </div>
 
-  <div v-if="isLoading" class="loading-container">
-    <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="Loading">
-  </div>
+    <div class="application-tables">
+      <ApplicationTable :applications="documentReceived.content" title="지원 접수"
+                        :total-count="documentReceived.totalElements"/>
+      <ApplicationTable :applications="documentPassed.content" title="1차 합격" :total-count="documentPassed.totalElements"
+                        passFail="합격" :sendEmail="sendDocumentPassEmail"/>
+      <ApplicationTable :applications="finalPassed.content" title="최종 합격" :total-count="finalPassed.totalElements"
+                        passFail="합격" :sendEmail="sendFinalPassEmail"/>
+      <ApplicationTable :applications="documentFailed.content" title="서류 탈락" :total-count="documentFailed.totalElements"
+                        passFail="불합격" :sendEmail="sendDocumentFailEmail"/>
+      <ApplicationTable :applications="finalFailed.content" title="최종 탈락" :total-count="finalFailed.totalElements"
+                        passFail="합격" :sendEmail="sendFinalFailEmail"/>
+    </div>
 
+    <div v-if="isLoading" class="loading-container">
+      <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="Loading">
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,37 +50,58 @@ export default {
       finalPassed: {content: [], totalElements: 0, passFail: "true"},
       documentFailed: {content: [], totalElements: 0, passFail: "false"},
       finalFailed: {content: [], totalElements: 0, passFail: "false"},
-      isLoading: false
+      isLoading: false,
+      selectedSemester: '', // 선택된 기수
+      availableSemesters: [] // 사용 가능한 기수 목록
     }
   },
 
   async mounted() {
-    try {
-      const documentReceivedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms`);
-      this.documentReceived = documentReceivedResponse.data.data;
-
-      const documentPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true`);
-      this.documentPassed = documentPassedResponse.data.data;
-
-      const finalPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true&finalPass=true`);
-      this.finalPassed = finalPassedResponse.data.data;
-
-      const documentFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=false`);
-      this.documentFailed = documentFailedResponse.data.data;
-
-      const finalFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=false&documentPass=true`);
-      this.finalFailed = finalFailedResponse.data.data;
-
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    await this.fetchAvailableSemesters();
+    await this.fetchApplicationsByFilter();
   },
 
   methods: {
+    // 사용 가능한 기수 목록을 가져오는 메서드
+    fetchAvailableSemesters() {
+      this.availableSemesters = [1, 2]
+    },
+
+    // 필터에 따라 지원서 목록을 가져오는 메서드
+    async fetchApplicationsByFilter() {
+      try {
+        const semesterParam = this.selectedSemester ? `&semester=${this.selectedSemester}` : '';
+
+        const documentReceivedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?${semesterParam}`);
+        this.documentReceived = documentReceivedResponse.data.data;
+
+        const documentPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true${semesterParam}`);
+        this.documentPassed = documentPassedResponse.data.data;
+
+        const finalPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true&finalPass=true${semesterParam}`);
+        this.finalPassed = finalPassedResponse.data.data;
+
+        const documentFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=false${semesterParam}`);
+        this.documentFailed = documentFailedResponse.data.data;
+
+        const finalFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=false&documentPass=true${semesterParam}`);
+        this.finalFailed = finalFailedResponse.data.data;
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
+
     async sendEmail(data) {
       this.isLoading = true;
       try {
-        const response = await axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/results`, data);
+        // 선택된 기수 정보도 함께 전송
+        const emailData = {
+          ...data,
+          semester: this.selectedSemester || null
+        };
+
+        const response = await axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/results`, emailData);
         await Swal.fire({
           title: response.data.message,
           confirmButtonColor: '#08366f',
@@ -111,11 +147,56 @@ export default {
 }
 </script>
 
-
 <style lang="scss" scoped>
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+
+  h2 {
+    margin: 0;
+    color: #333;
+  }
+
+  .filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    select {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+        border-color: #08366f;
+        box-shadow: 0 0 0 2px rgba(8, 54, 111, 0.1);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}
+
 .application-tables {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   margin-bottom: 1vh;
 
   & > * {
@@ -129,24 +210,21 @@ export default {
   }
 }
 
-
 .loading-container {
-  position: fixed; /* 화면에 고정 */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* 화면 전체 너비 */
-  height: 100%; /* 화면 전체 높이 */
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 배경 */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* 다른 요소들 위에 표시 */
+  z-index: 1000;
 }
 
 .loading-image {
-  width: 100px; /* 로딩 이미지 크기 조절 */
+  width: 100px;
   height: 100px;
 }
-
-
 </style>

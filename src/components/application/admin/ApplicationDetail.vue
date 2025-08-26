@@ -1,217 +1,140 @@
 <template>
-  <table class="profile-info">
-    <tbody>
-    <tr>
-      <td rowspan="2">
-        사진
-      </td>
-      <td rowspan="2">
-        <img :src="applications.photo" alt="Applicant's Photo"/>
-      </td>
-      <td>
-        이름
-      </td>
-      <td>
-        {{ applications.name }}
-      </td>
-    </tr>
+  <div class="section-spacer"></div>
+  <div class="form-header">
+    <h1>연세 골프 지원서</h1>
+  </div>
 
-    <tr>
-      <td>나이</td>
-      <td>
-        {{ applications.age }}
-      </td>
-    </tr>
+  <div class="default_info">
+    <div class="section-title">지원자 정보</div>
 
-    <tr>
-      <td>
-        학번
-      </td>
-      <td>
-        {{ applications.studentId }}
-      </td>
-      <td>
-        전공
-      </td>
-      <td>
-        {{ applications.major }}
-      </td>
-    </tr>
+    <div class="photo-upload-section">
+      <div class="photo-container">
+        <div class="photo-display">
+          <img class="apply-photo" :src="applications.photo" alt="지원자 사진"/>
+        </div>
+      </div>
+    </div>
 
-    <tr>
-      <td>
-        전화번호
-      </td>
-      <td>
-        {{ applications.phoneNumber }}
-      </td>
+    <div class="info-field">
+      <label>이름</label>
+      <div class="field-value">{{ applications.name }}</div>
+    </div>
 
-      <td>
-        이메일
-      </td>
-      <td>
-        {{ applications.email }}
-      </td>
-    </tr>
+    <div class="info-field">
+      <label>이메일</label>
+      <div class="field-value">{{ applications.email }}</div>
+    </div>
 
-    <tr>
-      <td>
-        구력
-      </td>
-      <td>
-        <div>{{ applications.golfDuration }} 년</div>
-      </td>
+    <div class="info-field">
+      <label>전화번호</label>
+      <div class="field-value">{{ applications.phoneNumber }}</div>
+    </div>
 
-      <td>
-        라운딩 횟수
-      </td>
-      <td>
-        <div> {{ applications.roundCount }} 회</div>
-      </td>
-    </tr>
+    <div class="info-field">
+      <label>학번</label>
+      <div class="field-value">{{ applications.studentId }}</div>
+    </div>
 
-    <tr>
-      <td>
-        레슨 여부
-      </td>
-      <td>
-        <div>{{ applications.lessonStatus ? '레슨중' : '레슨x' }}</div>
-      </td>
-      <td>
-        본인 클럽 소유 여부
-      </td>
-      <td>
-        <div>{{ applications.clubStatus ? '보유' : '미보유' }}</div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="info-field">
+      <label>전공</label>
+      <div class="field-value">{{ applications.major }}</div>
+    </div>
 
-  <table class="application-body">
-    <thead>
-    <tr>
-      <th>
-        1. 간략하게 자기소개 부탁드립니다. (군대 계획이나 교환학생 계획이 있다면 적어주세요)
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td v-html="formatContent(applications.selfIntroduction)">
-      </td>
-    </tr>
-    </tbody>
+    <div class="info-field">
+      <label>생년월일</label>
+      <div class="field-value">{{ applications.birthDate }}</div>
+    </div>
 
-    <thead>
-    <tr>
-      <th>
-        2. 연세 골프에 지원하게 된 동기를 작성해주세요
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td v-html="formatContent(applications.applyReason)">
-      </td>
-    </tr>
-    </tbody>
+<!--    <div class="info-field">-->
+<!--      <label>구력</label>-->
+<!--      <div class="field-value">{{ applications.golfDuration }} 년</div>-->
+<!--    </div>-->
 
-    <thead>
-    <tr>
-      <th>
-        3. 현재 본인의 골프 실력을 객관적으로 평가해주세요.
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td v-html="formatContent(applications.skillEvaluation)">
-      </td>
-    </tr>
-    </tbody>
+<!--    <div class="info-field">-->
+<!--      <label>라운딩 횟수</label>-->
+<!--      <div class="field-value">{{ applications.roundCount }} 회</div>-->
+<!--    </div>-->
 
-    <thead>
-    <tr>
-      <th>
-        4. 골프와 관련된 추억이 있으시다면 말씀해주세요
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td v-html="formatContent(applications.golfMemory)">
-      </td>
-    </tr>
-    </tbody>
+<!--    <div class="info-field">-->
+<!--      <label>레슨 여부</label>-->
+<!--      <div class="field-value">{{ applications.lessonStatus ? '레슨중' : '레슨x' }}</div>-->
+<!--    </div>-->
 
-    <thead>
-    <tr>
-      <th>
-        5. 현재 활동하는 다른 동아리나 학회가 있다면 적어주세요
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td v-html="formatContent(applications.otherClub)">
-      </td>
-    </tr>
-    </tbody>
+<!--    <div class="info-field">-->
+<!--      <label>본인 클럽 소유 여부</label>-->
+<!--      <div class="field-value">{{ applications.clubStatus ? '보유' : '미보유' }}</div>-->
+<!--    </div>-->
 
-    <thead>
-    <tr>
-      <th>
-        6. 본인의 스윙 영상이 담긴 url을 적어주세요 (유튜브, 인스타 등)
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>
-        <a :href="applications.swingVideo" target="_blank">스윙 영상 보기</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="section-spacer"></div>
 
-  <table class="application-footer">
-    <tbody>
-    <tr>
-      <td>
-        지원 시간
-      </td>
-      <td>
-        {{ applications.submitTime }}
-      </td>
+    <div class="info-field">
+      <label>간략하게 자기소개 부탁드립니다. (군대 계획이나 교환학생 계획이 있다면 적어주세요)</label>
+      <div class="field-value textarea-value" v-html="formatContent(applications.selfIntroduction)"></div>
+    </div>
 
-      <td>
-        면접 시간
-      </td>
-      <td>
-        {{ applications.interviewTime }} &nbsp;
-        <button @click="showInterviewModal = true">면접 시간 변경</button>
+    <div class="info-field">
+      <label>연세 골프에 지원하게 된 동기를 작성해주세요</label>
+      <div class="field-value textarea-value" v-html="formatContent(applications.applyReason)"></div>
+    </div>
 
-        <InterviewModal v-if="showInterviewModal" @close="showInterviewModal = false" @save="updateInterviewTime"/>
-      </td>
-    </tr>
+    <div class="info-field">
+      <label>현재 본인의 골프 실력을 객관적으로 평가해주세요.</label>
+      <div class="field-value textarea-value" v-html="formatContent(applications.skillEvaluation)"></div>
+    </div>
 
-    <tr>
-      <td>
-        합격 여부
-      </td>
-      <td>
-        <select v-model="applications.selection" @change="updateApplicationStatus">
-          <option value="documentPass">서류 합격</option>
-          <option value="finalPass">최종 합격</option>
-          <option value="documentFail">서류 탈락</option>
-          <option value="finalFail">최종 탈락</option>
-          <option value="pending">보류</option>
-        </select>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="info-field">
+      <label>골프와 관련된 추억이 있으시다면 말씀해주세요</label>
+      <div class="field-value textarea-value" v-html="formatContent(applications.golfMemory)"></div>
+    </div>
 
+    <div class="info-field">
+      <label>현재 활동하는 다른 동아리나 학회가 있다면 적어주세요</label>
+      <div class="field-value textarea-value" v-html="formatContent(applications.otherClub)"></div>
+    </div>
+
+    <div class="info-field">
+      <label>본인의 스윙 영상이 담긴 url을 적어주세요 (유튜브, 인스타 등)</label>
+      <div class="field-value">
+        <a :href="applications.swingVideo" target="_blank" class="video-link">스윙 영상 보기</a>
+      </div>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- 관리자 기능 -->
+    <div class="admin-section">
+      <div class="section-title">관리자 기능</div>
+
+      <div class="info-field">
+        <label>지원 시간</label>
+        <div class="field-value">{{ applications.submitTime }}</div>
+      </div>
+
+      <div class="info-field">
+        <label>면접 시간</label>
+        <div class="admin-field-container">
+          <div class="field-value">{{ applications.interviewTime }}</div>
+          <button class="admin-button" @click="showInterviewModal = true">면접 시간 변경</button>
+        </div>
+      </div>
+
+      <div class="info-field">
+        <label>합격 여부</label>
+        <div class="admin-field-container">
+          <select class="status-select" v-model="applications.selection" @change="updateApplicationStatus">
+            <option value="documentPass">서류 합격</option>
+            <option value="finalPass">최종 합격</option>
+            <option value="documentFail">서류 탈락</option>
+            <option value="finalFail">최종 탈락</option>
+            <option value="pending">보류</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모달 -->
+  <InterviewModal v-if="showInterviewModal" @close="showInterviewModal = false" @save="updateInterviewTime"/>
 </template>
 
 <script>
@@ -253,7 +176,6 @@ export default {
             confirmButtonColor: '#08366f',
           });
 
-
           closeModal();
           location.reload();
         } else {
@@ -288,38 +210,35 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     axios.get(`${process.env.VUE_APP_API_URL}/admin/forms/${to.params.id}`)
-        .then(response => {
-          const data = response.data.data;
-          let selection = null;
+    .then(response => {
+      const data = response.data.data;
+      let selection = null;
 
-          if (data.documentPass === true && data.finalPass === true) {
-            selection = 'finalPass';
-          } else if (data.documentPass === true && data.finalPass === false) {
-            selection = 'finalFail';
-          } else if (data.documentPass === false) {
-            selection = 'documentFail';
-          } else if (data.documentPass === true && data.finalPass === null) {
-            selection = 'documentPass';
-          } else if (data.documentPass === null && data.finalPass === null) {
-            selection = 'pending';
-          }
+      if (data.documentPass === true && data.finalPass === true) {
+        selection = 'finalPass';
+      } else if (data.documentPass === true && data.finalPass === false) {
+        selection = 'finalFail';
+      } else if (data.documentPass === false) {
+        selection = 'documentFail';
+      } else if (data.documentPass === true && data.finalPass === null) {
+        selection = 'documentPass';
+      } else if (data.documentPass === null && data.finalPass === null) {
+        selection = 'pending';
+      }
 
-          next(vm => {
-            vm.applications = data;
-            vm.applications.selection = selection;
-          });
-        })
-        .catch(error => {
-          console.error("Error fetching data:", error);
-          next(false);
-        });
-
+      next(vm => {
+        vm.applications = data;
+        vm.applications.selection = selection;
+      });
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+      next(false);
+    });
   },
 
   methods: {
-
     async updateApplicationStatus() {
-      // 선택에 따라 documentPass와 finalPass 값을 설정
       let payload = {};
       switch (this.applications.selection) {
         case "documentPass":
@@ -339,10 +258,8 @@ export default {
           break;
       }
 
-      // API 요청 보내기
       try {
         await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/pass`, payload);
-        // 추가적인 로직 (예: 응답 처리, 라우팅, 상태 업데이트 등)
         await Swal.fire({
           title: "합격 여부 변경 완료",
           confirmButtonColor: '#08366f',
@@ -353,58 +270,219 @@ export default {
     },
 
     formatContent(content) {
-      // 줄바꿈 문자를 <br> 태그로 변환
       if (!content) {
         return '';
       }
       return content.replace(/\n/g, '<br>');
     }
-
   },
-
 };
-
 </script>
 
 <style lang="scss" scoped>
-img {
-  max-width: 100px;
+/* 폼 헤더 스타일 */
+.form-header {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-.profile-info {
-  margin-top: 30px;
+.form-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
 }
 
-.profile-info, .application-body, .application-footer {
-  width: 50%;
-  border-collapse: collapse;
+.notice-text {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.4;
 }
 
-table {
-  margin: 0 auto;
-  font-size: 12px;
-  max-width: 70%;
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
 }
 
-table th, table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+.section-spacer {
+  height: 30px;
+  margin: 20px 0;
+}
+
+/* 기본 정보 섹션 스타일 */
+.default_info {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.info-field {
+  margin-bottom: 25px;
+}
+
+.info-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.field-value {
+  padding: 12px 0;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 1px solid #eee;
+  line-height: 1.5;
+}
+
+.textarea-value {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: none;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+/* 사진 업로드 섹션 스타일 */
+.photo-upload-section {
+  margin-bottom: 25px;
   text-align: center;
 }
 
-table th {
-  background-color: gray;
-  color: #fff;
+.photo-container {
+  display: inline-block;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-.application-footer {
-  margin-bottom: 30px;
+.photo-display {
+  display: inline-block;
 }
 
-@media (max-width: 1300px) {
-  .profile-info, .application-body, .application-footer {
-    max-width: 90%;
-    width: 90%;
+.apply-photo {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 관리자 섹션 스타일 */
+.admin-section {
+  border-top: 2px solid #08366f;
+  padding-top: 30px;
+  margin-top: 40px;
+}
+
+.admin-field-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.admin-button {
+  padding: 8px 16px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-button:hover {
+  background-color: #1a5cc8;
+}
+
+.status-select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #08366f;
+  box-shadow: 0 0 0 2px rgba(8, 54, 111, 0.1);
+}
+
+/* 비디오 링크 스타일 */
+.video-link {
+  color: #08366f;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.video-link:hover {
+  color: #1a5cc8;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .form-header,
+  .default_info {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  .form-header h1 {
+    font-size: 20px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .notice-text {
+    font-size: 12px;
+  }
+
+  .info-field {
+    margin-bottom: 20px;
+  }
+
+  .info-field label {
+    font-size: 13px;
+  }
+
+  .field-value {
+    font-size: 13px;
+  }
+
+  .photo-container {
+    padding: 15px;
+  }
+
+  .apply-photo {
+    max-width: 120px;
+    max-height: 120px;
+  }
+
+  .admin-field-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .admin-button {
+    align-self: flex-start;
   }
 }
 </style>
