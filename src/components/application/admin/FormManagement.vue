@@ -51,7 +51,7 @@ export default {
       documentFailed: {content: [], totalElements: 0, passFail: "false"},
       finalFailed: {content: [], totalElements: 0, passFail: "false"},
       isLoading: false,
-      selectedSemester: '', // 선택된 기수
+      selectedSemester: 1, // 선택된 기수
       availableSemesters: [] // 사용 가능한 기수 목록
     }
   },
@@ -64,7 +64,7 @@ export default {
   methods: {
     // 사용 가능한 기수 목록을 가져오는 메서드
     fetchAvailableSemesters() {
-      this.availableSemesters = [1, 2]
+      this.availableSemesters = [1]
     },
 
     // 필터에 따라 지원서 목록을 가져오는 메서드
