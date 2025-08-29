@@ -25,8 +25,8 @@ export default {
   data() {
     return {
       email: '',
-
       emailInvalid: false,
+      semester: '0', // 현재 semester 기본값 0으로 설정
     }
   },
 
@@ -50,7 +50,8 @@ export default {
 
         const response =
             await axios.post(`${process.env.VUE_APP_API_URL}/application/emailAlarm`, {
-              email: this.email
+              email: this.email,
+              semester: this.semester
             });
 
         // 응답 처리
