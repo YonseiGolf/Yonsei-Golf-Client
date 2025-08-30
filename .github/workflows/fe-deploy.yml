@@ -2,7 +2,7 @@ name: Yonsei-Golf FE DEV CI
 
 on:
   push:
-    branches: [ "feature/CI-CD" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
