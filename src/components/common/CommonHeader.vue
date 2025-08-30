@@ -45,9 +45,6 @@
             <router-link to="/admin">어드민</router-link>
           </li>
           <li>
-            <router-link to="/board" @click="closeHamburger">게시판</router-link>
-          </li>
-          <li>
             <router-link to="/recruit" @click="closeHamburger">모집안내</router-link>
           </li>
           <li>
