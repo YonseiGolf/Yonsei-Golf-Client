@@ -80,8 +80,48 @@
 
      <div class="info-field">
        <label>현재 활동하는 다른 동아리나 학회가 있다면 적어주세요</label>
-       <textarea ref="otherClubTextarea" placeholder="최대 500자까지 작성 가능합니다." v-model="applications.otherClub" rows="6" @input="handleOtherClubInput"></textarea>
-       <div class="error-message" v-if="otherClubInvalid"> 최대 500자까지 작성 가능합니다.</div>
+       
+       <!-- 활동 추가 폼 -->
+       <div class="activity-form">
+         <div class="activity-input-row">
+           <input type="text" placeholder="동아리/학회명" v-model="newActivity.clubName" class="activity-input">
+           <input type="date" v-model="newActivity.startDate" class="activity-input">
+           <input type="date" v-model="newActivity.endDate" class="activity-input">
+           <input type="text" placeholder="역할" v-model="newActivity.role" class="activity-input">
+           <button type="button" @click="addActivity" class="add-activity-btn">추가</button>
+         </div>
+       </div>
+
+       <!-- 활동 목록 -->
+       <div class="activities-container">
+         <div v-if="applications.activities && applications.activities.length > 0" class="activities-table">
+           <table>
+             <thead>
+               <tr>
+                 <th>동아리/학회명</th>
+                 <th>시작일</th>
+                 <th>종료일</th>
+                 <th>역할</th>
+                 <th>삭제</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr v-for="(activity, index) in applications.activities" :key="index">
+                 <td>{{ activity.clubName }}</td>
+                 <td>{{ formatDate(activity.startDate) }}</td>
+                 <td>{{ formatDate(activity.endDate) }}</td>
+                 <td>{{ activity.role }}</td>
+                 <td>
+                   <button type="button" @click="removeActivity(index)" class="remove-activity-btn">×</button>
+                 </td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+         <div v-else class="no-activities">
+           <p>등록된 활동이 없습니다.</p>
+         </div>
+       </div>
      </div>
 
      <div class="info-field">
@@ -127,7 +167,7 @@ export default {
         applyReason: '',
         skillEvaluation: '',
         golfMemory: '',
-        otherClub: '',
+        activities: [],
         swingVideo: '',
         selectedFile: null,
       },
@@ -135,9 +175,14 @@ export default {
       applyReasonInvalid: false,
       golfSkillInvalid: false,
       golfMemoryInvalid: false,
-      otherClubInvalid: false,
       golfSwingInvalid: false,
       isLoading: false,
+      newActivity: {
+        clubName: '',
+        startDate: '',
+        endDate: '',
+        role: ''
+      },
     }
   },
 
@@ -175,7 +220,7 @@ export default {
                     applyReason: this.applications.applyReason,
                     skillEvaluation: this.applications.skillEvaluation,
                     golfMemory: this.applications.golfMemory,
-                    otherClub: this.applications.otherClub,
+                    activityClubs: this.applications.activities,
                     swingVideo: this.applications.swingVideo,
                     semester: 1
                   });
@@ -358,21 +403,7 @@ export default {
       });
     },
 
-    handleOtherClubInput() {
-      if (this.applications.otherClub.length > 500) {
-        this.applications.otherClub = this.applications.otherClub.substring(0, 500);
-      }
-      this.otherClubInvalid = this.applications.otherClub.length >= 500;
 
-      // textarea 높이 자동 조절
-      this.$nextTick(() => {
-        if (this.$refs.otherClubTextarea) {
-          const textarea = this.$refs.otherClubTextarea;
-          textarea.style.height = 'auto';
-          textarea.style.height = textarea.scrollHeight + 'px';
-        }
-      });
-    },
 
     handleSwingVideoInput() {
       if (this.applications.swingVideo.length > 500) {
@@ -388,6 +419,60 @@ export default {
           textarea.style.height = textarea.scrollHeight + 'px';
         }
       });
+    },
+
+    formatDate(dateString) {
+      if (!dateString) return '-';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+    },
+
+    addActivity() {
+      if (!this.newActivity.clubName || !this.newActivity.startDate || !this.newActivity.endDate || !this.newActivity.role) {
+        Swal.fire({
+          title: '모든 필드를 입력해주세요.',
+          confirmButtonColor: '#08366f',
+        });
+        return;
+      }
+
+      // 종료일이 시작일보다 이전인지 확인
+      if (new Date(this.newActivity.endDate) < new Date(this.newActivity.startDate)) {
+        Swal.fire({
+          title: '종료일은 시작일보다 이후여야 합니다.',
+          confirmButtonColor: '#08366f',
+        });
+        return;
+      }
+
+      // activities 배열이 없으면 초기화
+      if (!this.applications.activities) {
+        this.applications.activities = [];
+      }
+
+      // 새 활동 추가
+      this.applications.activities.push({
+        clubName: this.newActivity.clubName,
+        startDate: this.newActivity.startDate,
+        endDate: this.newActivity.endDate,
+        role: this.newActivity.role
+      });
+
+      // 입력 필드 초기화
+      this.newActivity = {
+        clubName: '',
+        startDate: '',
+        endDate: '',
+        role: ''
+      };
+    },
+
+    removeActivity(index) {
+      this.applications.activities.splice(index, 1);
     },
   }
   ,
@@ -503,16 +588,7 @@ export default {
     }
     ,
 
-    applicationOtherClub: {
-      get() {
-        return this.applications.otherClub;
-      }
-      ,
-      set(val) {
-        this.applications.otherClub = val;
-      }
-    }
-    ,
+
 
     applicationSwingVideo: {
       get() {
@@ -537,7 +613,6 @@ export default {
           this.applications.applyReason.trim().length > 0 &&
           this.applications.skillEvaluation.trim().length > 0 &&
           this.applications.golfMemory.trim().length > 0 &&
-          this.applications.otherClub.trim().length > 0 &&
           this.applications.swingVideo.trim().length > 0;
     }
   }
@@ -991,6 +1066,163 @@ button:hover {
 .info-field textarea::placeholder {
   color: #999;
   font-size: 14px;
+}
+
+/* 활동 추가 폼 스타일 */
+.activity-form {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.activity-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.activity-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  background: white;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.activity-input:focus {
+  border-color: #08366f;
+}
+
+.add-activity-btn {
+  padding: 8px 16px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.add-activity-btn:hover {
+  background-color: #1a5cc8;
+}
+
+/* 활동 테이블 스타일 */
+.activities-container {
+  margin-top: 10px;
+}
+
+.activities-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.activities-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activities-table th {
+  background-color: #08366f;
+  color: white;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.activities-table td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.activities-table tr:last-child td {
+  border-bottom: none;
+}
+
+.activities-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.no-activities {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.remove-activity-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.remove-activity-btn:hover {
+  background-color: #cc0000;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .activity-input-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .activity-input {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .add-activity-btn {
+    align-self: flex-start;
+  }
+  
+  .activities-table {
+    font-size: 12px;
+  }
+  
+  .activities-table th,
+  .activities-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  
+  .activities-table th {
+    font-size: 11px;
+  }
+  
+  .remove-activity-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
 }
 
 </style>

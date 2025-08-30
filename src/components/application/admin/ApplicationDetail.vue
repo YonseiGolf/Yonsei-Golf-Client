@@ -89,7 +89,31 @@
 
     <div class="info-field">
       <label>현재 활동하는 다른 동아리나 학회가 있다면 적어주세요</label>
-      <div class="field-value textarea-value" v-html="formatContent(applications.otherClub)"></div>
+      <div class="activities-container">
+        <div v-if="applications.activities && applications.activities.length > 0" class="activities-table">
+          <table>
+            <thead>
+              <tr>
+                <th>동아리/학회명</th>
+                <th>시작일</th>
+                <th>종료일</th>
+                <th>역할</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(activity, index) in applications.activities" :key="index">
+                <td>{{ activity.clubName }}</td>
+                <td>{{ formatDate(activity.startDate) }}</td>
+                <td>{{ formatDate(activity.endDate) }}</td>
+                <td>{{ activity.role }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div v-else class="no-activities">
+          <p>등록된 활동이 없습니다.</p>
+        </div>
+      </div>
     </div>
 
     <div class="info-field">
@@ -274,6 +298,16 @@ export default {
         return '';
       }
       return content.replace(/\n/g, '<br>');
+    },
+
+    formatDate(dateString) {
+      if (!dateString) return '-';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
     }
   },
 };
@@ -483,6 +517,75 @@ export default {
 
   .admin-button {
     align-self: flex-start;
+  }
+}
+
+/* 활동 테이블 스타일 */
+.activities-container {
+  margin-top: 10px;
+}
+
+.activities-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.activities-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activities-table th {
+  background-color: #08366f;
+  color: white;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.activities-table td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.activities-table tr:last-child td {
+  border-bottom: none;
+}
+
+.activities-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.no-activities {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .activities-table {
+    font-size: 12px;
+  }
+  
+  .activities-table th,
+  .activities-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  
+  .activities-table th {
+    font-size: 11px;
   }
 }
 </style>
