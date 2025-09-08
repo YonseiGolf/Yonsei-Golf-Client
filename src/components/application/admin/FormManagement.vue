@@ -72,19 +72,39 @@ export default {
       try {
         const semesterParam = this.selectedSemester ? `&semester=${this.selectedSemester}` : '';
 
-        const documentReceivedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?${semesterParam}`);
+        const documentReceivedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?${semesterParam}`, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
         this.documentReceived = documentReceivedResponse.data.data;
 
-        const documentPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true${semesterParam}`);
+        const documentPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true${semesterParam}`, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
         this.documentPassed = documentPassedResponse.data.data;
 
-        const finalPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true&finalPass=true${semesterParam}`);
+        const finalPassedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=true&finalPass=true${semesterParam}`, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
         this.finalPassed = finalPassedResponse.data.data;
 
-        const documentFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=false${semesterParam}`);
+        const documentFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?documentPass=false${semesterParam}`, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
         this.documentFailed = documentFailedResponse.data.data;
 
-        const finalFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=false&documentPass=true${semesterParam}`);
+        const finalFailedResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/forms?finalPass=false&documentPass=true${semesterParam}`, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
         this.finalFailed = finalFailedResponse.data.data;
 
       } catch (error) {
@@ -101,7 +121,11 @@ export default {
           semester: this.selectedSemester || null
         };
 
-        const response = await axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/results`, emailData);
+        const response = await axios.post(`${process.env.VUE_APP_API_URL}/admin/forms/results`, emailData, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
         await Swal.fire({
           title: response.data.message,
           confirmButtonColor: '#08366f',

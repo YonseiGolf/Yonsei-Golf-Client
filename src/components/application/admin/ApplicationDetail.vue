@@ -233,7 +233,11 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
-    axios.get(`${process.env.VUE_APP_API_URL}/admin/forms/${to.params.id}`)
+    axios.get(`${process.env.VUE_APP_API_URL}/admin/forms/${to.params.id}`, {
+      headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+      }
+    })
     .then(response => {
       const data = response.data.data;
       let selection = null;
