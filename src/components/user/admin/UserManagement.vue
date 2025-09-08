@@ -29,19 +29,39 @@ export default {
 
   async mounted() {
     try {
-      const YBUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=YB`);
+      const YBUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=YB`, {
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+        }
+      });
       this.YBUsers = YBUsersResponse.data.data;
 
-      const OBUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=OB`);
+      const OBUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=OB`, {
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+        }
+      });
       this.OBUsers = OBUsersResponse.data.data;
 
-      const NoneUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=NONE`);
+      const NoneUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=NONE`, {
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+        }
+      });
       this.NoneUsers = NoneUsersResponse.data.data;
 
-      const DormantUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=DORMANT`);
+      const DormantUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=DORMANT`, {
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+        }
+      });
       this.DormantUsers = DormantUsersResponse.data.data;
 
-      const BlackListUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=BLACK_LIST`);
+      const BlackListUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=BLACK_LIST`, {
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+        }
+      });
       this.BlackListUsers = BlackListUsersResponse.data.data;
 
     } catch (error) {
