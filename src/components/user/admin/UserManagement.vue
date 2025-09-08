@@ -3,6 +3,7 @@
     <user-table :applications="YBUsers.content" title="YB" :totalCount="YBUsers.totalElements"></user-table>
     <user-table :applications="OBUsers.content" title="OB" :totalCount="OBUsers.totalElements"></user-table>
     <user-table :applications="NoneUsers.content" title="회원 대기" :totalCount="NoneUsers.totalElements"></user-table>
+    <user-table :applications="DormantUsers.content" title="휴면 회원" :totalCount="DormantUsers.totalElements"></user-table>
     <user-table :applications="BlackListUsers.content" title="블랙리스트" :totalCount="BlackListUsers.totalElements"></user-table>
   </div>
 </template>
@@ -21,6 +22,7 @@ export default {
       YBUsers: { content: [], totalElements: 0 },
       OBUsers: { content: [], totalElements: 0 },
       NoneUsers: { content: [], totalElements: 0 },
+      DormantUsers: { content: [], totalElements: 0 },
       BlackListUsers: { content: [], totalElements: 0 },
     };
   },
@@ -35,6 +37,9 @@ export default {
 
       const NoneUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=NONE`);
       this.NoneUsers = NoneUsersResponse.data.data;
+
+      const DormantUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=DORMANT`);
+      this.DormantUsers = DormantUsersResponse.data.data;
 
       const BlackListUsersResponse = await axios.get(`${process.env.VUE_APP_API_URL}/admin/users?userClass=BLACK_LIST`);
       this.BlackListUsers = BlackListUsersResponse.data.data;
