@@ -135,11 +135,17 @@
       </div>
 
       <div class="info-field">
-        <label>면접 시간</label>
-        <div class="admin-field-container">
-          <div class="field-value">{{ applications.interviewTime }}</div>
-          <button class="admin-button" @click="showInterviewModal = true">면접 시간 변경</button>
+        <label>지원자 선택 면접 가능 시간</label>
+        <div class="available-interview-times" v-if="applications.availableInterviewTimes && applications.availableInterviewTimes.length > 0">
+          <div
+            v-for="time in applications.availableInterviewTimes"
+            :key="time.id"
+            class="available-time-item"
+          >
+            {{ time.interviewDateTime }}
+          </div>
         </div>
+        <div v-else class="field-value">선택된 면접 가능 시간이 없습니다.</div>
       </div>
 
       <div class="info-field">
@@ -626,20 +632,47 @@ export default {
   border-radius: 8px;
 }
 
+/* 면접 가능 시간 스타일 */
+.available-interview-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 0;
+}
+
+.available-time-item {
+  padding: 8px 16px;
+  background-color: #e8f4fd;
+  border: 1px solid #08366f;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #08366f;
+  font-weight: 500;
+}
+
 /* 모바일 반응형 */
 @media (max-width: 768px) {
   .activities-table {
     font-size: 12px;
   }
-  
+
   .activities-table th,
   .activities-table td {
     padding: 8px 4px;
     font-size: 12px;
   }
-  
+
   .activities-table th {
     font-size: 11px;
+  }
+
+  .available-interview-times {
+    gap: 8px;
+  }
+
+  .available-time-item {
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
 </style>

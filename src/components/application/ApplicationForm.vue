@@ -129,6 +129,31 @@
        <textarea ref="swingVideoTextarea" placeholder="유튜브 링크를 첨부해주세요. (비공개 영상이 아닌지 확인해주세요)" v-model="applications.swingVideo" rows="6" @input="handleSwingVideoInput"></textarea>
        <div class="error-message" v-if="golfSwingInvalid"> 최대 500자까지 작성 가능합니다.</div>
      </div>
+
+     <div class="section-spacer"></div>
+
+     <div class="info-field" v-if="interviewTimeList.length > 0">
+       <label>면접 가능 시간을 선택해주세요 (복수 선택 가능)</label>
+       <div class="interview-time-list">
+         <div
+           v-for="time in interviewTimeList"
+           :key="time.id"
+           class="interview-time-item"
+         >
+           <label class="checkbox-label">
+             <input
+               type="checkbox"
+               :value="time.id"
+               v-model="selectedInterviewTimeIds"
+             />
+             <span class="checkbox-text">{{ time.interviewDateTime }}</span>
+           </label>
+         </div>
+       </div>
+       <div class="error-message" v-if="selectedInterviewTimeIds.length === 0">
+         최소 1개 이상의 면접 시간을 선택해주세요.
+       </div>
+     </div>
   </div>
   <div class="form-footer">
     <div class="notice-text">* 지원서 제출 전 이메일과 전화번호를 다시 한번 확인해주세요.</div>
@@ -183,10 +208,62 @@ export default {
         endDate: '',
         role: ''
       },
+      currentSemester: null,
+      currentRecruitId: null,
+      interviewTimeList: [],
+      selectedInterviewTimeIds: [],
     }
   },
 
+  async mounted() {
+    await this.fetchCurrentRecruit();
+  },
+
   methods: {
+    async fetchCurrentRecruit() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_API_URL}/application/recruit`);
+        console.log('현재 모집 기간 응답:', response.data);
+        if (response.status === 200 && response.data.data) {
+          this.currentSemester = response.data.data.semester;
+          this.currentRecruitId = response.data.data.id;
+
+          // 응답에 면접 시간 목록이 포함되어 있으면 사용
+          if (response.data.data.interviewTimes) {
+            this.interviewTimeList = response.data.data.interviewTimes;
+            console.log('interviewTimeList (from recruit):', this.interviewTimeList);
+          } else {
+            // 없으면 별도 API로 조회
+            await this.fetchInterviewTimes();
+          }
+        }
+      } catch (error) {
+        console.error('현재 기수 조회 실패:', error);
+      }
+    },
+
+    async fetchInterviewTimes() {
+      if (!this.currentRecruitId) {
+        console.log('currentRecruitId가 없어서 면접 시간을 조회하지 않습니다.');
+        return;
+      }
+
+      try {
+        // 일반 사용자용 API 호출
+        const response = await axios.get(
+          `${process.env.VUE_APP_API_URL}/application/recruit/${this.currentRecruitId}/interview-times`
+        );
+        console.log('면접 시간 응답:', response.data);
+        if (response.status === 200 && response.data.data) {
+          this.interviewTimeList = response.data.data;
+          console.log('interviewTimeList:', this.interviewTimeList);
+        }
+      } catch (error) {
+        console.error('면접 시간 목록 조회 실패:', error);
+        this.interviewTimeList = [];
+      }
+    },
+
     async submitApplication() {
 
       if (this.isFormValid) {
@@ -222,7 +299,8 @@ export default {
                     golfMemory: this.applications.golfMemory,
                     activityClubs: this.applications.activities,
                     swingVideo: this.applications.swingVideo,
-                    semester: 1
+                    semester: this.currentSemester,
+                    availableInterviewTimeIds: this.selectedInterviewTimeIds
                   });
 
               // 응답 처리
@@ -602,7 +680,7 @@ export default {
     ,
 
     isFormValid() {
-      return this.applications.name.trim().length > 0 &&
+      const basicFieldsValid = this.applications.name.trim().length > 0 &&
           this.applications.photo.trim().length > 0 &&
           this.applications.studentId.trim().length > 0 &&
           this.applications.birthDate.trim().length > 0 &&
@@ -614,6 +692,11 @@ export default {
           this.applications.skillEvaluation.trim().length > 0 &&
           this.applications.golfMemory.trim().length > 0 &&
           this.applications.swingVideo.trim().length > 0;
+
+      // 면접 시간이 있을 경우 최소 1개 이상 선택해야 함
+      const interviewTimeValid = this.interviewTimeList.length === 0 || this.selectedInterviewTimeIds.length > 0;
+
+      return basicFieldsValid && interviewTimeValid;
     }
   }
   ,
@@ -1222,6 +1305,59 @@ button:hover {
     width: 20px;
     height: 20px;
     font-size: 14px;
+  }
+}
+
+/* 면접 시간 선택 스타일 */
+.interview-time-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.interview-time-item {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  cursor: pointer;
+  accent-color: #08366f;
+}
+
+.checkbox-text {
+  font-size: 14px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .interview-time-list {
+    padding: 12px;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+  }
+
+  .checkbox-text {
+    font-size: 13px;
   }
 }
 

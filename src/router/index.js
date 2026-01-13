@@ -39,6 +39,11 @@ const routes = [
         component: ApplicationPage
     },
     {
+        path: '/apply/form',
+        name: 'applyForm',
+        component: ApplicationForm
+    },
+    {
         path: '/login',
         name: 'loginPage',
         component: LoginPage

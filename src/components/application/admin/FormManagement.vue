@@ -63,8 +63,28 @@ export default {
 
   methods: {
     // 사용 가능한 기수 목록을 가져오는 메서드
-    fetchAvailableSemesters() {
-      this.availableSemesters = [1]
+    async fetchAvailableSemesters() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_API_URL}/admin/recruits`, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
+        if (response.status === 200 && response.data.data) {
+          // semester 값들을 추출하여 정렬 (최신 기수가 먼저)
+          this.availableSemesters = response.data.data
+            .map(recruit => recruit.semester)
+            .sort((a, b) => b - a);
+
+          // 첫 번째 기수를 기본 선택값으로 설정
+          if (this.availableSemesters.length > 0) {
+            this.selectedSemester = this.availableSemesters[0];
+          }
+        }
+      } catch (error) {
+        console.error('기수 목록 조회 실패:', error);
+        this.availableSemesters = [];
+      }
     },
 
     // 필터에 따라 지원서 목록을 가져오는 메서드
