@@ -113,6 +113,22 @@ export default {
     },
 
     async sendEmail(data) {
+      // 확인 팝업
+      const result = await Swal.fire({
+        title: '메일을 발송하시겠습니까?',
+        text: '선택된 지원자들에게 결과 메일이 발송됩니다.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#08366f',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '발송',
+        cancelButtonText: '취소'
+      });
+
+      if (!result.isConfirmed) {
+        return;
+      }
+
       this.isLoading = true;
       try {
         // 선택된 기수 정보도 함께 전송

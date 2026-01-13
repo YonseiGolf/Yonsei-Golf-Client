@@ -58,7 +58,10 @@ export default {
         }
         
         const response = await axios.get(`${process.env.VUE_APP_API_URL}/admin/email/apply-start-email`, {
-          params: params
+          params: params,
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
         });
         this.emails = response.data.data.emailAlarms;
         console.log(this.emails);
@@ -68,16 +71,35 @@ export default {
     },
 
     async sendEmail() {
+      // 확인 팝업
+      const result = await Swal.fire({
+        title: '메일을 발송하시겠습니까?',
+        text: `${this.emails.length}명의 대기자에게 메일이 발송됩니다.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#08366f',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '발송',
+        cancelButtonText: '취소'
+      });
+
+      if (!result.isConfirmed) {
+        return;
+      }
+
       this.loading = true;
-      
+
       // 메일 전송 시에도 semester 파라미터 포함
       const params = {};
       if (this.selectedSemester) {
         params.semester = this.selectedSemester;
       }
-      
+
       axios.post(`${process.env.VUE_APP_API_URL}/admin/email/apply-start-email`, null, {
-        params: params
+        params: params,
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+        }
       })
       .then(async (res) => {
         console.log(res);

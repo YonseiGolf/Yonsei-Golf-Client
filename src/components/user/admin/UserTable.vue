@@ -73,6 +73,10 @@ export default {
       try {
         const response = await axios.patch(`${process.env.VUE_APP_API_URL}/admin/users/${item.id}`, {
           userClass: item.userClass
+        }, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
         });
         if (response.status === 200) {
           location.reload();

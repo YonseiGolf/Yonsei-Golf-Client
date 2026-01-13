@@ -188,11 +188,31 @@ export default {
     };
 
     const updateInterviewTime = async (newTime) => {
+      // 확인 팝업
+      const result = await Swal.fire({
+        title: '면접 시간을 변경하시겠습니까?',
+        text: `새로운 면접 시간: ${newTime}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#08366f',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '변경',
+        cancelButtonText: '취소'
+      });
+
+      if (!result.isConfirmed) {
+        return;
+      }
+
       interviewTime.value = newTime;
 
       try {
         const response = await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${currentPageId}/interviewTime`, {
           time: interviewTime.value
+        }, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
         });
         if (response.status === 200) {
           await Swal.fire({
@@ -267,6 +287,32 @@ export default {
 
   methods: {
     async updateApplicationStatus() {
+      const statusLabels = {
+        documentPass: '서류 합격',
+        finalPass: '최종 합격',
+        documentFail: '서류 탈락',
+        finalFail: '최종 탈락',
+        pending: '보류'
+      };
+
+      // 확인 팝업
+      const result = await Swal.fire({
+        title: '합격 여부를 변경하시겠습니까?',
+        text: `선택된 상태: ${statusLabels[this.applications.selection]}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#08366f',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '변경',
+        cancelButtonText: '취소'
+      });
+
+      if (!result.isConfirmed) {
+        // 취소 시 페이지 새로고침하여 원래 상태로 복구
+        location.reload();
+        return;
+      }
+
       let payload = {};
       switch (this.applications.selection) {
         case "documentPass":
@@ -287,7 +333,11 @@ export default {
       }
 
       try {
-        await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/pass`, payload);
+        await axios.patch(`${process.env.VUE_APP_API_URL}/admin/forms/${this.applications.id}/pass`, payload, {
+          headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+          }
+        });
         await Swal.fire({
           title: "합격 여부 변경 완료",
           confirmButtonColor: '#08366f',
