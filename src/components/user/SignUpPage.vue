@@ -11,8 +11,8 @@
 
       <div class="input-group">
         <label for="phoneNumber">전화번호</label>
-        <input type="text" id="phoneNumber" placeholder="010-0000-0000" v-model="phoneNumber" @input="validatePhoneNumber" required/>
-        <p v-if="phoneNumberInvalid" class="error-message">숫자와 - 만 입력 가능합니다.</p>
+        <input type="text" id="phoneNumber" placeholder="010-0000-0000" v-model="phoneNumber" @input="formatPhoneNumber" required/>
+        <p v-if="phoneNumberInvalid" class="error-message">올바른 전화번호를 입력해주세요.</p>
       </div>
 
       <div class="input-group">
@@ -23,7 +23,7 @@
 
       <div class="input-group">
         <label for="major">학과</label>
-        <input type="text" id="major" placeholder="OO과" v-model="major" @input="validateMajor" required/>
+        <input type="text" id="major" placeholder="국어국문학과" v-model="major" @input="validateMajor" required/>
         <p v-if="majorInvalid" class="error-message">학과는 10자 이내로 입력해주세요.</p>
       </div>
 
@@ -122,16 +122,26 @@ export default {
       this.nameInvalid = this.name.length > 10;
     },
 
-    validatePhoneNumber() {
-      // 숫자와 '-' 이외의 문자가 있는지 확인
-      const invalidCharacters = /[^0-9-]/g;
-      // 숫자나 '-' 이외의 문자를 제거
-      this.phoneNumber = this.phoneNumber.replace(invalidCharacters, '');
-      // 길이가 10자를 넘어갈 경우 마지막 부분을 잘라냄
-      if (this.phoneNumber.length > 14) {
-        this.phoneNumber = this.phoneNumber.substring(0, 14);
+    formatPhoneNumber() {
+      // 숫자만 추출
+      let numbers = this.phoneNumber.replace(/[^0-9]/g, '');
+
+      // 최대 11자리로 제한
+      if (numbers.length > 11) {
+        numbers = numbers.substring(0, 11);
       }
-      this.phoneNumberInvalid = invalidCharacters.test(this.phoneNumber) || this.phoneNumber.length > 13;
+
+      // 하이픈 자동 추가 (010-0000-0000 형식)
+      if (numbers.length <= 3) {
+        this.phoneNumber = numbers;
+      } else if (numbers.length <= 7) {
+        this.phoneNumber = `${numbers.substring(0, 3)}-${numbers.substring(3)}`;
+      } else {
+        this.phoneNumber = `${numbers.substring(0, 3)}-${numbers.substring(3, 7)}-${numbers.substring(7)}`;
+      }
+
+      // 11자리가 아니면 invalid
+      this.phoneNumberInvalid = numbers.length > 0 && numbers.length !== 11;
     },
 
     validateStudentId() {
