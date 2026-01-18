@@ -3,14 +3,6 @@
   <div class="contact-card">
     <h1>지금 바로 함께 해요</h1>
     <div class="contact-detail">상세 문의사항</div>
-    <div v-if="leader" class="contact-info">
-      &nbsp;&nbsp;<leaders>회장</leaders>&nbsp;&nbsp;:&nbsp;{{ leader.name }}  {{ leader.phoneNumber }}
-    </div>
-    <div v-for="assistant in assistantLeaders" :key="assistant.name" class="contact-info">
-      <leaders>부회장</leaders>&nbsp;&nbsp;:&nbsp;{{ assistant.name }} {{ assistant.phoneNumber }}
-    </div>
-
-    <div class="contact-detail"><br>자세히 둘러보기</div>
     <p>
       INSTAGRAM :
       <a href="https://www.instagram.com/yonsei__golf" target="_blank">@yonsei__golf</a>
@@ -33,27 +25,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  data() {
-    return {
-      leader: null,
-      assistantLeaders: []
-    };
-  },
-  created() {
-    axios.get(`${process.env.VUE_APP_API_URL}/users/leaders`)
-        .then(response => {
-          if (response.data.status === "success") {
-            this.leader = response.data.data.leader;
-            this.assistantLeaders = response.data.data.assistantLeaders;
-          }
-        })
-        .catch(error => {
-          console.error("There was an error fetching the data:", error);
-        });
-  }
+  name: 'ContactInfo'
 }
 </script>
 
@@ -97,13 +70,6 @@ p {
   font-weight: 500;
 }
 
-.contact-info {
-  font-size: 19px;
-  font-weight: normal;
-  color: #4d4d4d;
-  margin-bottom: 10px;
-}
-
 .buttons {
   margin-top: 20px;
 }
@@ -139,19 +105,9 @@ button:hover {
 
 a{
   color: #08366f;
-  text-decoration: none; // 밑줄 제거
+  text-decoration: none;
   &:hover {
-    text-decoration: underline; // 마우스를 올렸을 때 밑줄 표시
+    text-decoration: underline;
   }
-}
-
-.contact-main{
-  font-size: 30px;
-  font-weight: bold;
-}
-
-leaders{
-  font-size: 16px;
-  font-weight: bold;
 }
 </style>
