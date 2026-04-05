@@ -1,9 +1,9 @@
 <template>
   <div class="yonsei-golf">
-    <img src="https://minio.birdiehyun.store/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt" alt="yonsei-golf Logo"/>
+    <img src="https://minio.up-api.kr/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt" alt="yonsei-golf Logo"/>
     <h1>Yonsei-Golf</h1>
     <button @click="kakaoLogin" id="login-text">
-      <img src="https://minio.birdiehyun.store/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt" alt="kako logo" id="kako">
+      <img src="https://minio.up-api.kr/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt" alt="kako logo" id="kako">
       카카오로 3초 만에 시작하기
     </button>
   </div>

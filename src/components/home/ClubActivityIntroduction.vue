@@ -5,7 +5,7 @@
     <!-- 데스크톱: 4개 카드 모두 표시 -->
     <div class="desktop-cards">
       <div class="card grey-card hover-card" @click="handleCardClick(0)">
-        <img src="https://minio.birdiehyun.store/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD" alt="정규 활동"
+        <img src="https://minio.up-api.kr/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD" alt="정규 활동"
              class="introduction-image">
         <div class="hover-content" :class="{ 'active': activeCards[0] }">
           <main-title>
@@ -19,7 +19,7 @@
       </div>
 
       <div class="card grey-card hover-card" @click="handleCardClick(1)">
-        <img src="https://minio.birdiehyun.store/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD" alt="신입 환영 MT"
+        <img src="https://minio.up-api.kr/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD" alt="신입 환영 MT"
              class="introduction-image">
         <div class="hover-content" :class="{ 'active': activeCards[1] }">
           <main-title>
@@ -33,7 +33,7 @@
 
       <div class="card grey-card hover-card" @click="handleCardClick(2)">
         <img
-            src="https://minio.birdiehyun.store/yg-img-storage/store-image/yb-rounding.jpegm2v2OBd1a3"
+            src="https://minio.up-api.kr/yg-img-storage/store-image/yb-rounding.jpegm2v2OBd1a3"
             alt="단체 라운딩" class="introduction-image">
         <div class="hover-content" :class="{ 'active': activeCards[2] }">
           <main-title>
@@ -47,7 +47,7 @@
 
       <div class="card grey-card hover-card" @click="handleCardClick(3)">
         <img
-            src="https://minio.birdiehyun.store/yg-img-storage/store-image/ob-rounding.jpegfy6Y06Pp3R"
+            src="https://minio.up-api.kr/yg-img-storage/store-image/ob-rounding.jpegfy6Y06Pp3R"
             alt="OB 엠티" class="introduction-image">
         <div class="hover-content" :class="{ 'active': activeCards[3] }">
           <main-title>
@@ -107,22 +107,22 @@ export default {
       currentSlide: 0,
       carouselData: [
         {
-          image: "https://minio.birdiehyun.store/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD",
+          image: "https://minio.up-api.kr/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD",
           title: "정규 활동",
           description: "매주 목요일 신촌역 부근에서\n정기활동을 진행해요"
         },
         {
-          image: "https://minio.birdiehyun.store/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD",
+          image: "https://minio.up-api.kr/yg-img-storage/store-image/freshmen-mt.jpegUsgBCksEbD",
           title: "신입 환영 MT",
           description: "신입 부원들과 기존 부원들과의 조화를 위해\n신입 환영 MT를 진행해요"
         },
         {
-          image: "https://minio.birdiehyun.store/yg-img-storage/store-image/yb-rounding.jpegm2v2OBd1a3",
+          image: "https://minio.up-api.kr/yg-img-storage/store-image/yb-rounding.jpegm2v2OBd1a3",
           title: "단체 라운딩",
           description: "매 학기 경기권에서 라운딩을 진행해요"
         },
         {
-          image: "https://minio.birdiehyun.store/yg-img-storage/store-image/ob-rounding.jpegfy6Y06Pp3R",
+          image: "https://minio.up-api.kr/yg-img-storage/store-image/ob-rounding.jpegfy6Y06Pp3R",
           title: "OB 라운딩",
           description: "YB 활동이 끝나더라도\nOB 부원과 라운딩을 함께해요"
         }

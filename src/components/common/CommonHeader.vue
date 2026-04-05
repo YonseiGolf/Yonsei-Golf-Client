@@ -2,7 +2,7 @@
   <header class="header-container">
     <div class="logo">
       <router-link to="/">
-        <img src="https://minio.birdiehyun.store/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt" alt="Logo" width=500 height="500"/>
+        <img src="https://minio.up-api.kr/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt" alt="Logo" width=500 height="500"/>
       </router-link>
     </div>
     <nav>
