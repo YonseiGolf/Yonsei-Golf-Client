@@ -12,11 +12,17 @@
     <div class="photo-upload-section">
       <div class="photo-container">
         <div class="file-upload-container">
-          <input v-if="!applications.photo" type="file" @change="handleFileUpload" accept="image/*"/>
+          <input
+              v-if="!applications.photo"
+              type="file"
+              @change="handleFileUpload"
+              accept="image/*"
+              :disabled="isImageUploading"
+          />
           <div v-if="!applications.photo" class="upload-placeholder">
             <div class="upload-icon">👤</div>
             <div class="upload-text">지원자 사진</div>
-            <div class="upload-hint">클릭하여 업로드</div>
+            <div class="upload-hint">{{ isImageUploading ? '업로드 중...' : '클릭하여 업로드' }}</div>
           </div>
         </div>
         <div v-if="applications.photo" class="photo-display">
@@ -32,7 +38,14 @@
     <div class="info-field">
       <div class="email-container">
         <input type="email" placeholder="이메일을 입력해주세요" v-model="applications.email" @input="handleEmailInput">
-        <button type="button" class="email-confirm-btn">이메일 확인</button>
+        <button
+            type="button"
+            class="email-confirm-btn"
+            @click="sendEmailConfirmation"
+            :disabled="isEmailConfirmationSending || emailConfirmationSentTo === applications.email.trim()"
+        >
+          {{ emailConfirmationButtonText }}
+        </button>
       </div>
     </div>
     <div class="info-field">
@@ -202,6 +215,9 @@ export default {
       golfMemoryInvalid: false,
       golfSwingInvalid: false,
       isLoading: false,
+      isImageUploading: false,
+      isEmailConfirmationSending: false,
+      emailConfirmationSentTo: '',
       newActivity: {
         clubName: '',
         startDate: '',
@@ -332,27 +348,83 @@ export default {
       }
     },
 
-    uploadImage() {
+    async sendEmailConfirmation() {
+      const email = this.applications.email.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        await Swal.fire({
+          icon: 'warning',
+          title: '이메일을 확인해주세요.',
+          text: '올바른 이메일 형식을 입력해주세요.',
+          confirmButtonColor: '#08366f',
+        });
+        return;
+      }
+
+      this.applications.email = email;
+      this.isEmailConfirmationSending = true;
+      try {
+        await axios.post(`${process.env.VUE_APP_API_URL}/application/email-confirmation`, {
+          email,
+        });
+        this.emailConfirmationSentTo = email;
+        await Swal.fire({
+          icon: 'success',
+          title: '확인 메일을 발송했습니다.',
+          text: `${email}의 받은편지함을 확인해주세요.`,
+          confirmButtonColor: '#08366f',
+        });
+      } catch (error) {
+        await Swal.fire({
+          icon: 'error',
+          title: '확인 메일 발송에 실패했습니다.',
+          text: error.response?.data?.message || '잠시 후 다시 시도해주세요.',
+          confirmButtonColor: '#08366f',
+        });
+      } finally {
+        this.isEmailConfirmationSending = false;
+      }
+    },
+
+    async uploadImage() {
       const formData = new FormData();
       formData.append('image', this.applications.selectedFile);
 
-      axios.post(`${process.env.VUE_APP_API_URL}/apply/forms/image`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      this.isImageUploading = true;
+      try {
+        const response = await axios.post(
+            `${process.env.VUE_APP_API_URL}/apply/forms/image`,
+            formData
+        );
+        const imageUrl = response.data?.data?.image;
+        if (!imageUrl) {
+          throw new Error('이미지 URL이 응답에 없습니다.');
         }
-      })
-          .then(response => {
-            this.applications.photo = response.data.data.image; // 응답으로 받은 이미지 URL 저장
-          })
-          .catch(error => {
-            console.error("Image upload failed:", error);
-          });
+        this.applications.photo = imageUrl;
+        return true;
+      } catch (error) {
+        console.error("Image upload failed:", error);
+        await Swal.fire({
+          icon: 'error',
+          title: '사진 업로드에 실패했습니다.',
+          text: error.response?.data?.message || '잠시 후 다시 시도해주세요.',
+          confirmButtonColor: '#08366f',
+        });
+        return false;
+      } finally {
+        this.isImageUploading = false;
+      }
     },
 
-    handleFileUpload(event) {
+    async handleFileUpload(event) {
       this.applications.selectedFile = event.target.files[0];
       if (this.applications.selectedFile) {
-        this.uploadImage(); // 파일 선택 후 uploadImage 메서드 호출
+        const uploaded = await this.uploadImage();
+        if (!uploaded) {
+          this.applications.selectedFile = null;
+          event.target.value = '';
+        }
       }
     },
 
@@ -412,8 +484,11 @@ export default {
     },
 
     handleEmailInput() {
-      if (this.applications.email.length > 30) {
-        this.applications.email = this.applications.email.substring(0, 30);
+      if (this.applications.email.length > 254) {
+        this.applications.email = this.applications.email.substring(0, 254);
+      }
+      if (this.emailConfirmationSentTo !== this.applications.email.trim()) {
+        this.emailConfirmationSentTo = '';
       }
     },
 
@@ -556,6 +631,16 @@ export default {
   ,
 
   computed: {
+    emailConfirmationButtonText() {
+      if (this.isEmailConfirmationSending) {
+        return '발송 중...';
+      }
+      if (this.emailConfirmationSentTo === this.applications.email.trim()) {
+        return '발송 완료';
+      }
+      return '이메일 확인';
+    },
+
     applicationNameInput: {
       get() {
         return this.applications.name;
@@ -1115,6 +1200,11 @@ button:hover {
 
 .email-confirm-btn:hover {
   background-color: #e9e9e9;
+}
+
+.email-confirm-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .hint-text {
