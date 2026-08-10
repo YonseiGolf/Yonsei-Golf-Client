@@ -16,7 +16,7 @@
               v-if="!applications.photo"
               type="file"
               @change="handleFileUpload"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,image/gif"
               :disabled="isImageUploading"
           />
           <div v-if="!applications.photo" class="upload-placeholder">
@@ -183,6 +183,14 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
+const ALLOWED_IMAGE_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+]);
 
 export default {
 
@@ -388,19 +396,36 @@ export default {
     },
 
     async uploadImage() {
-      const formData = new FormData();
-      formData.append('image', this.applications.selectedFile);
+      const file = this.applications.selectedFile;
 
       this.isImageUploading = true;
       try {
         const response = await axios.post(
-            `${process.env.VUE_APP_API_URL}/apply/forms/image`,
-            formData
+            `${process.env.VUE_APP_API_URL}/apply/forms/image/presigned-url`,
+            {
+              fileName: file.name,
+              contentType: file.type,
+              fileSize: file.size,
+            }
         );
+        const uploadUrl = response.data?.data?.uploadUrl;
         const imageUrl = response.data?.data?.image;
-        if (!imageUrl) {
-          throw new Error('이미지 URL이 응답에 없습니다.');
+        if (!uploadUrl || !imageUrl) {
+          throw new Error('이미지 업로드 정보가 응답에 없습니다.');
         }
+
+        const uploadResponse = await fetch(uploadUrl, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': file.type,
+            'x-amz-acl': 'public-read',
+          },
+          body: file,
+        });
+        if (!uploadResponse.ok) {
+          throw new Error(`스토리지 업로드에 실패했습니다. (${uploadResponse.status})`);
+        }
+
         this.applications.photo = imageUrl;
         return true;
       } catch (error) {
@@ -408,7 +433,7 @@ export default {
         await Swal.fire({
           icon: 'error',
           title: '사진 업로드에 실패했습니다.',
-          text: error.response?.data?.message || '잠시 후 다시 시도해주세요.',
+          text: error.response?.data?.message || error.message || '잠시 후 다시 시도해주세요.',
           confirmButtonColor: '#08366f',
         });
         return false;
@@ -420,6 +445,30 @@ export default {
     async handleFileUpload(event) {
       this.applications.selectedFile = event.target.files[0];
       if (this.applications.selectedFile) {
+        if (!ALLOWED_IMAGE_TYPES.has(this.applications.selectedFile.type)) {
+          await Swal.fire({
+            icon: 'warning',
+            title: '지원하지 않는 이미지 형식입니다.',
+            text: 'JPG, PNG, WEBP, GIF 파일만 업로드할 수 있습니다.',
+            confirmButtonColor: '#08366f',
+          });
+          this.applications.selectedFile = null;
+          event.target.value = '';
+          return;
+        }
+
+        if (this.applications.selectedFile.size > MAX_IMAGE_SIZE) {
+          await Swal.fire({
+            icon: 'warning',
+            title: '이미지 용량이 너무 큽니다.',
+            text: '10MB 이하의 이미지를 선택해주세요.',
+            confirmButtonColor: '#08366f',
+          });
+          this.applications.selectedFile = null;
+          event.target.value = '';
+          return;
+        }
+
         const uploaded = await this.uploadImage();
         if (!uploaded) {
           this.applications.selectedFile = null;
