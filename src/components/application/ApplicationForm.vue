@@ -199,6 +199,7 @@ export default {
       applications: {
         name: '',
         photo: '',
+        photoKey: '',
         age: '',
         studentId: '',
         birthDate: '',
@@ -241,6 +242,10 @@ export default {
 
   async mounted() {
     await this.fetchCurrentRecruit();
+  },
+
+  beforeUnmount() {
+    this.revokePhotoPreview();
   },
 
   methods: {
@@ -307,7 +312,7 @@ export default {
                   await axios.post(`${process.env.VUE_APP_API_URL}/application`, {
                     name: this.applications.name,
                     age: this.applications.age,
-                    photo: this.applications.photo,
+                    photoKey: this.applications.photoKey,
                     studentId: this.applications.studentId,
                     birthDate: this.applications.birthDate,
                     major: this.applications.major,
@@ -408,25 +413,32 @@ export default {
               fileSize: file.size,
             }
         );
-        const uploadUrl = response.data?.data?.uploadUrl;
-        const imageUrl = response.data?.data?.image;
-        if (!uploadUrl || !imageUrl) {
+        const uploadData = response.data?.data;
+        const uploadUrl = uploadData?.uploadUrl;
+        const imageKey = uploadData?.imageKey;
+        if (!uploadUrl || !imageKey) {
           throw new Error('이미지 업로드 정보가 응답에 없습니다.');
+        }
+
+        const uploadHeaders = uploadData.uploadHeaders
+            ? {...uploadData.uploadHeaders}
+            : {'Content-Type': file.type};
+        if (!uploadData.uploadHeaders && new URL(uploadUrl).hostname === 'minio.up-api.kr') {
+          uploadHeaders['x-amz-acl'] = 'public-read';
         }
 
         const uploadResponse = await fetch(uploadUrl, {
           method: 'PUT',
-          headers: {
-            'Content-Type': file.type,
-            'x-amz-acl': 'public-read',
-          },
+          headers: uploadHeaders,
           body: file,
         });
         if (!uploadResponse.ok) {
           throw new Error(`스토리지 업로드에 실패했습니다. (${uploadResponse.status})`);
         }
 
-        this.applications.photo = imageUrl;
+        this.revokePhotoPreview();
+        this.applications.photo = URL.createObjectURL(file);
+        this.applications.photoKey = imageKey;
         return true;
       } catch (error) {
         console.error("Image upload failed:", error);
@@ -478,8 +490,16 @@ export default {
     },
 
     deletePhoto() {
+      this.revokePhotoPreview();
       this.applications.photo = '';
+      this.applications.photoKey = '';
       this.applications.selectedFile = null;
+    },
+
+    revokePhotoPreview() {
+      if (this.applications.photo.startsWith('blob:')) {
+        URL.revokeObjectURL(this.applications.photo);
+      }
     },
 
     handleNameInput() {
@@ -815,7 +835,7 @@ export default {
 
     isFormValid() {
       const basicFieldsValid = this.applications.name.trim().length > 0 &&
-          this.applications.photo.trim().length > 0 &&
+          this.applications.photoKey.trim().length > 0 &&
           this.applications.studentId.trim().length > 0 &&
           this.applications.birthDate.trim().length > 0 &&
           this.applications.major.trim().length > 0 &&
