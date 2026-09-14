@@ -1,0 +1,175 @@
+@layer legacy {
+.scope-BoardDetail { display: contents; }
+.scope-BoardDetail .board-container {
+  padding-top: 50px;
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.scope-BoardDetail .detail-category {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.scope-BoardDetail .reply-container {
+  margin: 0 auto;
+  width: 50%;
+  text-align: left;
+}
+
+.scope-BoardDetail .board-time {
+  font-size: 12px;
+  color: gray;
+}
+
+.scope-BoardDetail .detail-category {
+  color: gray;
+}
+
+.scope-BoardDetail .detail-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.scope-BoardDetail .detail-content {
+  margin-top: 40px;
+  font-size: 15px;
+  margin-bottom: 40px;
+}
+
+.scope-BoardDetail .reply-container {
+  width: 50%;
+}
+
+.scope-BoardDetail .replies-title {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.scope-BoardDetail .replies-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.scope-BoardDetail .reply {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+.scope-BoardDetail .reply:last-child {
+  border-bottom: none;
+}
+
+.scope-BoardDetail .reply-writer {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.scope-BoardDetail .reply-content {
+  font-weight: normal;
+  display: block; /* 댓글 내용을 새로운 줄에 표시 */
+  margin-top: 0.5em; /* 위쪽 여백 추가 */
+}
+
+.scope-BoardDetail .reply-date {
+  display: block;
+  font-size: 0.8em;
+  color: #777;
+  margin-top: 5px;
+}
+
+.scope-BoardDetail hr {
+  color: gray;
+}
+
+.scope-BoardDetail span {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.scope-BoardDetail .reply-form-container {
+  margin: 20px auto;
+  width: 50%;
+}
+
+.scope-BoardDetail textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  min-height: 50px;
+}
+
+.scope-BoardDetail .post-reply {
+  padding: 10px 15px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.scope-BoardDetail textarea {
+  outline: none;
+  resize: none;
+}
+
+.scope-BoardDetail #update-textarea {
+  height: 300px;
+}
+
+.scope-BoardDetail .edit-delete-post {
+  font-size: 15px;
+  font-color: gray;
+  border: none;
+  margin-right: 10px;
+  background-color: white;
+}
+
+.scope-BoardDetail .post-header, .scope-BoardDetail .reply-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scope-BoardDetail .post-actions, .scope-BoardDetail .reply-actions {
+  margin-left: 10px;
+}
+
+.scope-BoardDetail .edit-delete-post {
+  font-size: 10px;
+  color: gray;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.3vh;
+  margin-bottom: 20px;
+}
+.scope-BoardDetail .edit-delete-post:hover {
+  color: black;
+}
+
+.scope-BoardDetail .save-cancle-edit {
+  font-size: 15px;
+  font-color: gray;
+  border: none;
+  margin-right: 10px;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.3vh;
+  margin-bottom: 20px;
+}
+.scope-BoardDetail .save-cancle-edit:hover {
+  color: black;
+}
+
+.scope-BoardDetail .edit-title {
+  height: 20px;
+}
+}

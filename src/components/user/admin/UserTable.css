@@ -1,0 +1,26 @@
+@layer legacy {
+.scope-UserTable { display: block; min-width: 0; width: 100%; }
+.scope-UserTable table {
+  width: 100%;
+  white-space: nowrap;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.scope-UserTable thead {
+  background-color: #f2f2f2;
+}
+
+.scope-UserTable th, .scope-UserTable td {
+  border: 1px solid #d4d4d4;
+  padding: 8px 8px;
+  text-align: center;
+}
+
+.scope-UserTable select {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid #d4d4d4;
+  background-color: #f9f9f9;
+}
+}

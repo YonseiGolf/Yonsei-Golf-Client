@@ -1,0 +1,326 @@
+@layer legacy {
+.scope-ApplyPeriodAdmin { display: contents; }
+.scope-ApplyPeriodAdmin .apply-period-admin {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.scope-ApplyPeriodAdmin h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.scope-ApplyPeriodAdmin h3 {
+  color: #333;
+  margin: 0;
+}
+
+/* 목록 섹션 */
+.scope-ApplyPeriodAdmin .list-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.scope-ApplyPeriodAdmin .list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.scope-ApplyPeriodAdmin .btn-add {
+  padding: 8px 16px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.scope-ApplyPeriodAdmin .btn-add:hover {
+  background-color: #1a5cc8;
+}
+
+.scope-ApplyPeriodAdmin table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scope-ApplyPeriodAdmin th, .scope-ApplyPeriodAdmin td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.scope-ApplyPeriodAdmin th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+.scope-ApplyPeriodAdmin tbody tr {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.scope-ApplyPeriodAdmin tbody tr:hover {
+  background-color: #f9f9f9;
+}
+.scope-ApplyPeriodAdmin tbody tr.selected {
+  background-color: #e3f2fd;
+}
+
+.scope-ApplyPeriodAdmin .empty-list {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+/* 폼 섹션 */
+.scope-ApplyPeriodAdmin .form-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.scope-ApplyPeriodAdmin .form-section h3 {
+  margin-bottom: 20px;
+}
+
+.scope-ApplyPeriodAdmin .form-container {
+  max-width: 500px;
+}
+
+.scope-ApplyPeriodAdmin .form-group {
+  margin-bottom: 20px;
+}
+.scope-ApplyPeriodAdmin .form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+.scope-ApplyPeriodAdmin .form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.scope-ApplyPeriodAdmin .form-group input:focus {
+  outline: none;
+  border-color: #08366f;
+  box-shadow: 0 0 0 2px rgba(8, 54, 111, 0.1);
+}
+
+.scope-ApplyPeriodAdmin .date-range {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.scope-ApplyPeriodAdmin .date-range input {
+  flex: 1;
+}
+.scope-ApplyPeriodAdmin .date-range span {
+  color: #666;
+}
+
+.scope-ApplyPeriodAdmin .button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+.scope-ApplyPeriodAdmin .button-group button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.scope-ApplyPeriodAdmin .button-group .btn-save {
+  background-color: #08366f;
+  color: white;
+}
+.scope-ApplyPeriodAdmin .button-group .btn-save:hover {
+  background-color: #1a5cc8;
+}
+.scope-ApplyPeriodAdmin .button-group .btn-delete {
+  background-color: #d33;
+  color: white;
+}
+.scope-ApplyPeriodAdmin .button-group .btn-delete:hover {
+  background-color: #b02a2a;
+}
+.scope-ApplyPeriodAdmin .button-group .btn-cancel {
+  background-color: #f5f5f5;
+  color: #333;
+}
+.scope-ApplyPeriodAdmin .button-group .btn-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+/* 면접 시간 관리 섹션 */
+.scope-ApplyPeriodAdmin .interview-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.scope-ApplyPeriodAdmin .interview-section .list-header {
+  margin-bottom: 20px;
+}
+
+.scope-ApplyPeriodAdmin .interview-add-form {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.scope-ApplyPeriodAdmin .interview-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.scope-ApplyPeriodAdmin .interview-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.scope-ApplyPeriodAdmin .interview-input:focus {
+  outline: none;
+  border-color: #08366f;
+}
+
+.scope-ApplyPeriodAdmin .interview-edit-input {
+  padding: 6px 10px;
+  border: 1px solid #08366f;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.scope-ApplyPeriodAdmin .btn-add-interview {
+  padding: 10px 20px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.scope-ApplyPeriodAdmin .btn-add-interview:hover {
+  background-color: #1a5cc8;
+}
+
+.scope-ApplyPeriodAdmin .interview-list table {
+  margin-top: 10px;
+}
+.scope-ApplyPeriodAdmin .interview-list tbody tr {
+  cursor: default;
+}
+
+.scope-ApplyPeriodAdmin .btn-edit, .scope-ApplyPeriodAdmin .btn-save-small {
+  padding: 6px 12px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.scope-ApplyPeriodAdmin .btn-edit:hover, .scope-ApplyPeriodAdmin .btn-save-small:hover {
+  background-color: #1a5cc8;
+}
+
+.scope-ApplyPeriodAdmin .btn-delete-small {
+  padding: 6px 12px;
+  background-color: #d33;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.scope-ApplyPeriodAdmin .btn-delete-small:hover {
+  background-color: #b02a2a;
+}
+
+.scope-ApplyPeriodAdmin .btn-cancel-small {
+  padding: 6px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.scope-ApplyPeriodAdmin .btn-cancel-small:hover {
+  background-color: #5a6268;
+}
+
+.scope-ApplyPeriodAdmin .loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .scope-ApplyPeriodAdmin .apply-period-admin {
+    padding: 15px;
+  }
+  .scope-ApplyPeriodAdmin .list-section,
+  .scope-ApplyPeriodAdmin .form-section,
+  .scope-ApplyPeriodAdmin .interview-section {
+    padding: 15px;
+  }
+  .scope-ApplyPeriodAdmin .list-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .scope-ApplyPeriodAdmin table {
+    font-size: 12px;
+  }
+  .scope-ApplyPeriodAdmin th, .scope-ApplyPeriodAdmin td {
+    padding: 8px 4px;
+  }
+  .scope-ApplyPeriodAdmin .date-range {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .scope-ApplyPeriodAdmin .date-range span {
+    display: none;
+  }
+  .scope-ApplyPeriodAdmin .interview-input-row {
+    flex-direction: column;
+  }
+  .scope-ApplyPeriodAdmin .interview-input {
+    width: 100%;
+  }
+  .scope-ApplyPeriodAdmin .btn-add-interview {
+    width: 100%;
+  }
+}
+}

@@ -1,0 +1,636 @@
+@layer legacy {
+.scope-ApplicationForm { display: contents; }
+.scope-ApplicationForm .file-upload-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.scope-ApplicationForm .photo-upload-section {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.scope-ApplicationForm .photo-container {
+  display: inline-block;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.scope-ApplicationForm .photo-container:hover {
+  border-color: #08366f;
+}
+
+.scope-ApplicationForm .file-upload-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.scope-ApplicationForm .file-upload-container input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.scope-ApplicationForm .upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 120px;
+  cursor: pointer;
+}
+
+.scope-ApplicationForm .upload-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.scope-ApplicationForm .upload-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.scope-ApplicationForm .upload-hint {
+  font-size: 12px;
+  color: #666;
+}
+
+.scope-ApplicationForm .photo-display {
+  position: relative;
+  display: inline-block;
+}
+
+.scope-ApplicationForm .apply-photo {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.scope-ApplicationForm .photo-delete-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.scope-ApplicationForm .photo-delete-btn:hover {
+  background-color: #cc0000;
+}
+
+.scope-ApplicationForm img {
+  max-width: 100px;
+}
+
+.scope-ApplicationForm .profile-info {
+  margin-top: 30px;
+}
+
+.scope-ApplicationForm .profile-info, .scope-ApplicationForm .application-body, .scope-ApplicationForm .application-footer {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.scope-ApplicationForm table {
+  margin: 0 auto;
+  font-size: 12px;
+  max-width: 70%;
+}
+
+.scope-ApplicationForm table th, .scope-ApplicationForm table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.scope-ApplicationForm table th {
+  background-color: gray;
+  color: #fff;
+}
+
+.scope-ApplicationForm .application-footer {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 1300px) {
+  .scope-ApplicationForm .profile-info, .scope-ApplicationForm .application-body, .scope-ApplicationForm .application-footer {
+    max-width: 90%;
+    width: 90%;
+  }
+}
+.scope-ApplicationForm textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  margin-top: 10px;
+}
+
+.scope-ApplicationForm .apply-button {
+  color: white;
+  font-weight: bold;
+  margin: 0 auto;
+  width: auto;
+  min-width: 160px;
+  padding: 0 24px;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid #08366f;
+  background-color: #08366f;
+  transition: background-color 0.3s;
+}
+
+.scope-ApplicationForm button:hover {
+  background-color: #1a5cc8;
+  border-color: #1a5cc8;
+}
+
+.scope-ApplicationForm .before-apply {
+  font-size: 12px;
+}
+
+.scope-ApplicationForm .apply-photo {
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.scope-ApplicationForm .error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.scope-ApplicationForm .photo-button {
+  margin: 0 auto;
+  margin-top: 5px;
+  width: 30%;
+}
+
+.scope-ApplicationForm .loading-container {
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 화면 전체 너비 */
+  height: 100%; /* 화면 전체 높이 */
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 다른 요소들 위에 표시 */
+}
+
+.scope-ApplicationForm .loading-image {
+  width: 100px; /* 로딩 이미지 크기 조절 */
+  height: 100px;
+}
+
+/* 폼 헤더 스타일 */
+.scope-ApplicationForm .form-header {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.scope-ApplicationForm .form-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.scope-ApplicationForm .notice-text {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.scope-ApplicationForm .section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.scope-ApplicationForm .section-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.scope-ApplicationForm .form-footer {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.scope-ApplicationForm .section-spacer {
+  height: 30px;
+  margin: 20px 0;
+}
+
+/* 기본 정보 섹션 스타일 */
+.scope-ApplicationForm .default_info {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .scope-ApplicationForm .form-header,
+  .scope-ApplicationForm .form-footer,
+  .scope-ApplicationForm .default_info {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  .scope-ApplicationForm .form-header h1 {
+    font-size: 20px;
+  }
+  .scope-ApplicationForm .section-title {
+    font-size: 16px;
+  }
+  .scope-ApplicationForm .section-subtitle {
+    font-size: 13px;
+  }
+  .scope-ApplicationForm .notice-text {
+    font-size: 12px;
+  }
+  .scope-ApplicationForm .info-field {
+    margin-bottom: 20px;
+  }
+  .scope-ApplicationForm .info-field label {
+    font-size: 13px;
+  }
+  .scope-ApplicationForm .info-field input,
+  .scope-ApplicationForm .info-field textarea {
+    font-size: 13px;
+  }
+  .scope-ApplicationForm .email-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .scope-ApplicationForm .email-confirm-btn {
+    align-self: flex-start;
+  }
+  .scope-ApplicationForm .photo-container {
+    padding: 15px;
+  }
+  .scope-ApplicationForm .apply-photo {
+    max-width: 120px;
+    max-height: 120px;
+  }
+  .scope-ApplicationForm .photo-delete-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    top: -6px;
+    right: -6px;
+  }
+  .scope-ApplicationForm .upload-placeholder {
+    min-height: 100px;
+    padding: 15px;
+  }
+  .scope-ApplicationForm .upload-icon {
+    font-size: 28px;
+  }
+  .scope-ApplicationForm .upload-text {
+    font-size: 13px;
+  }
+  .scope-ApplicationForm .upload-hint {
+    font-size: 11px;
+  }
+}
+.scope-ApplicationForm .info-field {
+  margin-bottom: 25px;
+}
+
+.scope-ApplicationForm .info-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.scope-ApplicationForm .info-field input {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  background: transparent;
+  outline: none;
+  transition: border-bottom-color 0.3s;
+}
+
+.scope-ApplicationForm .info-field input:focus {
+  border-bottom-color: #08366f;
+}
+
+.scope-ApplicationForm .info-field input::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+.scope-ApplicationForm .email-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scope-ApplicationForm .email-container input {
+  flex: 1;
+}
+
+.scope-ApplicationForm .email-confirm-btn {
+  padding: 8px 16px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #666;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+
+.scope-ApplicationForm .email-confirm-btn:hover {
+  background-color: #e9e9e9;
+}
+
+.scope-ApplicationForm .email-confirm-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.scope-ApplicationForm .hint-text {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+/* 자기소개 textarea 스타일 */
+.scope-ApplicationForm .info-field textarea {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #f5f5f5;
+  outline: none;
+  resize: none;
+  height: auto;
+  min-height: 120px;
+  overflow: hidden;
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+}
+
+.scope-ApplicationForm .info-field textarea:focus {
+  background: #fff;
+  border: 1px solid #08366f;
+}
+
+.scope-ApplicationForm .info-field textarea::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 활동 추가 폼 스타일 */
+.scope-ApplicationForm .activity-form {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.scope-ApplicationForm .activity-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.scope-ApplicationForm .activity-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  background: white;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.scope-ApplicationForm .activity-input:focus {
+  border-color: #08366f;
+}
+
+.scope-ApplicationForm .add-activity-btn {
+  padding: 8px 16px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.scope-ApplicationForm .add-activity-btn:hover {
+  background-color: #1a5cc8;
+}
+
+/* 활동 테이블 스타일 */
+.scope-ApplicationForm .activities-container {
+  margin-top: 10px;
+}
+
+.scope-ApplicationForm .activities-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.scope-ApplicationForm .activities-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scope-ApplicationForm .activities-table th {
+  background-color: #08366f;
+  color: white;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scope-ApplicationForm .activities-table td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.scope-ApplicationForm .activities-table tr:last-child td {
+  border-bottom: none;
+}
+
+.scope-ApplicationForm .activities-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.scope-ApplicationForm .no-activities {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.scope-ApplicationForm .remove-activity-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.scope-ApplicationForm .remove-activity-btn:hover {
+  background-color: #cc0000;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .scope-ApplicationForm .activity-input-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .scope-ApplicationForm .activity-input {
+    width: 100%;
+    min-width: auto;
+  }
+  .scope-ApplicationForm .add-activity-btn {
+    align-self: flex-start;
+  }
+  .scope-ApplicationForm .activities-table {
+    font-size: 12px;
+  }
+  .scope-ApplicationForm .activities-table th,
+  .scope-ApplicationForm .activities-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  .scope-ApplicationForm .activities-table th {
+    font-size: 11px;
+  }
+  .scope-ApplicationForm .remove-activity-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+}
+/* 면접 시간 선택 스타일 */
+.scope-ApplicationForm .interview-time-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.scope-ApplicationForm .interview-time-item {
+  display: flex;
+  align-items: center;
+}
+
+.scope-ApplicationForm .checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.scope-ApplicationForm .checkbox-label input[type=checkbox] {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  cursor: pointer;
+  accent-color: #08366f;
+}
+
+.scope-ApplicationForm .checkbox-text {
+  font-size: 14px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .scope-ApplicationForm .interview-time-list {
+    padding: 12px;
+  }
+  .scope-ApplicationForm .checkbox-label input[type=checkbox] {
+    width: 16px;
+    height: 16px;
+  }
+  .scope-ApplicationForm .checkbox-text {
+    font-size: 13px;
+  }
+}
+}

@@ -1,0 +1,20 @@
+@layer legacy {
+.scope-CommonFooter { display: contents; }
+.scope-CommonFooter .common-footer {
+  background-color: #4d4d4d;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 12px;
+}
+
+.scope-CommonFooter .common-footer img {
+  width: 20px;
+  height: 20px;
+}
+
+.scope-CommonFooter #copyright {
+  align-content: center;
+  top: 10px;
+}
+}

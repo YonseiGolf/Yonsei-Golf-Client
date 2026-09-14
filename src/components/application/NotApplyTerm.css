@@ -1,0 +1,64 @@
+@layer legacy {
+.scope-NotApplyTerm { display: contents; }
+.scope-NotApplyTerm .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  padding-top: 60px;
+  padding-bottom: 150px;
+  background-color: #f0f0f0;
+  width: 100%;
+}
+
+.scope-NotApplyTerm h1 {
+  text-align: center;
+  font-size: 30px;
+  max-width: 80%;
+  padding: 50px;
+}
+
+.scope-NotApplyTerm .email-input {
+  width: 80%;
+  height: 20%;
+  max-width: 800px;
+  padding: 10px 5px;
+  background-color: #ffffff;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.scope-NotApplyTerm .email-input input {
+  padding: 3%;
+  width: 90%;
+  font-size: 2vh;
+  border: 1px solid white;
+  border-radius: 100px;
+}
+.scope-NotApplyTerm .email-input button {
+  padding: 3%;
+  font-size: 18px;
+  background-color: #08366f;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 140px;
+}
+.scope-NotApplyTerm .email-input button:hover {
+  background-color: #1a5cc8;
+}
+
+.scope-NotApplyTerm input {
+  outline: none;
+}
+
+.scope-NotApplyTerm h1 {
+  font-family: "GmarketSansMedium", sans-serif;
+  font-weight: bold;
+}
+}

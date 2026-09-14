@@ -1,0 +1,289 @@
+@layer legacy {
+.scope-ApplicationDetail { display: contents; }
+/* 폼 헤더 스타일 */
+.scope-ApplicationDetail .form-header {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.scope-ApplicationDetail .form-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.scope-ApplicationDetail .notice-text {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.scope-ApplicationDetail .section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.scope-ApplicationDetail .section-spacer {
+  height: 30px;
+  margin: 20px 0;
+}
+
+/* 기본 정보 섹션 스타일 */
+.scope-ApplicationDetail .default_info {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.scope-ApplicationDetail .info-field {
+  margin-bottom: 25px;
+}
+
+.scope-ApplicationDetail .info-field label, .scope-ApplicationDetail .info-field > p:first-child {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.scope-ApplicationDetail .field-value {
+  padding: 12px 0;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 1px solid #eee;
+  line-height: 1.5;
+}
+
+.scope-ApplicationDetail .textarea-value {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: none;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+/* 사진 업로드 섹션 스타일 */
+.scope-ApplicationDetail .photo-upload-section {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.scope-ApplicationDetail .photo-container {
+  display: inline-block;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.scope-ApplicationDetail .photo-display {
+  display: inline-block;
+}
+
+.scope-ApplicationDetail .apply-photo {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 관리자 섹션 스타일 */
+.scope-ApplicationDetail .admin-section {
+  border-top: 2px solid #08366f;
+  padding-top: 30px;
+  margin-top: 40px;
+}
+
+.scope-ApplicationDetail .admin-field-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.scope-ApplicationDetail .admin-button {
+  padding: 8px 16px;
+  background-color: #08366f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scope-ApplicationDetail .admin-button:hover {
+  background-color: #1a5cc8;
+}
+
+.scope-ApplicationDetail .status-select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.scope-ApplicationDetail .status-select:focus {
+  outline: none;
+  border-color: #08366f;
+  box-shadow: 0 0 0 2px rgba(8, 54, 111, 0.1);
+}
+
+/* 비디오 링크 스타일 */
+.scope-ApplicationDetail .video-link {
+  color: #08366f;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.scope-ApplicationDetail .video-link:hover {
+  color: #1a5cc8;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .scope-ApplicationDetail .form-header,
+  .scope-ApplicationDetail .default_info {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  .scope-ApplicationDetail .form-header h1 {
+    font-size: 20px;
+  }
+  .scope-ApplicationDetail .section-title {
+    font-size: 16px;
+  }
+  .scope-ApplicationDetail .notice-text {
+    font-size: 12px;
+  }
+  .scope-ApplicationDetail .info-field {
+    margin-bottom: 20px;
+  }
+  .scope-ApplicationDetail .info-field label {
+    font-size: 13px;
+  }
+  .scope-ApplicationDetail .field-value {
+    font-size: 13px;
+  }
+  .scope-ApplicationDetail .photo-container {
+    padding: 15px;
+  }
+  .scope-ApplicationDetail .apply-photo {
+    max-width: 120px;
+    max-height: 120px;
+  }
+  .scope-ApplicationDetail .admin-field-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .scope-ApplicationDetail .admin-button {
+    align-self: flex-start;
+  }
+}
+/* 활동 테이블 스타일 */
+.scope-ApplicationDetail .activities-container {
+  margin-top: 10px;
+}
+
+.scope-ApplicationDetail .activities-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.scope-ApplicationDetail .activities-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scope-ApplicationDetail .activities-table th {
+  background-color: #08366f;
+  color: white;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scope-ApplicationDetail .activities-table td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.scope-ApplicationDetail .activities-table tr:last-child td {
+  border-bottom: none;
+}
+
+.scope-ApplicationDetail .activities-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.scope-ApplicationDetail .no-activities {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+/* 면접 가능 시간 스타일 */
+.scope-ApplicationDetail .available-interview-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 0;
+}
+
+.scope-ApplicationDetail .available-time-item {
+  padding: 8px 16px;
+  background-color: #e8f4fd;
+  border: 1px solid #08366f;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #08366f;
+  font-weight: 500;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .scope-ApplicationDetail .activities-table {
+    font-size: 12px;
+  }
+  .scope-ApplicationDetail .activities-table th,
+  .scope-ApplicationDetail .activities-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  .scope-ApplicationDetail .activities-table th {
+    font-size: 11px;
+  }
+  .scope-ApplicationDetail .available-interview-times {
+    gap: 8px;
+  }
+  .scope-ApplicationDetail .available-time-item {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+}

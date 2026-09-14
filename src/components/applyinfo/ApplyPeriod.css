@@ -1,0 +1,32 @@
+@layer legacy {
+.scope-ApplyPeriod { display: contents; }
+.scope-ApplyPeriod h1 {
+  color: #08366f;
+  font-family: "GmarketSansMedium", sans-serif;
+}
+
+.scope-ApplyPeriod .container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  margin-top: 30px;
+  margin-bottom: 100px;
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
+.scope-ApplyPeriod .text-box {
+  border: 1px solid #e3e3e3;
+  padding: 20px;
+  padding-top: 50px;
+  max-width: 500px;
+  width: 95%;
+  height: 95%;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.scope-ApplyPeriod .apply-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+}
