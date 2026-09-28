@@ -7,6 +7,7 @@
 import axios from "axios";
 import globalState from "@/globalState";
 import store from "@/store";
+import {decodeJwtPayload} from '@/utils/jwt';
 
 export default {
   name: 'KakaoCallback',
@@ -41,11 +42,7 @@ export default {
               const token = loginResponse.data.data.accessToken;
               sessionStorage.setItem('accessToken', token);
 
-              const parts = token.split('.');
-              const payload = parts[1]
-              const decoded = atob(payload);
-              const decodedURIComponent = decodeURIComponent(escape(decoded));
-              const json = JSON.parse(decodedURIComponent);
+              const json = decodeJwtPayload(token);
 
               // 로그인이 성공하면 store 에 로그인 정보를 저장해둔다.
               const userDetails = {
