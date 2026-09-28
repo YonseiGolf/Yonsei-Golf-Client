@@ -11,7 +11,7 @@ export default function ApplyPeriod() {
 			<h1>모집 일정</h1>
 			<AsyncState {...query} retry={query.reload} />
 			{data ? (
-				<div className="container">
+				<div className="schedule-container">
 					<div className="text-box">
 						<p>
 							<span className="apply-title">서류 접수</span>　{data.startDate} ~ {data.endDate}

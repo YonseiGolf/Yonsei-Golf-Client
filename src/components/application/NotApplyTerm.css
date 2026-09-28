@@ -1,15 +1,14 @@
 @layer legacy {
 .scope-NotApplyTerm { display: contents; }
-.scope-NotApplyTerm .container {
+/* Not `.container`: Tailwind's container utility caps max-width per breakpoint and overrides this layer. */
+.scope-NotApplyTerm .term-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 40vh;
-  padding-top: 60px;
-  padding-bottom: 150px;
+  min-height: 40vh;
+  padding: 60px 16px 150px;
   background-color: #f0f0f0;
-  width: 100%;
 }
 
 .scope-NotApplyTerm h1 {
@@ -19,42 +18,11 @@
   padding: 50px;
 }
 
-.scope-NotApplyTerm .email-input {
-  width: 80%;
-  height: 20%;
-  max-width: 800px;
-  padding: 10px 5px;
-  background-color: #ffffff;
-  border-radius: 100px;
+.scope-NotApplyTerm .email-form {
+  width: min(100%, 800px);
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-}
-.scope-NotApplyTerm .email-input input {
-  padding: 3%;
-  width: 90%;
-  font-size: 2vh;
-  border: 1px solid white;
-  border-radius: 100px;
-}
-.scope-NotApplyTerm .email-input button {
-  padding: 3%;
-  font-size: 18px;
-  background-color: #08366f;
-  color: #fff;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  min-width: 140px;
-}
-.scope-NotApplyTerm .email-input button:hover {
-  background-color: #1a5cc8;
-}
-
-.scope-NotApplyTerm input {
-  outline: none;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .scope-NotApplyTerm h1 {
