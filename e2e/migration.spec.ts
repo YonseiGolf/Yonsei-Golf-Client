@@ -161,6 +161,18 @@ test('application uploads a photo, sends a confirmation mail and submits the ser
 	expect(mock.errors).toEqual([])
 })
 
+test('clicking anywhere on the photo box opens the file chooser', async ({ page }) => {
+	await mockApi(page)
+	await page.goto('/apply/form')
+	for (const text of ['👤', '지원자 사진', '클릭하여 업로드 (10MB 이하)']) {
+		const box = await page.getByText(text, { exact: true }).boundingBox()
+		if (!box) throw new Error(`${text} is not visible`)
+		const chooser = page.waitForEvent('filechooser', { timeout: 3000 })
+		await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2)
+		await chooser
+	}
+})
+
 test('administrator preview uploads a photo and submits a test application for the chosen semester', async ({
 	page,
 }) => {
