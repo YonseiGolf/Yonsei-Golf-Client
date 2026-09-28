@@ -71,6 +71,12 @@ E2E는 `localhost:4173`의 별도 서버와 가짜 API를 사용합니다. 실�
 
 `.github/workflows/check.yml`은 PR 및 수동 실행에서 위 검사를 수행합니다. 기존 `fe-deploy.yml`의 dev push 배포 조건은 유지했습니다.
 
+## Vercel
+
+Vercel은 `dev` 브랜치를 운영(`www.yonsei-golf.kr`)으로, 그 밖의 브랜치를 Preview로 배포합니다. `vercel.json`이 Vite 빌드(`pnpm build` → `dist`)와 SPA 경로 fallback을 지정하므로 대시보드의 Framework 설정과 관계없이 같은 방식으로 빌드합니다. 환경변수는 `VITE_*` 이름을 우선 사용하고, 없으면 기존 `VUE_APP_API_URL`, `VUE_APP_KAKAO_REST_API_KEY`, `VUE_APP_KAKAO_REDIRECT_URI`를 읽습니다.
+
+운영 배포에 문제가 있으면 `vercel rollback <이전 운영 배포 URL>`(또는 대시보드의 Instant Rollback)로 이전 배포를 바로 되돌립니다. 롤백 뒤에는 새 운영 배포가 자동으로 도메인에 연결되지 않으므로, 수정 후 `vercel promote <배포 URL>`로 다시 연결합니다.
+
 ## 빌드와 Docker
 
 ```sh
