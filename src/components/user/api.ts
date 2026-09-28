@@ -42,7 +42,8 @@ export function completeKakaoLogin(code: string) {
 				useAuthStore.getState().setSession(result.accessToken)
 				return 'signed-in'
 			} catch (error) {
-				if (error instanceof ApiError && error.status === 401 && error.code === 401) {
+				// The server answers 404 when no member is linked to this Kakao account.
+				if (error instanceof ApiError && error.status === 404) {
 					useAuthStore.getState().clearSession()
 					sessionStorage.setItem('signupToken', temporaryToken)
 					return 'signup'
@@ -63,6 +64,9 @@ export async function signUp(body: SignUpRequest) {
 }
 
 export async function logout() {
-	await api('/users/logout', { method: 'POST' })
-	useAuthStore.getState().clearSession()
+	try {
+		await api('/users/logout', { method: 'POST' })
+	} finally {
+		useAuthStore.getState().clearSession()
+	}
 }

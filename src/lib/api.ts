@@ -61,20 +61,12 @@ export async function api<T = void>(path: string, options: Options = {}, retry =
 		}
 	}
 	if (!response.ok || result?.status === 'fail') {
-		if (
-			auth &&
-			!token &&
-			accessToken &&
-			retry &&
-			response.status === 401 &&
-			result?.code === 40101
-		) {
+		if (auth && !token && accessToken && retry && response.status === 401) {
 			// Requests that failed before a parallel refresh completed reuse its new token.
 			if (sessionStorage.getItem('accessToken') === accessToken) await refreshSession()
 			return api<T>(path, options, false)
 		}
-		if (auth && !token && (result?.code === 40102 || (response.status === 401 && !retry)))
-			useAuthStore.getState().clearSession()
+		if (auth && !token && response.status === 401 && !retry) useAuthStore.getState().clearSession()
 		throw new ApiError(
 			result?.message || `요청에 실패했습니다. (${response.status})`,
 			response.status,

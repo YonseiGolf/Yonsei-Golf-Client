@@ -13,4 +13,4 @@ export const ok = (data: unknown = null) =>
 		status: 200,
 	})
 export const fail = (status: number, code = status, message = '실패') =>
-	new Response(JSON.stringify({ status: 'fail', code, message }), { status })
+	new Response(JSON.stringify({ status: 'error', code, message, data: null }), { status })

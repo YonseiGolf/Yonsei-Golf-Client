@@ -117,7 +117,7 @@ export async function mockApi(
 		const ok = (data: unknown = null) =>
 			route.fulfill({ json: { status: 'success', code: 200, message: '성공', data } })
 		const fail = (message: string, status = 400, code = status) =>
-			route.fulfill({ status, json: { status: 'fail', code, message } })
+			route.fulfill({ status, json: { status: 'error', code, message, data: null } })
 		const paged = (content: unknown[], totalPages = 1) => ({
 			content,
 			totalElements: content.length,
@@ -127,13 +127,13 @@ export async function mockApi(
 		if (path === '/users/signIn/refresh')
 			return options.authenticated || options.admin
 				? ok({ accessToken: fakeToken(options.admin) })
-				: fail('로그인이 필요합니다.', 401, 40102)
+				: fail('Refresh Token이 존재하지 않습니다.', 401)
 		if (path === '/users/loggedIn' || path === '/users/logout' || path === '/users/signUp')
 			return ok()
 		if (path === '/oauth/kakao') return ok({ accessToken: 'temporary-kakao-token' })
 		if (path === '/users/signIn')
 			return options.signup
-				? fail('회원가입이 필요합니다.', 401)
+				? fail('존재하지 않는 유저입니다.', 404)
 				: ok({ accessToken: fakeToken(options.admin) })
 		if (path === '/application/availability') return ok(options.available ?? true)
 		if (path === '/application/recruit' || (path === '/admin/recruit' && method === 'GET'))

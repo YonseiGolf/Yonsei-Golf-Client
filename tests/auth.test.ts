@@ -33,7 +33,7 @@ describe('Kakao authentication', () => {
 			vi
 				.fn()
 				.mockResolvedValueOnce(ok({ accessToken: 'temporary' }))
-				.mockResolvedValueOnce(fail(401, 401, '가입이 필요합니다.')),
+				.mockResolvedValueOnce(fail(404, 404, '존재하지 않는 유저입니다.')),
 		)
 		expect(await completeKakaoLogin('new-user')).toBe('signup')
 		expect(sessionStorage.getItem('signupToken')).toBe('temporary')
@@ -47,9 +47,9 @@ describe('Kakao authentication', () => {
 			vi
 				.fn()
 				.mockResolvedValueOnce(ok({ accessToken: 'temporary' }))
-				.mockResolvedValueOnce(fail(401, 40101)),
+				.mockResolvedValueOnce(fail(401)),
 		)
-		await expect(completeKakaoLogin('expired')).rejects.toMatchObject({ code: 40101 })
+		await expect(completeKakaoLogin('expired')).rejects.toMatchObject({ status: 401 })
 		expect(sessionStorage.getItem('signupToken')).toBeNull()
 	})
 })

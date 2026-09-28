@@ -1,3 +1,4 @@
+import { logout } from '@/components/user/api'
 import { api, queryString, refreshSession } from '@/lib/api'
 import { useAuthStore } from '@/store'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
@@ -54,7 +55,7 @@ describe('server API and session renewal', () => {
 					finishRefresh = resolve
 				})
 			if (new Headers(options.headers).get('Authorization') === `Bearer ${old}`)
-				return fail(401, 40101)
+				return fail(401)
 			return ok({ refreshed: true })
 		})
 		vi.stubGlobal('fetch', fetcher)
@@ -87,7 +88,7 @@ describe('server API and session renewal', () => {
 				Promise.resolve(
 					path.endsWith('/refresh')
 						? ok({ accessToken: tokenFor({ ...member, name: '새 토큰' }) })
-						: fail(401, 40101),
+						: fail(401),
 				),
 			)
 		vi.stubGlobal('fetch', fetcher)
@@ -103,10 +104,24 @@ describe('server API and session renewal', () => {
 			vi
 				.fn()
 				.mockImplementation((path: string) =>
-					Promise.resolve(path.endsWith('/refresh') ? fail(401, 40102) : fail(401, 40101)),
+					Promise.resolve(
+						path.endsWith('/refresh')
+							? fail(401, 401, 'Refresh Token이 존재하지 않습니다.')
+							: fail(401),
+					),
 				),
 		)
-		await expect(api('/admin/users')).rejects.toMatchObject({ code: 40102 })
+		await expect(api('/admin/users')).rejects.toMatchObject({
+			status: 401,
+			message: 'Refresh Token이 존재하지 않습니다.',
+		})
+		expect(useAuthStore.getState().user).toBeNull()
+	})
+	it('clears the local session even if the logout request fails', async () => {
+		useAuthStore.getState().setSession(tokenFor())
+		vi.stubGlobal('fetch', vi.fn().mockResolvedValue(fail(500)))
+		await expect(logout()).rejects.toMatchObject({ status: 500 })
+		expect(sessionStorage.getItem('accessToken')).toBeNull()
 		expect(useAuthStore.getState().user).toBeNull()
 	})
 	it('surfaces non-JSON responses as errors instead of false success', async () => {

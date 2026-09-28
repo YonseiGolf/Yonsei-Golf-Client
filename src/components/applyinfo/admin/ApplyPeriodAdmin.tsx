@@ -118,7 +118,10 @@ function PeriodForm({
 	})
 	const action = useAction()
 	const dateError = recruitDateError(dates)
-	const valid = Number.isSafeInteger(Number(semester)) && Number(semester) > 0 && !dateError
+	// The server requires every date, so saving waits until all seven are chosen.
+	const complete = dateFields.every(([key]) => dates[key])
+	const valid =
+		Number.isSafeInteger(Number(semester)) && Number(semester) > 0 && complete && !dateError
 	return (
 		<section className="form-section">
 			<h3>{initial ? '모집 기간 수정' : '새 모집 기간 등록'}</h3>
@@ -148,7 +151,7 @@ function PeriodForm({
 								method: initial ? 'PATCH' : 'POST',
 								body: {
 									semester: Number(semester),
-									...Object.fromEntries(dateFields.map(([key]) => [key, dates[key] || null])),
+									...Object.fromEntries(dateFields.map(([key]) => [key, dates[key]])),
 								},
 							})
 							onSaved()
@@ -174,6 +177,7 @@ function PeriodForm({
 						<Input
 							id={`recruit-${key}`}
 							type="date"
+							required
 							value={/^\d{4}-\d{2}-\d{2}$/.test(dates[key]) ? dates[key] : ''}
 							onChange={(event) => setDates({ ...dates, [key]: event.target.value })}
 						/>

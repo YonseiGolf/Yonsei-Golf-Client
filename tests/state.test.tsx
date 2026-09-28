@@ -2,7 +2,7 @@ import { getApplicationStatus } from '@/components/application/admin/status'
 import { emptyDates, recruitDateError } from '@/components/applyinfo/admin/recruit'
 import { useAction } from '@/hooks/useAction'
 import { useQuery } from '@/hooks/useQuery'
-import { toDateTimeInput } from '@/lib/format'
+import { formatDateTime, toDateTimeInput } from '@/lib/format'
 import { act, renderHook, waitFor } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
@@ -10,6 +10,13 @@ describe('administrative data', () => {
 	it('does not prefill datetime inputs with yearless application response dates', () => {
 		expect(toDateTimeInput('09월20일 10:30')).toBe('')
 		expect(toDateTimeInput('2026-09-20 10:30')).toBe('2026-09-20T10:30')
+	})
+	it('drops only the seconds from server date-times', () => {
+		expect(formatDateTime('2026년 09월 28일 10:05:00')).toBe('2026년 09월 28일 10:05')
+		expect(formatDateTime('2026-09-28T10:05:00')).toBe('2026-09-28 10:05')
+		expect(formatDateTime('2026-09-28 10:05')).toBe('2026-09-28 10:05')
+		expect(formatDateTime('09월28일 10:05')).toBe('09월28일 10:05')
+		expect(formatDateTime(null)).toBe('미정')
 	})
 	it.each([
 		[null, null, 'pending'],
