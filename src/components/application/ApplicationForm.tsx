@@ -1,6 +1,12 @@
-import { getAvailability, getInterviewTimes, getRecruit } from '@/components/applyinfo/api'
+import {
+	getAvailability,
+	getInterviewTimes,
+	getRecruit,
+	getRecruits,
+} from '@/components/applyinfo/api'
 import AsyncState from '@/components/common/AsyncState'
 import { confirmAction } from '@/components/common/ConfirmDialog'
+import SelectField from '@/components/common/SelectField'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
@@ -32,6 +38,18 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 		const times = recruit ? await getInterviewTimes(recruit.id, signal) : []
 		return { recruit, available, times }
 	})
+	const recruits = useQuery('admin-recruits', getRecruits, preview)
+	const [testRecruitId, setTestRecruitId] = useState<number>()
+	const testRecruit = recruits.data?.find((item) => item.id === testRecruitId)
+	const testTimes = useQuery(
+		`test-interview-times:${testRecruitId}`,
+		(signal) => getInterviewTimes(testRecruitId ?? 0, signal),
+		testRecruitId !== undefined,
+	)
+	// A preview without a test semester is a dry run: nothing is uploaded, mailed or submitted.
+	const dryRun = preview && !testRecruit
+	const recruit = testRecruit ?? query.data?.recruit
+	const times = (testRecruit ? testTimes.data : query.data?.times) ?? []
 	const [values, setValues] = useState({
 		name: '',
 		email: '',
@@ -74,12 +92,12 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 	if (submitted)
 		return (
 			<div className="page-container">
-				<h1>지원서가 제출되었습니다.</h1>
+				<h1>{preview ? '테스트 지원서가 제출되었습니다.' : '지원서가 제출되었습니다.'}</h1>
 				<p>
 					{values.email}로 접수 메일을 보내드립니다. 10분 내로 메일을 받지 못했다면 인스타그램으로
 					문의해 주세요.
 				</p>
-				<Link to="/">홈으로</Link>
+				{preview ? <Link to="/admin/form">지원서 관리로</Link> : <Link to="/">홈으로</Link>}
 			</div>
 		)
 	const valid =
@@ -88,18 +106,22 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 		values.phoneNumber.replace(/\D/g, '').length >= 10 &&
 		photo.key &&
 		isHttpUrl(values.swingVideo) &&
-		(!query.data?.times.length || selectedTimes.length > 0)
+		!testTimes.loading &&
+		!testTimes.error &&
+		(!times.length || selectedTimes.length > 0)
 	return (
 		<div className="scope-ApplicationForm">
 			<form
 				onSubmit={(event) => {
 					event.preventDefault()
-					if (!valid || preview || upload.pending || !query.data?.recruit) return
-					const semester = query.data.recruit.semester
+					if (!valid || dryRun || upload.pending || !recruit) return
+					const semester = recruit.semester
 					void submission.run(async () => {
 						if (
 							!(await confirmAction(
-								'지원서를 제출하시겠습니까?',
+								preview
+									? `${semester}기 테스트 지원서를 제출하시겠습니까?`
+									: '지원서를 제출하시겠습니까?',
 								`결과가 발송될 이메일을 확인해 주세요: ${values.email.trim()}`,
 							))
 						)
@@ -125,7 +147,34 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 					<h1>연세 골프 지원서</h1>
 					<div className="notice-text">* 지원서는 임시저장되지 않습니다.</div>
 					{preview && (
-						<output>지원서 양식 미리보기입니다. 제출과 이메일 발송은 실행되지 않습니다.</output>
+						<div className="test-submit">
+							<div className="flex flex-wrap items-center gap-2.5">
+								<Label htmlFor="test-semester">테스트 제출 기수</Label>
+								<SelectField
+									id="test-semester"
+									value={String(testRecruitId ?? '')}
+									disabled={recruits.loading || upload.pending || submission.pending}
+									onValueChange={(value) => {
+										setTestRecruitId(value ? Number(value) : undefined)
+										setPhoto({ url: '', key: '' })
+										setSelectedTimes([])
+									}}
+									options={[
+										{ value: '', label: '제출 안 함 (미리보기)' },
+										...(recruits.data ?? []).map((item) => ({
+											value: String(item.id),
+											label: `${item.semester}기`,
+										})),
+									]}
+								/>
+							</div>
+							<AsyncState error={recruits.error || testTimes.error} />
+							<output>
+								{testRecruit
+									? `테스트 제출 모드입니다. 사진이 실제로 업로드되고 ${testRecruit.semester}기 지원서로 저장되며, 입력한 이메일로 접수 메일이 발송됩니다. 저장된 지원서는 화면에서 삭제할 수 없습니다.`
+									: '지원서 양식 미리보기입니다. 제출과 이메일 발송은 실행되지 않습니다.'}
+							</output>
+						</div>
 					)}
 				</div>
 				<fieldset
@@ -150,7 +199,7 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 													if (file)
 														void upload.run(async () => {
 															try {
-																const key = preview ? 'preview' : await uploadPhoto(file)
+																const key = dryRun ? 'preview' : await uploadPhoto(file)
 																setPhoto({ url: URL.createObjectURL(file), key })
 															} finally {
 																input.value = ''
@@ -229,7 +278,7 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 											variant="outline"
 											className="email-confirm-btn w-fit"
 											disabled={
-												preview ||
+												dryRun ||
 												confirmation.pending ||
 												!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()) ||
 												confirmedEmail === values.email.trim()
@@ -284,11 +333,11 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 								onChange={(event) => update('swingVideo', event.target.value)}
 							/>
 						</div>
-						{Boolean(query.data?.times.length) && (
+						{times.length > 0 && (
 							<fieldset className="info-field" style={{ border: 0 }}>
 								<legend>면접 가능 시간을 선택해주세요 (복수 선택 가능)</legend>
 								<div className="interview-time-list">
-									{query.data?.times.map((time) => (
+									{times.map((time) => (
 										<div className="interview-time-item" key={time.id}>
 											<Label
 												htmlFor={`interview-time-${time.id}`}
@@ -328,7 +377,7 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 				<Button
 					className="apply-button mb-5 min-h-12 min-w-40 rounded-lg text-base"
 					type="submit"
-					disabled={preview || !valid || submission.pending || upload.pending}
+					disabled={dryRun || !valid || submission.pending || upload.pending}
 				>
 					{submission.pending ? '제출 중…' : '지원서 제출'}
 				</Button>
