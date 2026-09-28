@@ -191,6 +191,7 @@ export default function ApplicationForm({ preview = false }: { preview?: boolean
 											<Input
 												type="file"
 												aria-label="지원자 사진"
+												className="h-full"
 												accept={IMAGE_TYPES.join(',')}
 												disabled={upload.pending}
 												onChange={(event) => {
