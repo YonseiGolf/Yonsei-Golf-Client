@@ -1,0 +1,55 @@
+@layer legacy {
+.scope-SignUpPage { display: contents; }
+.scope-SignUpPage .register-container {
+  width: 280px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.scope-SignUpPage .input-group {
+  margin-bottom: 15px;
+  width: 250px;
+  font-weight: bold;
+}
+
+.scope-SignUpPage label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.scope-SignUpPage input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.scope-SignUpPage button {
+  width: 100%;
+  padding: 10px;
+  background-color: #08366f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.scope-SignUpPage button:hover {
+  background-color: #0056b3;
+}
+
+.scope-SignUpPage .error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.scope-SignUpPage button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+}

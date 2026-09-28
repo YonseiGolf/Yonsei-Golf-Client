@@ -1,0 +1,128 @@
+@layer legacy {
+.scope-BoardTemplateDetail { display: contents; }
+.scope-BoardTemplateDetail .board-container {
+  padding-top: 50px;
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.scope-BoardTemplateDetail .detail-category {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.scope-BoardTemplateDetail .board-time {
+  font-size: 12px;
+  color: gray;
+}
+
+.scope-BoardTemplateDetail .detail-category {
+  color: gray;
+}
+
+.scope-BoardTemplateDetail .detail-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.scope-BoardTemplateDetail .detail-content {
+  margin-top: 40px;
+  font-size: 15px;
+  margin-bottom: 40px;
+}
+
+.scope-BoardTemplateDetail hr {
+  color: gray;
+}
+
+.scope-BoardTemplateDetail span {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.scope-BoardTemplateDetail textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  min-height: 50px;
+}
+
+.scope-BoardTemplateDetail textarea {
+  outline: none;
+  resize: none;
+}
+
+.scope-BoardTemplateDetail .edit-delete-post {
+  font-size: 15px;
+  font-color: gray;
+  border: none;
+  margin-right: 10px;
+  background-color: white;
+}
+
+.scope-BoardTemplateDetail .post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scope-BoardTemplateDetail .post-actions {
+  margin-left: 10px;
+}
+
+.scope-BoardTemplateDetail .edit-delete-post {
+  font-size: 10px;
+  color: gray;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.3vh;
+  margin-bottom: 20px;
+}
+.scope-BoardTemplateDetail .edit-delete-post:hover {
+  color: black;
+}
+
+.scope-BoardTemplateDetail .save-cancle-edit {
+  font-size: 15px;
+  font-color: gray;
+  border: none;
+  margin-right: 10px;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.3vh;
+  margin-bottom: 20px;
+}
+.scope-BoardTemplateDetail .save-cancle-edit:hover {
+  color: black;
+}
+
+.scope-BoardTemplateDetail .button-container {
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.scope-BoardTemplateDetail .listButton {
+  padding: 10px 20px; /* 버튼의 내부 여백을 조정합니다 */
+  font-size: 16px; /* 글자 크기를 조정합니다 */
+  background-color: #08366f; /* 버튼의 배경색을 조정합니다 */
+  color: white; /* 버튼의 글자 색상을 조정합니다 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 합니다 */
+}
+
+.scope-BoardTemplateDetail button {
+  border: none;
+}
+
+.scope-BoardTemplateDetail .edit-title {
+  height: 20px;
+}
+}

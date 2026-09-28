@@ -1,0 +1,94 @@
+@layer legacy {
+.scope-PostTemplate { display: contents; }
+.scope-PostTemplate h2 {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.scope-PostTemplate .template-header-container {
+  padding-top: 20px;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.scope-PostTemplate .template-body-container {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.scope-PostTemplate .title-input {
+  display: flex;
+  height: 30px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  justify-content: space-between;
+}
+
+.scope-PostTemplate .input-title {
+  width: 70%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  height: 100%;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.scope-PostTemplate .board-body-input {
+  display: flex;
+  margin: 0 auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 50%;
+  height: 400px;
+  text-align: left;
+  padding: 10px;
+}
+
+@media (max-width: 1024px) {
+  .scope-PostTemplate .board-header-container,
+  .scope-PostTemplate .board-body-container,
+  .scope-PostTemplate .board-body-input {
+    width: 90%;
+  }
+}
+.scope-PostTemplate .button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+  width: 50%;
+  padding-top: 20px;
+}
+
+.scope-PostTemplate .posting-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.scope-PostTemplate select,
+.scope-PostTemplate input,
+.scope-PostTemplate textarea {
+  outline: none;
+}
+
+.scope-PostTemplate textarea {
+  resize: none;
+}
+
+.scope-PostTemplate .button-container {
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.scope-PostTemplate .postButton {
+  padding: 10px 20px; /* 버튼의 내부 여백을 조정합니다 */
+  font-size: 16px; /* 글자 크기를 조정합니다 */
+  background-color: #08366f; /* 버튼의 배경색을 조정합니다 */
+  color: white; /* 버튼의 글자 색상을 조정합니다 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 합니다 */
+}
+
+.scope-PostTemplate button {
+  border: none;
+}
+}

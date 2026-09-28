@@ -1,0 +1,25 @@
+@layer legacy {
+  .scope-CommonHeader { display: contents; }
+  .scope-CommonHeader .header-container {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; background: #08366f; min-height: 80px;
+  }
+  .scope-CommonHeader .logo { display: block; width: 60px; height: 60px; }
+  .scope-CommonHeader .logo img { width: 60px; height: 60px; }
+  .scope-CommonHeader .header-nav {
+    display: flex; align-items: center; gap: 20px;
+    list-style: none; margin: 0; padding: 0; font-size: 16px; font-weight: bold;
+  }
+  .scope-CommonHeader nav a { color: white; text-decoration: none; }
+  .scope-CommonHeader nav a:hover { color: #dceaff; }
+  .scope-CommonHeader nav a.active { color: #42b983; }
+  .scope-CommonHeader .mobile_btn { display: none; }
+  .mobile-navigation ul { margin: 0; padding: 0 24px; list-style: none; }
+  .mobile-navigation li { border-bottom: 1px solid #d7dee7; padding: 16px 0; text-align: center; }
+  .mobile-navigation a { display: block; padding: 10px; color: #08366f; text-decoration: none; font-size: 20px; font-weight: bold; }
+  .mobile-navigation a.active { color: #08366f; background: #edf2f8; border-radius: 6px; }
+  @media (max-width: 1024px) {
+    .scope-CommonHeader .header-nav { display: none; }
+    .scope-CommonHeader .mobile_btn { display: block; }
+  }
+}

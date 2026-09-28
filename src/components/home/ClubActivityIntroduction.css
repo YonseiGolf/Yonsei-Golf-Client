@@ -1,0 +1,196 @@
+@layer legacy {
+.scope-ClubActivityIntroduction { display: contents; }
+.scope-ClubActivityIntroduction #title {
+  margin-bottom: 20px; /* 제목과 카드 컨테이너 사이의 간격 설정 */
+  color: white; /* 제목 색상 설정 */
+}
+
+.scope-ClubActivityIntroduction .blue-container {
+  background-color: #08366f;
+  padding: 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.scope-ClubActivityIntroduction h2 {
+  font-size: 30px;
+  font-family: "GmarketSansMedium", sans-serif;
+}
+
+/* 데스크톱 카드 스타일 */
+.scope-ClubActivityIntroduction .desktop-cards {
+  width: 40%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 50px;
+}
+
+/* 모바일 캐러셀 스타일 */
+.scope-ClubActivityIntroduction .mobile-carousel {
+  display: none;
+  width: 90%;
+  margin-top: 50px;
+}
+
+.scope-ClubActivityIntroduction .card {
+  margin-bottom: 3%; /* 카드 간의 위아래 간격 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px; /* 글자 크기 설정 */
+  border: 1px solid #a5b1c2;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 200px; /* 최소 높이 설정 */
+}
+
+.scope-ClubActivityIntroduction .hover-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.scope-ClubActivityIntroduction .hover-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 54, 111, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 10px;
+}
+
+/* 데스크톱: hover 사용 */
+@media (hover: hover) {
+  .scope-ClubActivityIntroduction .hover-card:hover .hover-content {
+    opacity: 1;
+  }
+}
+/* 모바일: active 클래스 사용 (클릭 시) */
+.scope-ClubActivityIntroduction .hover-content.active {
+  opacity: 1;
+}
+
+/* 캐러셀 컨테이너 */
+.scope-ClubActivityIntroduction .carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 캐러셀 화살표 */
+.scope-ClubActivityIntroduction .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #08366f;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.scope-ClubActivityIntroduction .carousel-arrow:hover {
+  background: rgb(255, 255, 255);
+}
+
+.scope-ClubActivityIntroduction .left-arrow {
+  left: -12px;
+}
+
+.scope-ClubActivityIntroduction .right-arrow {
+  right: -12px;
+}
+
+/* 캐러셀 슬라이드 */
+.scope-ClubActivityIntroduction .carousel-slide {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 모바일 카드 */
+.scope-ClubActivityIntroduction .mobile-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  border: 1px solid #a5b1c2;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+/* 페이지네이션 도트 */
+.scope-ClubActivityIntroduction .carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.scope-ClubActivityIntroduction .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scope-ClubActivityIntroduction .dot.active {
+  background: white;
+}
+
+.scope-ClubActivityIntroduction .dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 1024px) {
+  /* 데스크톱 카드 숨기기 */
+  .scope-ClubActivityIntroduction .desktop-cards {
+    display: none;
+  }
+  /* 모바일 캐러셀 표시 */
+  .scope-ClubActivityIntroduction .mobile-carousel {
+    display: block;
+    width: 100%;
+  }
+}
+.scope-ClubActivityIntroduction .introduction-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 9px;
+}
+
+.scope-ClubActivityIntroduction .main-title {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "GmarketSansMedium", sans-serif;
+}
+
+.scope-ClubActivityIntroduction .main-body {
+  font-size: 14px;
+  font-family: "Pretendard-Regular", sans-serif;
+}
+}

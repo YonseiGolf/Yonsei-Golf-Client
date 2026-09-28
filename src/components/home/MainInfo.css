@@ -1,0 +1,60 @@
+@layer legacy {
+.scope-MainInfo { display: contents; }
+.scope-MainInfo .background-image {
+  width: 100%;
+  height: 600px;
+  padding-top: 13.5729386892%;
+  position: relative;
+  background-image: url("https://minio.birdie.men/yg-img-storage/store-image/ob-homecoming.pngxZxQzmnk9l");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.9;
+}
+.scope-MainInfo .background-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
+.scope-MainInfo #yonsei-golf {
+  font-size: 100px;
+  color: white;
+  text-align: left;
+  margin-left: 10%;
+  position: relative;
+}
+
+.scope-MainInfo #info {
+  font-size: 25px;
+  color: white;
+  text-align: left;
+  margin-left: 10%;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .scope-MainInfo #yonsei-golf {
+    font-size: 50px;
+    color: white;
+    text-align: left;
+    margin-left: 10%;
+    position: relative;
+  }
+  .scope-MainInfo #info {
+    display: none;
+  }
+}
+.scope-MainInfo #yonsei-golf {
+  font-family: "GmarketSansMedium", sans-serif;
+}
+
+.scope-MainInfo #info {
+  font-family: "GmarketSansMedium", sans-serif;
+}
+}

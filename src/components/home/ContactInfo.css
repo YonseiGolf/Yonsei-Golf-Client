@@ -1,0 +1,76 @@
+@layer legacy {
+.scope-ContactInfo { display: contents; }
+.scope-ContactInfo .white-container {
+  height: 150px;
+  color: white;
+}
+
+.scope-ContactInfo .contact-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
+.scope-ContactInfo h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #08366f;
+  font-weight: bold;
+  font-family: "GmarketSansMedium", sans-serif;
+}
+
+.scope-ContactInfo .contact-detail {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #4d4d4d;
+}
+
+.scope-ContactInfo p {
+  font-size: 16px;
+  color: #4d4d4d;
+  font-weight: 500;
+}
+
+.scope-ContactInfo .buttons {
+  margin-top: 20px;
+}
+
+.scope-ContactInfo .contact-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white;
+  color: #08366f;
+  border: 2px solid #08366f;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.scope-ContactInfo .contact-button:hover {
+  background-color: #094a7a;
+  color: white;
+}
+
+.scope-ContactInfo .buttons .contact-button {
+  margin-right: 20px;
+  font-size: 24px;
+}
+
+.scope-ContactInfo .buttons .contact-button:last-child {
+  margin-right: 0;
+}
+
+.scope-ContactInfo a {
+  color: #08366f;
+  text-decoration: none;
+}
+.scope-ContactInfo a:hover {
+  text-decoration: underline;
+}
+}

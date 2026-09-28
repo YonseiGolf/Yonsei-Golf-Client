@@ -1,0 +1,26 @@
+@layer theme, base, legacy, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import 'tw-animate-css';
+@import './theme.css';
+
+@layer legacy {
+body { margin: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+#app { font-family: Avenir, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; text-align: center; color: #2c3e50; display: flex; flex-direction: column; min-height: 100vh; }
+#app > header { position: sticky; top: 0; z-index: 1000; }
+#app > footer { margin-top: auto; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid #4c9aff; outline-offset: 3px; }
+a { color: #08366f; }
+.status-message { display: block; padding: 24px; text-align: center; overflow-wrap: anywhere; }
+[role=alert], .error-message { color: #b42318; }
+.success-message { color: #146b37; padding: 12px; }
+.page-container { width: min(100% - 32px, 1100px); margin: 32px auto; }
+.table-scroll { overflow-x: auto; width: 100%; }
+.preserve-lines { white-space: pre-wrap; overflow-wrap: anywhere; }
+.scope-ClubActivityIntroduction .main-body { white-space: pre-line; }
+@media (max-width: 600px) { .page-container { width: calc(100% - 24px); } }
+}

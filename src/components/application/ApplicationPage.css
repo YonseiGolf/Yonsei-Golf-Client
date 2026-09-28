@@ -1,0 +1,6 @@
+@layer legacy {
+.scope-ApplicationPage { display: contents; }
+.scope-ApplicationPage .white-container {
+  height: 100px;
+}
+}

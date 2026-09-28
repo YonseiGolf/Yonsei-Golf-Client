@@ -1,0 +1,29 @@
+@layer legacy {
+.scope-ApplicationTable { display: block; min-width: 0; width: 100%; }
+.scope-ApplicationTable table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.scope-ApplicationTable thead {
+  background-color: #f2f2f2;
+}
+
+.scope-ApplicationTable th, .scope-ApplicationTable td {
+  border: 1px solid #d4d4d4;
+  padding: 8px 8px;
+  text-align: center;
+}
+
+.scope-ApplicationTable th {
+  min-width: 50px;
+}
+
+.scope-ApplicationTable tbody tr {
+  cursor: pointer;
+}
+.scope-ApplicationTable tbody tr:hover {
+  background-color: #f5f5f5;
+}
+}

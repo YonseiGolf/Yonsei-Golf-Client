@@ -1,0 +1,63 @@
+@layer legacy {
+.scope-BoardTemplateHome { display: contents; }
+.scope-BoardTemplateHome .table-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+}
+
+.scope-BoardTemplateHome table {
+  border-collapse: collapse; /* 경계선을 겹치게 */
+  margin-top: 20px; /* 테이블 상단에 여백을 추가 */
+  width: 80%;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.scope-BoardTemplateHome th, .scope-BoardTemplateHome td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.scope-BoardTemplateHome th {
+  padding: 8px; /* 셀 내부에 패딩을 추가하여 내용이 선에 닿지 않도록 */
+  text-align: center;
+}
+
+.scope-BoardTemplateHome td {
+  padding: 8px; /* 셀 내부에 패딩을 추가하여 내용이 선에 닿지 않도록 */
+  text-align: center;
+}
+
+.scope-BoardTemplateHome thead {
+  background-color: #f9f9f9; /* 테이블 헤더의 배경색 */
+}
+
+.scope-BoardTemplateHome .boardList:hover {
+  background-color: #f1f1f1; /* 마우스를 올렸을 때 행의 배경색을 변경 */
+}
+
+.scope-BoardTemplateHome .button-out-container {
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+  width: 90%;
+}
+
+.scope-BoardTemplateHome .button-container {
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+}
+
+.scope-BoardTemplateHome .postButton {
+  padding: 10px 20px; /* 버튼의 내부 여백을 조정합니다 */
+  font-size: 16px; /* 글자 크기를 조정합니다 */
+  background-color: #08366f; /* 버튼의 배경색을 조정합니다 */
+  color: white; /* 버튼의 글자 색상을 조정합니다 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 합니다 */
+}
+
+.scope-BoardTemplateHome button {
+  border: none;
+}
+}

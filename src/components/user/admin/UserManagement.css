@@ -1,0 +1,23 @@
+@layer legacy {
+.scope-UserManagement { display: contents; }
+.scope-UserManagement .users-tables {
+  margin: 0 auto;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 1vh;
+  width: 80%;
+}
+.scope-UserManagement .users-tables > * {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+@media (max-width: 1300px) {
+  .scope-UserManagement .users-tables {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    width: calc(100% - 32px);
+  }
+}
+}

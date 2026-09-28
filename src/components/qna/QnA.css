@@ -1,0 +1,6 @@
+@layer legacy {
+  .scope-QnA { width: 100%; }
+  .scope-QnA h1 { font-family: 'GmarketSansMedium', sans-serif; }
+  .scope-QnA .white-container { height: 100px; }
+  .scope-QnA .faq-answer p { margin: 0; text-align: left; }
+}

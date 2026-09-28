@@ -24,3 +24,7 @@ pnpm-debug.log*
 .idea
 .env
 dist
+playwright-report/
+test-results/
+coverage/
+.pnpm-store/

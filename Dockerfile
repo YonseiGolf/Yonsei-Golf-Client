@@ -1,12 +1,14 @@
-# vue-project/Dockerfile
+# Yonsei Golf React client
 
 # 1단계: build
-FROM node:18-alpine AS build
+FROM node:22-alpine AS build
 
 WORKDIR /app
+RUN corepack enable
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY . .
-RUN yarn install
-RUN yarn build
+RUN pnpm build
 
 # 2단계: Nginx로 서빙
 FROM nginx:stable-alpine

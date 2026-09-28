@@ -1,0 +1,35 @@
+@layer legacy {
+.scope-ApplyQualification { display: contents; }
+.scope-ApplyQualification h1 {
+	word-break: keep-all;
+	padding-inline: 12px;
+  margin-top: 100px;
+  color: #08366f;
+  font-family: "GmarketSansMedium", sans-serif;
+}
+
+.scope-ApplyQualification .container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  font-family: "Pretendard-Regular", sans-serif;
+}
+
+.scope-ApplyQualification .text-box {
+  border: 1px solid #e3e3e3;
+  padding: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 95%;
+  max-width: 500px;
+  height: 95%;
+  text-align: left;
+  border-radius: 20px;
+}
+
+.scope-ApplyQualification .single-text {
+  padding: 1vh;
+  padding-left: 4vh;
+}
+}

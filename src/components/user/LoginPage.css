@@ -1,0 +1,46 @@
+@layer legacy {
+.scope-LoginPage { display: contents; }
+.scope-LoginPage .yonsei-golf {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-top: 50px;
+}
+
+.scope-LoginPage .yonsei-golf img {
+  width: 100px;
+  margin-top: 20px;
+}
+
+.scope-LoginPage .yonsei-golf h1 {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.scope-LoginPage .yonsei-golf button {
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: #FFEB3B;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scope-LoginPage .yonsei-golf button:hover {
+  background-color: #FFC107;
+}
+
+.scope-LoginPage #kako {
+  width: 10px;
+  height: 10px;
+}
+
+.scope-LoginPage #login-text {
+  font-weight: bold;
+}
+}
