@@ -30,7 +30,7 @@
     </table>
 
     <div v-if="loading" class="loading-container">
-      <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="Loading">
+      <img src="/image/loading.gif" alt="Loading">
     </div>
   </div>
 </template>
