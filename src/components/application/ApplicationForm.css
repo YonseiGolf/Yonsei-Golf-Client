@@ -227,6 +227,17 @@
   margin-bottom: 15px;
 }
 
+.scope-ApplicationForm .test-submit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
 .scope-ApplicationForm .notice-text {
   font-size: 13px;
   color: #666;

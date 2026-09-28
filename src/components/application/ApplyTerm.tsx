@@ -5,7 +5,7 @@ import './ApplyTerm.css'
 export default function ApplyTerm() {
 	return (
 		<div className="scope-ApplyTerm">
-			<div className="container">
+			<div className="term-container">
 				<h1>Welcome</h1>
 
 				<h2>

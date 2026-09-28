@@ -1,6 +1,6 @@
 @layer legacy {
 .scope-ApplyTerm { display: contents; }
-.scope-ApplyTerm .container {
+.scope-ApplyTerm .term-container {
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -52,6 +52,27 @@ test('closed recruitment only offers notification registration and rejects direc
 	)
 })
 
+for (const available of [false, true]) {
+	test(`recruitment banner spans a wide viewport when available is ${available}`, async ({
+		page,
+	}) => {
+		await mockApi(page, { available })
+		await page.setViewportSize({ width: 1800, height: 900 })
+		await page.goto('/apply')
+		await expect(page.locator('main h1').first()).toBeVisible()
+		const widths = await page.evaluate(() => ({
+			viewport: document.documentElement.clientWidth,
+			banner: document.querySelector('.term-container')?.getBoundingClientRect().width,
+		}))
+		expect(widths.banner).toBe(widths.viewport)
+		if (!available) {
+			const field = await page.getByLabel('알림 받을 이메일').boundingBox()
+			const button = await page.getByRole('button', { name: '알림 등록' }).boundingBox()
+			expect(field?.height).toBe(button?.height)
+		}
+	})
+}
+
 test('signup keeps the temporary token through a reload and sends typed fields', async ({
 	page,
 }) => {
@@ -137,6 +158,34 @@ test('application uploads a photo, sends a confirmation mail and submits the ser
 	expect(
 		mock.requests.find((request) => request.path === '/upload/photo')?.authorization,
 	).toBeUndefined()
+	expect(mock.errors).toEqual([])
+})
+
+test('administrator preview uploads a photo and submits a test application for the chosen semester', async ({
+	page,
+}) => {
+	const mock = await mockApi(page, { admin: true, available: false })
+	await page.goto('/admin/apply/form')
+	await page.getByLabel('테스트 제출 기수').click()
+	await page.getByRole('option', { name: '14기', exact: true }).click()
+	await expect(page.getByText('테스트 제출 모드입니다.', { exact: false })).toBeVisible()
+	await fillApplication(page)
+	await expect(page.getByRole('img', { name: '지원자 사진' })).toBeVisible()
+	await page.getByRole('button', { name: '지원서 제출', exact: true }).click()
+	await expect(page.getByRole('alertdialog')).toContainText('14기 테스트 지원서')
+	await page.getByRole('alertdialog').getByRole('button', { name: '확인', exact: true }).click()
+	await expect(page.getByRole('heading', { name: '테스트 지원서가 제출되었습니다.' })).toBeVisible()
+	expect(mock.requests.some((request) => request.path === '/upload/photo')).toBe(true)
+	expect(
+		mock.requests.some((request) => request.path === '/application/recruit/2/interview-times'),
+	).toBe(true)
+	const requests = mock.requests.filter((request) => request.path === '/application')
+	expect(requests).toHaveLength(1)
+	expect(requests[0].body).toMatchObject({
+		photoKey: 'store-image/photo.png',
+		semester: 14,
+		availableInterviewTimeIds: [4],
+	})
 	expect(mock.errors).toEqual([])
 })
 

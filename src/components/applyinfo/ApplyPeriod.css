@@ -5,7 +5,7 @@
   font-family: "GmarketSansMedium", sans-serif;
 }
 
-.scope-ApplyPeriod .container {
+.scope-ApplyPeriod .schedule-container {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   margin-top: 30px;
