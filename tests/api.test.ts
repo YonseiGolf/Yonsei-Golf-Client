@@ -54,8 +54,7 @@ describe('server API and session renewal', () => {
 				return new Promise<Response>((resolve) => {
 					finishRefresh = resolve
 				})
-			if (new Headers(options.headers).get('Authorization') === `Bearer ${old}`)
-				return fail(401)
+			if (new Headers(options.headers).get('Authorization') === `Bearer ${old}`) return fail(401)
 			return ok({ refreshed: true })
 		})
 		vi.stubGlobal('fetch', fetcher)
