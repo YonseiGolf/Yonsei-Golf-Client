@@ -17,10 +17,7 @@ export default function LoginPage() {
 	return (
 		<div className="scope-LoginPage">
 			<div className="yonsei-golf">
-				<img
-					src="https://minio.birdie.men/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt"
-					alt="연세골프"
-				/>
+				<img src="https://minio.birdie.men/yg-img-storage/site/logo.png" alt="연세골프" />
 				<h1>Yonsei-Golf</h1>
 				{location.state?.message && <output>{String(location.state.message)}</output>}
 				<Button
@@ -33,11 +30,7 @@ export default function LoginPage() {
 						window.location.href = `https://kauth.kakao.com/oauth/authorize?${params}`
 					}}
 				>
-					<img
-						src="https://minio.birdie.men/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt"
-						alt=""
-						id="kako"
-					/>
+					<img src="https://minio.birdie.men/yg-img-storage/site/logo.png" alt="" id="kako" />
 					카카오로 3초 만에 시작하기
 				</Button>
 				<AsyncState error={!env.kakaoKey ? '카카오 로그인 설정이 필요합니다.' : ''} />
