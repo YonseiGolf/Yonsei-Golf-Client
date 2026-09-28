@@ -47,7 +47,7 @@ export default function ClubActivityIntroduction() {
 				}
 			>
 				<img
-					src={`https://minio.up-api.kr/yg-img-storage/store-image/${item.image}`}
+					src={`https://minio.birdie.men/yg-img-storage/store-image/${item.image}`}
 					alt={item.title}
 					className="introduction-image"
 					loading="lazy"

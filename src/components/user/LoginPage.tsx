@@ -18,7 +18,7 @@ export default function LoginPage() {
 		<div className="scope-LoginPage">
 			<div className="yonsei-golf">
 				<img
-					src="https://minio.up-api.kr/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt"
+					src="https://minio.birdie.men/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt"
 					alt="연세골프"
 				/>
 				<h1>Yonsei-Golf</h1>
@@ -34,7 +34,7 @@ export default function LoginPage() {
 					}}
 				>
 					<img
-						src="https://minio.up-api.kr/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt"
+						src="https://minio.birdie.men/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt"
 						alt=""
 						id="kako"
 					/>
