@@ -4,22 +4,22 @@ import './ClubActivityIntroduction.css'
 
 const activities = [
 	{
-		image: 'freshmen-mt.jpegUsgBCksEbD',
+		image: 'activity-freshmen-mt.jpg',
 		title: '정규 활동',
 		description: '매주 목요일 신촌역 부근에서\n정기활동을 진행해요',
 	},
 	{
-		image: 'freshmen-mt.jpegUsgBCksEbD',
+		image: 'activity-freshmen-mt.jpg',
 		title: '신입 환영 MT',
 		description: '신입 부원들과 기존 부원들과의 조화를 위해\n신입 환영 MT를 진행해요',
 	},
 	{
-		image: 'yb-rounding.jpegm2v2OBd1a3',
+		image: 'activity-yb-rounding.jpg',
 		title: '단체 라운딩',
 		description: '매 학기 경기권에서 라운딩을 진행해요',
 	},
 	{
-		image: 'ob-rounding.jpegfy6Y06Pp3R',
+		image: 'activity-ob-rounding.jpg',
 		title: 'OB 라운딩',
 		description: 'YB 활동이 끝나더라도\nOB 부원과 라운딩을 함께해요',
 	},
@@ -47,7 +47,7 @@ export default function ClubActivityIntroduction() {
 				}
 			>
 				<img
-					src={`https://minio.birdie.men/yg-img-storage/store-image/${item.image}`}
+					src={`https://minio.birdie.men/yg-img-storage/site/${item.image}`}
 					alt={item.title}
 					className="introduction-image"
 					loading="lazy"

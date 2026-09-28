@@ -17,7 +17,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router'
 import AsyncState from './AsyncState'
 import './CommonHeader.css'
 
-const logo = 'https://minio.birdie.men/yg-img-storage/store-image/yg-mark.pngPhLjHNx7Kt'
+const logo = 'https://minio.birdie.men/yg-img-storage/site/logo.png'
 export default function CommonHeader() {
 	const user = useAuthStore((state) => state.user)
 	const [open, setOpen] = useState(false)
