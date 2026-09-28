@@ -175,7 +175,7 @@
   <button class="apply-button" @click="submitApplication" type="submit">지원서 제출</button>
 
   <div v-if="isLoading" class="loading-container">
-    <img src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif" alt="Loading">
+    <img src="/image/loading.gif" alt="Loading">
   </div>
 
 </template>
@@ -423,7 +423,7 @@ export default {
         const uploadHeaders = uploadData.uploadHeaders
             ? {...uploadData.uploadHeaders}
             : {'Content-Type': file.type};
-        if (!uploadData.uploadHeaders && new URL(uploadUrl).hostname === 'minio.up-api.kr') {
+        if (!uploadData.uploadHeaders && new URL(uploadUrl).hostname === 'minio.birdie.men') {
           uploadHeaders['x-amz-acl'] = 'public-read';
         }
 

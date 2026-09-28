@@ -1,5 +1,5 @@
 <template>
-  <img class="loading-img" src="https://yg-img-storage.s3.ap-northeast-2.amazonaws.com/image/loading.a11988e6.gif"
+  <img class="loading-img" src="/image/loading.gif"
        alt="loading img">
 </template>
 
