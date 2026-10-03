@@ -115,6 +115,8 @@ export interface ApplicationSummary {
 	interviewTime: string | null
 	documentPass: boolean
 	finalPass: boolean
+	/** When the mail for the current decisions (the receipt while undecided) was sent. */
+	mailSentAt: string | null
 }
 export interface ApplicationDetail
 	extends Omit<ApplicationRequest, 'photoKey' | 'activityClubs' | 'availableInterviewTimeIds'> {
@@ -140,8 +142,9 @@ export type MailTemplateType =
 	| 'EMAIL_CONFIRMATION'
 	| 'APPLICATION_RECEIPT'
 	| 'DOCUMENT_PASS'
+	| 'DOCUMENT_FAIL'
 	| 'FINAL_PASS'
-	| 'FAIL'
+	| 'FINAL_FAIL'
 	| 'RECRUITMENT_START'
 export interface MailTemplateContent {
 	subject: string

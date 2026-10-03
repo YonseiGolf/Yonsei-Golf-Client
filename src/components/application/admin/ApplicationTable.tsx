@@ -74,6 +74,7 @@ export default function ApplicationTable({
 										<TableHead>사진</TableHead>
 										<TableHead>이름</TableHead>
 										<TableHead>면접 시간</TableHead>
+										<TableHead>{documentPass === undefined ? '접수 메일' : '결과 메일'}</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -92,11 +93,23 @@ export default function ApplicationTable({
 												<Link to={`/application/${item.id}`}>{item.name}</Link>
 											</TableCell>
 											<TableCell>{formatDateTime(item.interviewTime)}</TableCell>
+											<TableCell>
+												{item.mailSentAt ? (
+													<>
+														발송됨
+														<small className="mail-sent-at">
+															{formatDateTime(item.mailSentAt)}
+														</small>
+													</>
+												) : (
+													<span className="mail-unsent">미발송</span>
+												)}
+											</TableCell>
 										</TableRow>
 									))}
 									{!query.data.content.length && (
 										<TableRow>
-											<TableCell colSpan={3}>해당 지원서가 없습니다.</TableCell>
+											<TableCell colSpan={4}>해당 지원서가 없습니다.</TableCell>
 										</TableRow>
 									)}
 								</TableBody>
