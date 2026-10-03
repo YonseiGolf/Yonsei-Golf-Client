@@ -4,6 +4,7 @@ import SelectField from '@/components/common/SelectField'
 import { Label } from '@/components/ui/label'
 import { useQuery } from '@/hooks/useQuery'
 import { useState } from 'react'
+import { Link } from 'react-router'
 import ApplicationTable from './ApplicationTable'
 import './FormManagement.css'
 
@@ -35,7 +36,8 @@ export default function FormManagement() {
 				<>
 					<p className="status-message">
 						목록은 선택한 기수만 표시합니다. 결과 메일은 전체 기수에서 해당 결과의 미발송 지원자에게
-						발송됩니다.
+						발송됩니다.{' '}
+						<Link to="/admin/mail-templates?type=DOCUMENT_PASS">결과 메일 문구 확인·수정</Link>
 					</p>
 					<div className="application-tables" key={semester}>
 						<ApplicationTable semester={semester} title="지원 접수" />

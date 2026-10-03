@@ -136,3 +136,19 @@ export interface EmailAlarm {
 	email: string
 	semester: number
 }
+export type MailTemplateType =
+	| 'EMAIL_CONFIRMATION'
+	| 'APPLICATION_RECEIPT'
+	| 'DOCUMENT_PASS'
+	| 'FINAL_PASS'
+	| 'FAIL'
+	| 'RECRUITMENT_START'
+export interface MailTemplateContent {
+	subject: string
+	body: string
+}
+export interface MailTemplate extends MailTemplateContent {
+	type: MailTemplateType
+	placeholders: string[]
+	customized: boolean
+}

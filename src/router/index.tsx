@@ -18,6 +18,7 @@ const UserManagement = lazy(() => import('@/components/user/admin/UserManagement
 const FormManagement = lazy(() => import('@/components/application/admin/FormManagement'))
 const ApplicationDetail = lazy(() => import('@/components/application/admin/ApplicationDetail'))
 const ApplyAlarm = lazy(() => import('@/components/application/admin/ApplyAlarm'))
+const MailTemplates = lazy(() => import('@/components/application/admin/MailTemplates'))
 const BoardTemplateHome = lazy(
 	() => import('@/components/board/admin/boardtemplate/BoardTemplateHome'),
 )
@@ -71,6 +72,7 @@ export default function AppRoutes() {
 						<Route path="/application/:id" element={<ApplicationDetail />} />
 						<Route path="/admin/apply/form" element={<ApplicationForm preview />} />
 						<Route path="/admin/apply-alarm" element={<ApplyAlarm />} />
+						<Route path="/admin/mail-templates" element={<MailTemplates />} />
 						<Route path="/admin/board/template" element={<BoardTemplateHome />} />
 						<Route path="/admin/board/template/post" element={<PostTemplate />} />
 						<Route path="/admin/board/template/:templateId" element={<BoardTemplateDetail />} />

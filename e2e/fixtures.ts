@@ -93,6 +93,21 @@ export async function mockApi(
 		interviewTime: null as string | null,
 		availableInterviewTimes: times,
 	}
+	const defaultMailTemplates = [
+		['EMAIL_CONFIRMATION', '[연세골프] 지원서 이메일 확인', '이메일 확인 메일입니다.', []],
+		['APPLICATION_RECEIPT', '안녕하세요. 연세골프입니다.', '{{이름}}님의 지원서가 제출되었습니다.'],
+		['DOCUMENT_PASS', '연세골프 결과 메일입니다.', '{{이름}}님 서류 합격 축하드립니다.'],
+		['FINAL_PASS', '연세골프 결과 메일입니다.', '{{이름}}님 최종 합격 축하드립니다.'],
+		['FAIL', '연세골프 결과 메일입니다.', '{{이름}}님 지원해주셔서 감사합니다.'],
+		['RECRUITMENT_START', '연세대학교 골프동아리입니다.', '모집이 시작되었습니다.', []],
+	].map(([type, subject, body, placeholders = ['{{이름}}']]) => ({
+		type,
+		subject,
+		body,
+		placeholders,
+		customized: false,
+	}))
+	let mailTemplates = defaultMailTemplates
 	await page.route('**/upload/photo', (route) => {
 		requests.push({
 			path: '/upload/photo',
@@ -269,6 +284,18 @@ export async function mockApi(
 						],
 					})
 				: ok()
+		if (path === '/admin/email/templates') return ok(mailTemplates)
+		if (path.startsWith('/admin/email/templates/')) {
+			const type = path.split('/').at(-1)
+			mailTemplates = mailTemplates.map((item) =>
+				item.type !== type
+					? item
+					: method === 'DELETE'
+						? (defaultMailTemplates.find((template) => template.type === type) ?? item)
+						: { ...item, ...body, customized: true },
+			)
+			return ok()
+		}
 		return fail(`미정의 mock API: ${method} ${path}`, 501)
 	})
 	return { requests, errors }

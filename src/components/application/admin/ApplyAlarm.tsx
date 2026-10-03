@@ -17,7 +17,7 @@ import { useQuery } from '@/hooks/useQuery'
 import { api, queryString } from '@/lib/api'
 import type { EmailAlarm } from '@/types/api'
 import { useState } from 'react'
-import { useSearchParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import './ApplyAlarm.css'
 
 export default function ApplyAlarm() {
@@ -59,7 +59,10 @@ export default function ApplyAlarm() {
 						}))}
 					/>
 				</div>
-				<p>메일은 전체 기수의 미발송 대기자에게 발송됩니다.</p>
+				<p>
+					메일은 전체 기수의 미발송 대기자에게 발송됩니다.{' '}
+					<Link to="/admin/mail-templates?type=RECRUITMENT_START">보낼 문구 확인·수정</Link>
+				</p>
 				<Button
 					type="button"
 					disabled={action.pending}

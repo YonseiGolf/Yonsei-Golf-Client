@@ -121,6 +121,7 @@ test('all administrator routes, including the legacy application URL, are guarde
 		'/application/9',
 		'/admin/apply/form',
 		'/admin/apply-alarm',
+		'/admin/mail-templates',
 		'/admin/board/template',
 		'/admin/board/template/post',
 		'/admin/board/template/2',
@@ -375,4 +376,53 @@ test('alarm query parameters and administrator preview remain usable', async ({ 
 	).toHaveLength(0)
 	expect(mock.errors).toEqual([])
 	expect(await page.evaluate(() => sessionStorage.getItem('accessToken'))).toBe(fakeToken(true))
+})
+
+test('mail templates preview the applicant name, guard unsaved edits, save and reset', async ({
+	page,
+}) => {
+	const mock = await mockApi(page, { admin: true })
+	await page.goto('/admin/apply-alarm')
+	await page.getByRole('link', { name: '보낼 문구 확인·수정' }).click()
+	await expect(page).toHaveURL(/\/admin\/mail-templates\?type=RECRUITMENT_START$/)
+	await expect(page.getByRole('heading', { name: '모집 시작 알림' })).toBeVisible()
+	await expect(page.getByText('이름을 알 수 없어', { exact: false })).toBeVisible()
+	const kinds = page.getByRole('navigation', { name: '메일 종류' })
+	await kinds.getByRole('button', { name: '서류 합격' }).click()
+	await expect(page.getByRole('heading', { name: '서류 합격' })).toBeVisible()
+	const body = page.getByLabel('본문', { exact: true })
+	await body.fill('축하드립니다 ')
+	await page.getByRole('button', { name: '본문에 {{이름}} 넣기' }).click()
+	await expect(body).toHaveValue('축하드립니다 {{이름}}')
+	await expect(page.getByRole('region', { name: '미리보기' })).toContainText('축하드립니다 홍길동')
+	await body.fill('{{이룸}}님 축하드립니다')
+	await expect(page.getByText('이 메일에서 쓸 수 없는 변수입니다: {{이룸}}')).toBeVisible()
+	await expect(page.getByRole('button', { name: '저장', exact: true })).toBeDisabled()
+	await body.fill('{{이름}}님 서류 합격을 축하드립니다.\n면접은 문자로 안내드립니다.')
+	await kinds.getByRole('button', { name: '최종 합격' }).click()
+	await expect(page.getByRole('alertdialog')).toContainText('저장하지 않은 변경 내용')
+	await page.getByRole('alertdialog').getByRole('button', { name: '취소', exact: true }).click()
+	await expect(body).toHaveValue(
+		'{{이름}}님 서류 합격을 축하드립니다.\n면접은 문자로 안내드립니다.',
+	)
+	await page.getByRole('button', { name: '저장', exact: true }).click()
+	await page.getByRole('alertdialog').getByRole('button', { name: '확인', exact: true }).click()
+	await expect(page.getByText('저장했습니다.', { exact: false })).toBeVisible()
+	await expect(page.getByText('수정한 문구 사용 중')).toBeVisible()
+	await expect(kinds.getByRole('button', { name: /서류 합격.*수정됨/ })).toBeVisible()
+	expect(mock.requests.find((request) => request.method === 'PATCH')).toMatchObject({
+		path: '/admin/email/templates/DOCUMENT_PASS',
+		body: {
+			subject: '연세골프 결과 메일입니다.',
+			body: '{{이름}}님 서류 합격을 축하드립니다.\n면접은 문자로 안내드립니다.',
+		},
+	})
+	await page.getByRole('button', { name: '기본 문구로 되돌리기' }).click()
+	await page.getByRole('alertdialog').getByRole('button', { name: '확인', exact: true }).click()
+	await expect(page.getByText('기본 문구 사용 중')).toBeVisible()
+	await expect(body).toHaveValue('{{이름}}님 서류 합격 축하드립니다.')
+	expect(mock.requests.find((request) => request.method === 'DELETE')?.path).toBe(
+		'/admin/email/templates/DOCUMENT_PASS',
+	)
+	expect(mock.errors).toEqual([])
 })
