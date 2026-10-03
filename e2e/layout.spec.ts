@@ -17,6 +17,7 @@ for (const width of [320, 390, 768, 1440]) {
 			'/admin/form',
 			'/application/9',
 			'/admin/apply-alarm',
+			'/admin/mail-templates',
 			'/admin/board/template',
 			'/admin/board/template/post',
 			'/admin/board/template/2',

@@ -7,6 +7,7 @@ const links = [
 	['/admin/form', '지원서 관리'],
 	['/admin/apply-alarm', '지원 대기 명단'],
 	['/admin/apply/form', '지원서 양식'],
+	['/admin/mail-templates', '메일 양식'],
 	['/admin/apply-period', '지원 기간 관리'],
 	['/admin/board/template', '게시판 양식'],
 ]

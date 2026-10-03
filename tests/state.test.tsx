@@ -1,3 +1,4 @@
+import { mailTemplateError, previewMail } from '@/components/application/admin/mail'
 import { getApplicationStatus } from '@/components/application/admin/status'
 import { emptyDates, recruitDateError } from '@/components/applyinfo/admin/recruit'
 import { useAction } from '@/hooks/useAction'
@@ -17,6 +18,20 @@ describe('administrative data', () => {
 		expect(formatDateTime('2026-09-28 10:05')).toBe('2026-09-28 10:05')
 		expect(formatDateTime('09월28일 10:05')).toBe('09월28일 10:05')
 		expect(formatDateTime(null)).toBe('미정')
+	})
+	it('flags mail placeholders the server rejects and previews only the ones it fills', () => {
+		const named = ['{{이름}}']
+		expect(mailTemplateError({ subject: '{{이름}}님 결과', body: '{{이름}}님' }, named)).toBe('')
+		expect(
+			mailTemplateError({ subject: '결과', body: '{{이룸}} {{이룸}} {{ 이름 }}' }, named),
+		).toBe('이 메일에서 쓸 수 없는 변수입니다: {{이룸}}, {{ 이름 }}')
+		expect(mailTemplateError({ subject: '모집', body: '{{이름}}님' }, [])).toBe(
+			'이 메일에서 쓸 수 없는 변수입니다: {{이름}}',
+		)
+		expect(mailTemplateError({ subject: ' ', body: '본문' }, named)).toBe('제목을 입력해 주세요.')
+		expect(mailTemplateError({ subject: '제목', body: '\n' }, named)).toBe('본문을 입력해 주세요.')
+		expect(previewMail('{{이름}}님, {{이름}}님', named)).toBe('홍길동님, 홍길동님')
+		expect(previewMail('{{이름}}님', [])).toBe('{{이름}}님')
 	})
 	it.each([
 		[null, null, 'pending'],
