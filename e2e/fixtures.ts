@@ -98,7 +98,8 @@ export async function mockApi(
 		['APPLICATION_RECEIPT', '안녕하세요. 연세골프입니다.', '{{이름}}님의 지원서가 제출되었습니다.'],
 		['DOCUMENT_PASS', '연세골프 결과 메일입니다.', '{{이름}}님 서류 합격 축하드립니다.'],
 		['FINAL_PASS', '연세골프 결과 메일입니다.', '{{이름}}님 최종 합격 축하드립니다.'],
-		['FAIL', '연세골프 결과 메일입니다.', '{{이름}}님 지원해주셔서 감사합니다.'],
+		['DOCUMENT_FAIL', '연세골프 결과 메일입니다.', '{{이름}}님 지원해주셔서 감사합니다.'],
+		['FINAL_FAIL', '연세골프 결과 메일입니다.', '{{이름}}님 지원해주셔서 감사합니다.'],
 		['RECRUITMENT_START', '연세대학교 골프동아리입니다.', '모집이 시작되었습니다.', []],
 	].map(([type, subject, body, placeholders = ['{{이름}}']]) => ({
 		type,
@@ -259,6 +260,8 @@ export async function mockApi(
 						interviewTime: application.interviewTime,
 						documentPass: false,
 						finalPass: false,
+						// Only the receipt (지원 접수) is mailed, so both states are shown.
+						mailSentAt: url.searchParams.has('documentPass') ? null : '2026-09-14 10:00',
 					},
 				]),
 			)

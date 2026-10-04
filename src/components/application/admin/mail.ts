@@ -11,10 +11,14 @@ export const mailTemplateInfo: Record<MailTemplateType, { label: string; when: s
 		label: '서류 합격',
 		when: '지원서 관리의 1차 합격 메일 보내기로 발송됩니다.',
 	},
+	DOCUMENT_FAIL: {
+		label: '서류 탈락',
+		when: '지원서 관리의 서류 탈락 메일 보내기로 발송됩니다.',
+	},
 	FINAL_PASS: { label: '최종 합격', when: '지원서 관리의 최종 합격 메일 보내기로 발송됩니다.' },
-	FAIL: {
-		label: '불합격',
-		when: '지원서 관리의 서류 탈락·최종 탈락 메일 보내기에서 함께 사용됩니다.',
+	FINAL_FAIL: {
+		label: '최종 탈락',
+		when: '지원서 관리의 최종 탈락 메일 보내기로 발송됩니다.',
 	},
 	RECRUITMENT_START: {
 		label: '모집 시작 알림',

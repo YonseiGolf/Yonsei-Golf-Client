@@ -282,6 +282,12 @@ test('application management preserves nullable pass states, interview format an
 		page.getByRole('region', { name: '지원 접수' }).getByRole('link', { name: '지원자' }),
 	).toBeVisible()
 	expect(mock.requests.some((request) => request.path.includes('semester=14'))).toBe(true)
+	const received = page.getByRole('region', { name: '지원 접수' })
+	await expect(received.getByRole('columnheader', { name: '접수 메일' })).toBeVisible()
+	await expect(received.getByRole('cell', { name: /발송됨\s*2026-09-14 10:00/ })).toBeVisible()
+	const firstPass = page.getByRole('region', { name: '1차 합격' })
+	await expect(firstPass.getByRole('columnheader', { name: '결과 메일' })).toBeVisible()
+	await expect(firstPass.getByRole('cell', { name: '미발송' })).toBeVisible()
 	await page.getByRole('button', { name: '전체 기수 1차 합격 메일 보내기' }).click()
 	await expect(page.getByRole('alertdialog')).toContainText('전체 기수')
 	await page.getByRole('alertdialog').getByRole('button', { name: '취소', exact: true }).click()
